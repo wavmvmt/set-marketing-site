@@ -52,13 +52,10 @@ nav.s{padding:16px 64px;background:rgba(6,6,6,.95);backdrop-filter:blur(24px);bo
 .ncta{font-family:var(--fb);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--white);background:var(--red);padding:13px 30px;text-decoration:none;font-weight:700;transition:background .3s,transform .2s}
 .ncta:hover{background:var(--red2);transform:translateY(-1px)}
 
-/* HERO SPLIT SCREEN */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
-.hero-img{position:relative;overflow:hidden}
-.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:brightness(.75)}
-.hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--black) 100%),linear-gradient(180deg,rgba(6,6,6,.3) 0%,transparent 30%)}
-.hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 90px;position:relative;overflow:hidden;background:var(--black)}
-.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 0% 60%,rgba(200,16,46,.06) 0%,transparent 60%)}
+/* HERO FULL WIDTH */
+.hero{min-height:100vh;display:flex;position:relative;overflow:hidden}
+.hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 90px;position:relative;overflow:hidden;background:var(--black);width:100%}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 30% 70%,rgba(200,16,46,.06) 0%,transparent 60%)}
 .hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:90px 90px;mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.2) 30%,rgba(0,0,0,.06) 80%,transparent 100%)}
 .hspotlight{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(200,16,46,.12) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}
 .h-topbar{position:absolute;top:0;left:0;right:0;height:3px;background:var(--red)}
@@ -225,8 +222,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   nav.s{padding:14px 24px}
   .nlinks{display:none}
   .ncta{padding:10px 20px;font-size:10px}
-  .hero{grid-template-columns:1fr;min-height:100svh}
-  .hero-img{height:50vh}
+  .hero{min-height:100svh}
   .hero-right{padding:40px 24px 60px}
   .h-eye{font-size:9px;margin-bottom:24px}
   .hbot{gap:24px;margin-top:32px}
@@ -295,9 +291,6 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 </nav>
 
 <section class="hero" aria-label="SET Marketing Hero">
-  <div class="hero-img">
-    <img src="https://i.imgur.com/N9bPfGM.jpg" alt="Chris Marchese, Founder and CEO of SET Marketing, speaking on stage"/>
-  </div>
   <div class="hero-right">
     <div class="hbg"></div>
     <div class="hgrid"></div>
@@ -310,7 +303,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
       We Install <span class="outline">Systems.</span>
     </h1>
     <div class="hbot">
-      <p style="font-family:'Syne',sans-serif;font-size:15px;font-weight:400;color:#f4f1ec;line-height:1.75;max-width:360px;">SET Marketing engineers acquisition, conversion, and automation infrastructure for operators generating $1M to $20M who are ready to scale beyond founder-led growth. Powered by SET OS, our proprietary growth intelligence platform.</p>
+      <p style="font-family:'Syne',sans-serif;font-size:15px;font-weight:400;color:#f4f1ec;line-height:1.75;max-width:520px;">SET Marketing engineers acquisition, conversion, and automation infrastructure for operators generating $1M to $20M who are ready to scale beyond founder-led growth. Powered by SET OS, our proprietary growth intelligence platform.</p>
       <div class="hact">
         <a href="#contact" class="btn-p">
           Book Revenue Strategy Call
@@ -431,8 +424,11 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 
 <section class="founder" id="founder" aria-label="About Chris Marchese">
   <div class="fv rv">
-    <div class="fiw">
-      <img src="https://i.imgur.com/N9bPfGM.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Chris Marchese, Founder and CEO of SET Marketing, speaking on stage"/>
+    <div class="fiw" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0a0a 0%,#111 50%,#0a0a0a 100%);">
+      <div style="text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(120px,15vw,200px);font-weight:300;font-style:italic;color:var(--red);line-height:1;opacity:.7;">CM</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:rgba(244,241,236,.3);margin-top:16px;">Est. 2019</div>
+      </div>
     </div>
     <div class="f-badge">Founder &amp; CEO</div>
     <div class="f-corner"></div>
