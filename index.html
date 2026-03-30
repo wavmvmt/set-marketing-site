@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#050505">
 <title>SET Marketing — More Leads. More Revenue. Less Chaos.</title>
-<meta name="description" content="SET Marketing builds lead generation and revenue systems for $1M–$20M businesses. $180M+ in client revenue. Toronto & Miami. Book a free strategy call.">
+<meta name="description" content="SET Marketing builds lead generation and revenue systems for $1M–$20M businesses. $500M+ in client revenue. Toronto & Miami. Book a free strategy call.">
 <meta property="og:title" content="SET Marketing — More Leads. More Revenue. Less Chaos.">
-<meta property="og:description" content="We build lead generation and revenue systems for $1M–$20M operators. $180M+ generated. Book your free strategy call.">
+<meta property="og:description" content="We build lead generation and revenue systems for $1M–$20M operators. $500M+ generated. Book your free strategy call.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://marketingbyset.com">
 <meta property="og:image" content="https://marketingbyset.com/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SET Marketing — More Leads. More Revenue. Less Chaos.">
-<meta name="twitter:description" content="Lead generation & revenue systems for $1M–$20M businesses. $180M+ generated.">
+<meta name="twitter:description" content="Lead generation & revenue systems for $1M–$20M businesses. $500M+ generated.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23050505'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='14' font-weight='700' fill='%23b22030'>S</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -410,12 +410,24 @@ footer{background:var(--ink);border-top:1px solid var(--wire);padding:56px 24px;
 /* ── ANIMATIONS ── */
 @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
-/* ── PAGE LOADER ── */
-.page-loader{position:fixed;inset:0;background:var(--ink);z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity .5s ease,visibility .5s ease}
-.page-loader.done{opacity:0;visibility:hidden;pointer-events:none}
-.loader-bar{width:120px;height:1px;background:var(--wire);position:relative;overflow:hidden}
-.loader-bar::after{content:'';position:absolute;left:0;top:0;height:100%;width:0;background:var(--gold);animation:loaderFill .4s ease-out forwards}
-@keyframes loaderFill{to{width:100%}}
+/* ── CINEMATIC INTRO ── */
+.intro{position:fixed;inset:0;background:var(--ink);z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0}
+.intro.done{pointer-events:none}
+.intro-number{font-family:var(--fd);font-weight:900;font-size:clamp(80px,25vw,280px);color:var(--paper);line-height:.85;letter-spacing:-.04em;opacity:0;transform:scale(1.2)}
+.intro-label{font-family:var(--fm);font-size:clamp(9px,1.5vw,12px);letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:0;margin-top:12px}
+.intro-line{width:0;height:1px;background:var(--gold);margin-top:20px}
+
+/* ── RED FLASH ── */
+.red-flash{position:fixed;inset:0;background:var(--gold);z-index:9998;opacity:0;pointer-events:none;mix-blend-mode:screen}
+
+/* ── FULL-VIEWPORT INTERSTITIALS ── */
+.interstitial{position:relative;min-height:60vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--ink)}
+.interstitial-text{font-family:var(--fd);font-weight:900;font-size:clamp(60px,18vw,220px);line-height:.85;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(178,32,48,.2);text-align:center;opacity:0;transform:scale(.8)}
+.interstitial-text em{-webkit-text-stroke-color:rgba(178,32,48,.5);font-style:italic}
+.interstitial-text.fill{color:var(--paper);-webkit-text-stroke:none}
+
+/* ── SCROLL VELOCITY GLOW ── */
+.velocity-glow{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;z-index:9997;pointer-events:none;transform:scaleX(0)}
 
 /* ── SCROLL PROGRESS ── */
 .scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--gold);width:0%;z-index:10001;transition:none}
@@ -465,7 +477,13 @@ body.sec-light{background:#0d0d0d}
 </style>
 </head>
 <body>
-<div class="page-loader" id="pageLoader"><div class="loader-bar"></div></div>
+<div class="intro" id="intro">
+  <div class="intro-number" id="introNum">$500M+</div>
+  <div class="intro-label" id="introLabel">Revenue Generated For Our Clients</div>
+  <div class="intro-line" id="introLine"></div>
+</div>
+<div class="red-flash" id="redFlash"></div>
+<div class="velocity-glow" id="velocityGlow"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="set-emblem" id="setEmblem">
   <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -536,7 +554,7 @@ body.sec-light{background:#0d0d0d}
     </div>
     <div class="hero-proof">
       <div class="hpstat">
-        <div class="hpnum">$180M+</div>
+        <div class="hpnum">$500M+</div>
         <div class="hplbl">Revenue Generated</div>
       </div>
       <div class="hpstat">
@@ -553,8 +571,8 @@ body.sec-light{background:#0d0d0d}
 
 <!-- TICKER -->
 <div class="ticker"><div class="t-track">
-  <div class="t-item"><span class="t-gem">✦</span>BMW</div><div class="t-item"><span class="t-gem">✦</span>Huawei</div><div class="t-item"><span class="t-gem">✦</span>W Hotels</div><div class="t-item"><span class="t-gem">✦</span>Rick Ross</div><div class="t-item"><span class="t-gem">✦</span>Miami Dolphins</div><div class="t-item"><span class="t-gem">✦</span>$180M+ Revenue Generated</div><div class="t-item"><span class="t-gem">✦</span>$15M+ Ad Spend Managed</div><div class="t-item"><span class="t-gem">✦</span>150+ Companies Scaled</div><div class="t-item"><span class="t-gem">✦</span>12 Industries</div><div class="t-item"><span class="t-gem">✦</span>Toronto · Miami</div>
-  <div class="t-item"><span class="t-gem">✦</span>BMW</div><div class="t-item"><span class="t-gem">✦</span>Huawei</div><div class="t-item"><span class="t-gem">✦</span>W Hotels</div><div class="t-item"><span class="t-gem">✦</span>Rick Ross</div><div class="t-item"><span class="t-gem">✦</span>Miami Dolphins</div><div class="t-item"><span class="t-gem">✦</span>$180M+ Revenue Generated</div><div class="t-item"><span class="t-gem">✦</span>$15M+ Ad Spend Managed</div><div class="t-item"><span class="t-gem">✦</span>150+ Companies Scaled</div><div class="t-item"><span class="t-gem">✦</span>12 Industries</div><div class="t-item"><span class="t-gem">✦</span>Toronto · Miami</div>
+  <div class="t-item"><span class="t-gem">✦</span>BMW</div><div class="t-item"><span class="t-gem">✦</span>Huawei</div><div class="t-item"><span class="t-gem">✦</span>W Hotels</div><div class="t-item"><span class="t-gem">✦</span>Rick Ross</div><div class="t-item"><span class="t-gem">✦</span>Miami Dolphins</div><div class="t-item"><span class="t-gem">✦</span>$500M+ Revenue Generated</div><div class="t-item"><span class="t-gem">✦</span>$15M+ Ad Spend Managed</div><div class="t-item"><span class="t-gem">✦</span>150+ Companies Scaled</div><div class="t-item"><span class="t-gem">✦</span>12 Industries</div><div class="t-item"><span class="t-gem">✦</span>Toronto · Miami</div>
+  <div class="t-item"><span class="t-gem">✦</span>BMW</div><div class="t-item"><span class="t-gem">✦</span>Huawei</div><div class="t-item"><span class="t-gem">✦</span>W Hotels</div><div class="t-item"><span class="t-gem">✦</span>Rick Ross</div><div class="t-item"><span class="t-gem">✦</span>Miami Dolphins</div><div class="t-item"><span class="t-gem">✦</span>$500M+ Revenue Generated</div><div class="t-item"><span class="t-gem">✦</span>$15M+ Ad Spend Managed</div><div class="t-item"><span class="t-gem">✦</span>150+ Companies Scaled</div><div class="t-item"><span class="t-gem">✦</span>12 Industries</div><div class="t-item"><span class="t-gem">✦</span>Toronto · Miami</div>
 </div></div>
 
 <!-- ══ PAIN ══ -->
@@ -577,6 +595,11 @@ body.sec-light{background:#0d0d0d}
   </div>
 </section>
 
+<!-- INTERSTITIAL: THE FIX -->
+<div class="interstitial" id="int1">
+  <div class="interstitial-text">The <em>fix</em></div>
+</div>
+
 <!-- ══ OUTCOMES ══ -->
 <section class="section outcomes" id="outcomes">
   <div class="rv">
@@ -597,7 +620,7 @@ body.sec-light{background:#0d0d0d}
 <!-- PROOF STATS -->
 <div class="proof-bar">
   <div class="proof-grid">
-    <div class="ps rv"><div class="psn">$<span class="cnt" data-t="180">0</span><em>M+</em></div><div class="psl">Revenue Generated</div><div class="psd">All client campaigns</div></div>
+    <div class="ps rv"><div class="psn">$<span class="cnt" data-t="500">0</span><em>M+</em></div><div class="psl">Revenue Generated</div><div class="psd">All client campaigns</div></div>
     <div class="ps rv d1"><div class="psn">$<span class="cnt" data-t="15">0</span><em>M+</em></div><div class="psl">Ad Spend Managed</div><div class="psd">Meta · Google · YouTube</div></div>
     <div class="ps rv d2"><div class="psn"><span class="cnt" data-t="150">0</span><em>+</em></div><div class="psl">Companies Scaled</div><div class="psd">$1M to $20M+</div></div>
     <div class="ps rv d3"><div class="psn"><span class="cnt" data-t="12">0</span><em>+</em></div><div class="psl">Industries</div><div class="psd">Across North America</div></div>
@@ -664,6 +687,11 @@ body.sec-light{background:#0d0d0d}
     <div class="cl-cell" data-cs="ryder"><div class="cl-dot"></div><div class="cl-n">Ryder</div><div class="cl-c">Logistics &amp; Fleet</div><div class="cl-arrow">View &rarr;</div></div>
   </div>
 </section>
+
+<!-- INTERSTITIAL: THE PROOF -->
+<div class="interstitial" id="int2">
+  <div class="interstitial-text fill">Proof.</div>
+</div>
 
 <!-- ══ RESULTS — PINNED HORIZONTAL SCROLL ══ -->
 <section class="section results results-pin" id="results">
@@ -751,7 +779,7 @@ body.sec-light{background:#0d0d0d}
     </div>
     <div class="why-row">
       <div class="wc them"><span class="wc-icon bad">✕</span><div><span class="wc-lbl">Experience</span>Junior team, templated playbook, no real track record at your revenue level</div></div>
-      <div class="wc us"><span class="wc-icon good">✓</span><div><span class="wc-lbl">Experience</span>$180M+ generated. BMW, Huawei, Miami Dolphins, and 150+ operators like you.</div></div>
+      <div class="wc us"><span class="wc-icon good">✓</span><div><span class="wc-lbl">Experience</span>$500M+ generated. BMW, Huawei, Miami Dolphins, and 150+ operators like you.</div></div>
     </div>
   </div>
 </section>
@@ -772,7 +800,7 @@ body.sec-light{background:#0d0d0d}
       <div class="f-eyebrow">Chris Marchese · SET Enterprises · Toronto &amp; Miami</div>
       <div class="f-name">I've Been<br><em>Where You Are.</em></div>
       <p class="f-p">Before SET, I spent 12 years as an industrial millwright. I know what it feels like to grind, build something real, and hit a ceiling you can't figure out how to break through. <strong>I didn't come from marketing — I came from building things.</strong></p>
-      <p class="f-p">I made every mistake in the book so our clients don't have to. Over the last several years, SET has driven <strong>$180M+ in revenue across 12 industries</strong> — from BMW and Huawei to the Miami Dolphins to operators doing $2M who wanted to hit $8M.</p>
+      <p class="f-p">I made every mistake in the book so our clients don't have to. Over the last several years, SET has driven <strong>$500M+ in revenue across 12 industries</strong> — from BMW and Huawei to the Miami Dolphins to operators doing $2M who wanted to hit $8M.</p>
       <p class="f-p">I'm selective about who we work with because I only take on clients I know we can grow. If you book a call, you'll speak with me or a senior SET team member — not a salesperson. We'll be straight with you about whether we can help, and what that looks like.</p>
       <div class="f-sig">Chris Marchese</div>
       <div class="f-role">Founder &amp; CEO · SET Enterprises · Toronto &amp; Miami</div>
@@ -824,7 +852,7 @@ body.sec-light{background:#0d0d0d}
   <div class="faq-list rv">
     <div class="faq-item open">
       <button class="faq-btn">How is SET different from other marketing agencies?<span class="faq-plus">+</span></button>
-      <div class="faq-body"><div class="faq-inner"><p>Most agencies sell you services — ads management, SEO, content production. <strong>We build systems and take ownership of your revenue outcomes, not just your deliverables.</strong> Every campaign is connected to a bigger strategy with measurable KPIs, weekly reporting, and real accountability. We've driven $180M+ in client revenue across 12 industries — that's the track record we stand behind.</p></div></div>
+      <div class="faq-body"><div class="faq-inner"><p>Most agencies sell you services — ads management, SEO, content production. <strong>We build systems and take ownership of your revenue outcomes, not just your deliverables.</strong> Every campaign is connected to a bigger strategy with measurable KPIs, weekly reporting, and real accountability. We've driven $500M+ in client revenue across 12 industries — that's the track record we stand behind.</p></div></div>
     </div>
     <div class="faq-item">
       <button class="faq-btn">How quickly will I see results?<span class="faq-plus">+</span></button>
@@ -1176,10 +1204,45 @@ body.sec-light{background:#0d0d0d}
 // MOTION SYSTEM v2 — Lean GSAP, no Lenis
 // ══════════════════════════════════════════
 
-// ── PAGE LOADER (fast — 0.4s then gone) ──
-var loader = document.getElementById('pageLoader');
+// ── CINEMATIC INTRO SEQUENCE ──
+var intro = document.getElementById('intro');
+var introNum = document.getElementById('introNum');
+var introLabel = document.getElementById('introLabel');
+var introLine = document.getElementById('introLine');
+var redFlash = document.getElementById('redFlash');
+document.body.style.overflow = 'hidden';
 window.addEventListener('load', function(){
-  setTimeout(function(){ loader.classList.add('done'); }, 400);
+  var tl = gsap.timeline({
+    onComplete: function(){
+      intro.classList.add('done');
+      document.body.style.overflow = '';
+      gsap.to(intro, { opacity: 0, duration: 0.3, delay: 0.1 });
+      gsap.set(intro, { display: 'none', delay: 0.5 });
+    }
+  });
+  // wait for GSAP
+  (function waitGsap(){
+    if(typeof gsap === 'undefined') return setTimeout(waitGsap, 30);
+    gsap.registerPlugin(ScrollTrigger);
+    var tl = gsap.timeline({
+      onComplete: function(){
+        intro.classList.add('done');
+        document.body.style.overflow = '';
+        gsap.to(intro, { opacity: 0, duration: 0.3, delay: 0.1 });
+        gsap.set(intro, { display: 'none', delay: 0.5 });
+        initMotion();
+      }
+    });
+    tl.to(introNum, { opacity: 1, scale: 1, duration: 1, ease: 'power3.out', delay: 0.3 })
+      .to(introLine, { width: 80, duration: 0.6, ease: 'power2.inOut' }, '-=0.4')
+      .to(introLabel, { opacity: 1, duration: 0.5, ease: 'power2.out' }, '-=0.3')
+      .to({}, { duration: 0.6 })
+      .to(introNum, { scale: 20, opacity: 0, duration: 0.7, ease: 'power3.in' })
+      .to(introLabel, { opacity: 0, duration: 0.2 }, '<')
+      .to(introLine, { opacity: 0, scaleX: 3, duration: 0.3 }, '<')
+      .to(redFlash, { opacity: 0.6, duration: 0.08 }, '-=0.15')
+      .to(redFlash, { opacity: 0, duration: 0.4, ease: 'power2.out' });
+  })();
 });
 
 // Wait for GSAP to load (deferred), then init everything
@@ -1370,12 +1433,58 @@ function initMotion(){
   var proofBar2 = document.querySelector('.proof-bar');
   if(proofBar2){
     gsap.from('.psn', {
-      scale: 0.4, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'back.out(1.4)',
+      scale: 0.3, opacity: 0, y: 40, duration: 1, stagger: 0.2, ease: 'back.out(1.7)',
       scrollTrigger: { trigger: proofBar2, start: 'top 80%' }
     });
   }
+
+  // ── INTERSTITIAL REVEALS (giant text) ──
+  document.querySelectorAll('.interstitial-text').forEach(function(el){
+    gsap.to(el, {
+      scale: 1, opacity: 1, duration: 1.2, ease: 'power3.out',
+      scrollTrigger: { trigger: el.parentElement, start: 'top 70%', end: 'center center', scrub: 0.5 }
+    });
+    // Scale up past 1 and fade as you leave
+    gsap.to(el, {
+      scale: 1.5, opacity: 0,
+      scrollTrigger: { trigger: el.parentElement, start: 'center center', end: 'bottom top', scrub: 0.5 }
+    });
+  });
+
+  // ── RED FLASH ON KEY TRANSITIONS ──
+  var flashTriggers = ['.outcomes', '.results-pin', '#book'];
+  flashTriggers.forEach(function(sel){
+    var el = document.querySelector(sel);
+    if(el){
+      ScrollTrigger.create({
+        trigger: el, start: 'top 80%', once: true,
+        onEnter: function(){
+          gsap.to(redFlash, { opacity: 0.15, duration: 0.06 });
+          gsap.to(redFlash, { opacity: 0, duration: 0.5, delay: 0.06, ease: 'power2.out' });
+        }
+      });
+    }
+  });
+
+  // ── SCROLL VELOCITY GLOW ──
+  var velocityGlow = document.getElementById('velocityGlow');
+  if(velocityGlow){
+    var lastScroll = window.scrollY;
+    var velocityRAF;
+    function checkVelocity(){
+      var current = window.scrollY;
+      var speed = Math.abs(current - lastScroll);
+      var intensity = Math.min(speed / 80, 1);
+      velocityGlow.style.opacity = intensity * 0.7;
+      velocityGlow.style.transform = 'scaleX(' + Math.min(intensity * 1.2, 1) + ')';
+      lastScroll = current;
+      velocityRAF = requestAnimationFrame(checkVelocity);
+    }
+    checkVelocity();
+  }
 }
-initMotion();
+// Fallback: if intro somehow fails, init motion after 4s
+setTimeout(function(){ if(!document.querySelector('.intro.done')){ document.body.style.overflow=''; if(intro) intro.style.display='none'; initMotion(); }}, 4000);
 
 // ── CURSOR ──
 var cur = document.getElementById('cur'), cr = document.getElementById('cur-r');
