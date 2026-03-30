@@ -414,7 +414,7 @@ footer{background:var(--ink);border-top:1px solid var(--wire);padding:56px 24px;
 .page-loader{position:fixed;inset:0;background:var(--ink);z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity .5s ease,visibility .5s ease}
 .page-loader.done{opacity:0;visibility:hidden;pointer-events:none}
 .loader-bar{width:120px;height:1px;background:var(--wire);position:relative;overflow:hidden}
-.loader-bar::after{content:'';position:absolute;left:0;top:0;height:100%;width:0;background:var(--gold);animation:loaderFill 1s ease-out forwards}
+.loader-bar::after{content:'';position:absolute;left:0;top:0;height:100%;width:0;background:var(--gold);animation:loaderFill .4s ease-out forwards}
 @keyframes loaderFill{to{width:100%}}
 
 /* ── SCROLL PROGRESS ── */
@@ -427,14 +427,6 @@ footer{background:var(--ink);border-top:1px solid var(--wire);padding:56px 24px;
 /* ── SPLIT TEXT ── */
 .split-line{display:block;overflow:hidden}
 .split-line-inner{display:block;transform:translateY(110%)}
-
-/* ── MAGNETIC BUTTON ── */
-.btn-magnetic{transition:transform .3s var(--ease2)}
-
-/* ── HORIZONTAL SCROLL PIN ── */
-.results-pin-wrap{overflow:hidden}
-.results-track{display:flex;flex-wrap:nowrap;width:max-content}
-.results-track>*{flex-shrink:0}
 
 /* ── PARALLAX LAYERS ── */
 .parallax-slow{will-change:transform}
@@ -918,10 +910,9 @@ footer{background:var(--ink);border-top:1px solid var(--wire);padding:56px 24px;
   <a href="#book" class="sticky-btn">Book Now</a>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
 <script>
 // ── THREE.JS HERO SCENE ──
 (function(){
@@ -1137,272 +1128,145 @@ footer{background:var(--ink);border-top:1px solid var(--wire);padding:56px 24px;
   }
 })();
 
-// ══════════════════════════════════════════════════
-// PREMIUM MOTION SYSTEM — GSAP + Lenis + ScrollTrigger
-// ══════════════════════════════════════════════════
+// ══════════════════════════════════════════
+// MOTION SYSTEM v2 — Lean GSAP, no Lenis
+// ══════════════════════════════════════════
 
-// ── 1. LENIS SMOOTH SCROLL ──
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-  orientation: 'vertical',
-  smoothWheel: true
-});
-
-function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
-requestAnimationFrame(raf);
-
-// Connect Lenis to GSAP ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add(function(time){ lenis.raf(time * 1000); });
-gsap.ticker.lagSmoothing(0);
-
-// Anchor scroll via Lenis
-document.querySelectorAll('a[href^="#"]').forEach(function(a){
-  a.addEventListener('click', function(e){
-    var id = a.getAttribute('href'); if(id === '#') return;
-    var target = document.querySelector(id);
-    if(target){ e.preventDefault(); lenis.scrollTo(target, {offset: -72}); }
-  });
-});
-
-// ── 2. SCROLL PROGRESS BAR ──
-var progressBar = document.getElementById('scrollProgress');
-if(progressBar){
-  gsap.to(progressBar, {
-    width: '100%',
-    ease: 'none',
-    scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.1 }
-  });
-}
-
-// ── 3. PAGE LOADER SEQUENCE ──
+// ── PAGE LOADER (fast — 0.4s then gone) ──
 var loader = document.getElementById('pageLoader');
 window.addEventListener('load', function(){
-  gsap.timeline()
-    .to(loader, { opacity: 0, duration: 0.4, delay: 0.8, ease: 'power2.inOut', onComplete: function(){ loader.classList.add('done'); } })
-    .from('.hero-content > *', { y: 40, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' }, '-=0.1')
-    .from('#heroCanvas', { opacity: 0, scale: 0.95, duration: 1, ease: 'power2.out' }, '-=0.5');
+  setTimeout(function(){ loader.classList.add('done'); }, 400);
 });
 
-// ── 4. TEXT SPLIT REVEALS ──
-function splitTextIntoLines(el){
-  var text = el.textContent;
-  var html = el.innerHTML;
-  // Handle <br> and <em> tags
-  var parts = html.split(/<br\s*\/?>/gi);
-  el.innerHTML = '';
-  parts.forEach(function(part, i){
-    var line = document.createElement('span');
-    line.className = 'split-line';
-    var inner = document.createElement('span');
-    inner.className = 'split-line-inner';
-    inner.innerHTML = part.trim();
-    line.appendChild(inner);
-    el.appendChild(line);
-  });
-}
-
-document.querySelectorAll('.s-title, .hero-hl, .f-name').forEach(function(el){
-  splitTextIntoLines(el);
-  gsap.to(el.querySelectorAll('.split-line-inner'), {
-    y: 0,
-    duration: 0.9,
-    stagger: 0.15,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
-  });
-});
-
-// ── 5. SECTION REVEALS (replaces IntersectionObserver) ──
-document.querySelectorAll('.rv').forEach(function(el){
-  // Skip elements that are children of already-animated containers
-  if(el.closest('.hero-content')) return;
-  gsap.to(el, {
-    y: 0,
-    opacity: 1,
-    duration: 0.8,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
-  });
-});
-
-// ── 6. CLIENT GRID STAGGER ──
-gsap.to('.cl-cell', {
-  y: 0,
-  opacity: 1,
-  scale: 1,
-  duration: 0.5,
-  stagger: { amount: 0.8, from: 'start' },
-  ease: 'power2.out',
-  scrollTrigger: { trigger: '.cl-grid', start: 'top 80%', toggleActions: 'play none none none' }
-});
-
-// ── 7. PROOF STATS — SCROLL-LINKED COUNTER ──
-function countUp(el){
-  var t = +el.dataset.t, dur = 1800, s = performance.now();
-  (function step(n){
-    var p = Math.min((n - s) / dur, 1);
-    var ease = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.round(ease * t);
-    if(p < 1) requestAnimationFrame(step);
-  })(s);
-}
-
-var proofBar = document.querySelector('.proof-bar');
-if(proofBar){
-  ScrollTrigger.create({
-    trigger: proofBar,
-    start: 'top 80%',
-    once: true,
-    onEnter: function(){
-      proofBar.querySelectorAll('.cnt').forEach(countUp);
-      proofBar.querySelectorAll('.ps').forEach(function(p){ p.classList.add('on'); });
-    }
-  });
-
-  // Parallax lift on proof stat tiles
-  gsap.utils.toArray('.ps').forEach(function(ps, i){
-    gsap.from(ps, {
-      y: 30 + i * 10,
-      opacity: 0.5,
-      scrollTrigger: { trigger: proofBar, start: 'top 90%', end: 'top 40%', scrub: 1 }
-    });
-  });
-}
-
-// ── 8. PROCESS LINE REVEALS ──
-gsap.utils.toArray('.pi').forEach(function(el, i){
-  gsap.timeline({
-    scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none none' }
-  })
-  .to(el, { opacity: 1, duration: 0 })
-  .fromTo(el.querySelector('.pi-line::before') || el,
-    {},
-    { duration: 0.6, ease: 'power2.out', onStart: function(){ el.classList.add('on'); } }
-  );
-});
-// Fallback: also trigger .pi.on via ScrollTrigger
-document.querySelectorAll('.pi').forEach(function(el){
-  ScrollTrigger.create({
-    trigger: el,
-    start: 'top 80%',
-    once: true,
-    onEnter: function(){ el.classList.add('on'); }
-  });
-});
-
-// ── 9. PARALLAX DEPTH LAYERS ──
-// Hero orb floats at different speed
-var heroOrb = document.querySelector('.hero-orb');
-if(heroOrb){
-  gsap.to(heroOrb, {
-    y: -120,
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
-  });
-}
-
-// Hero content parallax (moves up faster)
-var heroContent = document.querySelector('.hero-content');
-if(heroContent){
-  gsap.to(heroContent, {
-    y: -60,
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
-  });
-}
-
-// Section tags float in from left with parallax
-gsap.utils.toArray('.s-tag').forEach(function(tag){
-  gsap.from(tag, {
-    x: -30,
-    opacity: 0,
-    scrollTrigger: { trigger: tag, start: 'top 88%', end: 'top 60%', scrub: 1 }
-  });
-});
-
-// ── 10. WHY SET TABLE — STAGGER ROWS ──
-gsap.utils.toArray('.why-row').forEach(function(row, i){
-  gsap.from(row, {
-    y: 30,
-    opacity: 0,
-    duration: 0.6,
-    delay: i * 0.1,
-    scrollTrigger: { trigger: row, start: 'top 88%', toggleActions: 'play none none none' }
-  });
-});
-
-// ── 11. TESTIMONIAL CARDS STAGGER ──
-gsap.from('.test-card', {
-  y: 40,
-  opacity: 0,
-  duration: 0.6,
-  stagger: 0.15,
-  ease: 'power2.out',
-  scrollTrigger: { trigger: '.test-grid', start: 'top 80%', toggleActions: 'play none none none' }
-});
-
-// ── 12. FAQ ITEMS STAGGER ──
-gsap.from('.faq-item', {
-  y: 20,
-  opacity: 0,
-  duration: 0.4,
-  stagger: 0.08,
-  scrollTrigger: { trigger: '.faq-list', start: 'top 80%', toggleActions: 'play none none none' }
-});
-
-// ── 13. MAGNETIC BUTTONS ──
-if(window.innerWidth >= 1024){
-  document.querySelectorAll('.btn-p').forEach(function(btn){
-    btn.classList.add('btn-magnetic');
-    btn.addEventListener('mousemove', function(e){
-      var rect = btn.getBoundingClientRect();
-      var x = e.clientX - rect.left - rect.width / 2;
-      var y = e.clientY - rect.top - rect.height / 2;
-      gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: 'power2.out' });
-    });
-    btn.addEventListener('mouseleave', function(){
-      gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' });
-    });
-  });
-}
-
-// ── 14. OUTCOME CARDS — STAGGER + HOVER DEPTH ──
-gsap.from('.oc', {
-  y: 50,
-  opacity: 0,
-  duration: 0.6,
-  stagger: 0.1,
-  ease: 'power2.out',
-  scrollTrigger: { trigger: '.outcomes-grid', start: 'top 80%', toggleActions: 'play none none none' }
-});
-
-// ── 15. PAIN POINTS STAGGER ──
-gsap.from('.pain-item', {
-  x: -40,
-  opacity: 0,
-  duration: 0.5,
-  stagger: 0.12,
-  ease: 'power2.out',
-  scrollTrigger: { trigger: '.pain-list', start: 'top 80%', toggleActions: 'play none none none' }
-});
-
-// ── 16. BOOKING SECTION ENTRANCE ──
-ScrollTrigger.create({
-  trigger: '#book',
-  start: 'top 75%',
-  once: true,
-  onEnter: function(){
-    gsap.from('#book .rv', { y: 50, opacity: 0, duration: 0.8, ease: 'power3.out' });
-    gsap.from('#bookForm, #book .btn-p', { y: 30, opacity: 0, duration: 0.6, delay: 0.3, stagger: 0.1, ease: 'power2.out' });
+// Wait for GSAP to load (deferred), then init everything
+function initMotion(){
+  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined'){
+    return setTimeout(initMotion, 50);
   }
-});
+  gsap.registerPlugin(ScrollTrigger);
 
-// ── 17. CURSOR (preserved from original) ──
+  // ── SCROLL PROGRESS BAR ──
+  var progressBar = document.getElementById('scrollProgress');
+  if(progressBar){
+    window.addEventListener('scroll', function(){
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (window.scrollY / h * 100) + '%';
+    }, {passive: true});
+  }
+
+  // ── TEXT SPLIT REVEALS (the real wow) ──
+  function splitLines(el){
+    var parts = el.innerHTML.split(/<br\s*\/?>/gi);
+    el.innerHTML = '';
+    parts.forEach(function(part){
+      var line = document.createElement('span');
+      line.className = 'split-line';
+      var inner = document.createElement('span');
+      inner.className = 'split-line-inner';
+      inner.innerHTML = part.trim();
+      line.appendChild(inner);
+      el.appendChild(line);
+    });
+  }
+
+  document.querySelectorAll('.s-title, .hero-hl, .f-name').forEach(function(el){
+    splitLines(el);
+    gsap.to(el.querySelectorAll('.split-line-inner'), {
+      y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 85%' }
+    });
+  });
+
+  // ── SECTION REVEALS (.rv) ──
+  document.querySelectorAll('.rv').forEach(function(el){
+    if(el.closest('.hero-content')) return;
+    gsap.to(el, {
+      y: 0, opacity: 1, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
+  });
+
+  // ── CLIENT GRID CASCADE ──
+  gsap.to('.cl-cell', {
+    y: 0, opacity: 1, scale: 1, duration: 0.4,
+    stagger: { amount: 0.6, from: 'start' }, ease: 'power2.out',
+    scrollTrigger: { trigger: '.cl-grid', start: 'top 82%' }
+  });
+
+  // ── OUTCOME CARDS STAGGER ──
+  gsap.from('.oc', {
+    y: 40, opacity: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out',
+    scrollTrigger: { trigger: '.outcomes-grid', start: 'top 82%' }
+  });
+
+  // ── PROOF STATS COUNTER ──
+  function countUp(el){
+    var t = +el.dataset.t, dur = 1600, s = performance.now();
+    (function step(n){
+      var p = Math.min((n - s) / dur, 1);
+      el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * t);
+      if(p < 1) requestAnimationFrame(step);
+    })(s);
+  }
+  var proofBar = document.querySelector('.proof-bar');
+  if(proofBar){
+    ScrollTrigger.create({
+      trigger: proofBar, start: 'top 82%', once: true,
+      onEnter: function(){
+        proofBar.querySelectorAll('.cnt').forEach(countUp);
+        proofBar.querySelectorAll('.ps').forEach(function(p){ p.classList.add('on'); });
+      }
+    });
+  }
+
+  // ── PROCESS LINE REVEALS ──
+  document.querySelectorAll('.pi').forEach(function(el){
+    ScrollTrigger.create({
+      trigger: el, start: 'top 82%', once: true,
+      onEnter: function(){ el.classList.add('on'); }
+    });
+  });
+
+  // ── WHY SET ROWS ──
+  gsap.utils.toArray('.why-row').forEach(function(row, i){
+    gsap.from(row, {
+      y: 25, opacity: 0, duration: 0.5,
+      scrollTrigger: { trigger: row, start: 'top 88%' }
+    });
+  });
+
+  // ── TESTIMONIAL CARDS ──
+  var testGrid = document.querySelector('.test-grid');
+  if(testGrid){
+    gsap.from('.test-card', {
+      y: 30, opacity: 0, duration: 0.5, stagger: 0.12, ease: 'power2.out',
+      scrollTrigger: { trigger: testGrid, start: 'top 82%' }
+    });
+  }
+
+  // ── HERO PARALLAX (subtle depth) ──
+  var heroOrb = document.querySelector('.hero-orb');
+  if(heroOrb){
+    gsap.to(heroOrb, {
+      y: -80,
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+    });
+  }
+  var heroContent = document.querySelector('.hero-content');
+  if(heroContent){
+    gsap.to(heroContent, {
+      y: -40,
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+    });
+  }
+}
+initMotion();
+
+// ── CURSOR ──
 var cur = document.getElementById('cur'), cr = document.getElementById('cur-r');
 if(window.innerWidth >= 1024 && cur){
   var mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; });
+  document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; }, {passive: true});
   (function a(){
     cur.style.left = mx + 'px'; cur.style.top = my + 'px';
     rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
@@ -1415,17 +1279,17 @@ if(window.innerWidth >= 1024 && cur){
   });
 }
 
-// ── 18. NAV SCROLL + STICKY ──
+// ── NAV SCROLL + STICKY ──
 var nav = document.getElementById('nav'), sticky = document.getElementById('sticky');
 var heroH = 0;
-lenis.on('scroll', function(e){
-  var y = e.animatedScroll || window.scrollY;
+window.addEventListener('scroll', function(){
+  var y = window.scrollY;
   if(nav) nav.classList.toggle('s', y > 50);
   if(!heroH){ var h = document.querySelector('.hero'); heroH = h ? h.offsetHeight * 0.35 : 300; }
   if(sticky) sticky.classList.toggle('show', y > heroH);
-});
+}, {passive: true});
 
-// ── 19. FAQ ACCORDION ──
+// ── FAQ ACCORDION ──
 document.querySelectorAll('.faq-btn').forEach(function(btn){
   btn.addEventListener('click', function(){
     var item = btn.closest('.faq-item'), isOpen = item.classList.contains('open');
@@ -1434,7 +1298,7 @@ document.querySelectorAll('.faq-btn').forEach(function(btn){
   });
 });
 
-// ── 20. FORM SUBMIT ──
+// ── FORM SUBMIT ──
 function handleSubmit(e){
   e.preventDefault();
   var form = document.getElementById('bookForm'), success = document.getElementById('formSuccess');
@@ -1447,6 +1311,15 @@ function handleSubmit(e){
   console.log('Form submission:', data);
   form.style.display = 'none'; success.style.display = 'block';
 }
+
+// ── SMOOTH SCROLL (native, no library) ──
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var id = a.getAttribute('href'); if(id === '#') return;
+    var t = document.querySelector(id);
+    if(t){ e.preventDefault(); window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth'}); }
+  });
+});
 </script>
 
 <!-- CASE STUDY MODAL -->
