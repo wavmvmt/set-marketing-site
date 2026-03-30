@@ -420,7 +420,7 @@ footer{background:var(--ink);border-top:1px solid var(--wire);padding:56px 24px;
 /* ── RED FLASH ── */
 
 /* ── FULL-VIEWPORT INTERSTITIALS ── */
-.interstitial{position:relative;min-height:60vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--ink)}
+.interstitial{position:relative;min-height:35vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--ink)}
 .interstitial-text{font-family:var(--fd);font-weight:900;font-size:clamp(60px,18vw,220px);line-height:.85;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(178,32,48,.2);text-align:center;opacity:0;transform:scale(.8)}
 .interstitial-text em{-webkit-text-stroke-color:rgba(178,32,48,.5);font-style:italic}
 .interstitial-text.fill{color:var(--paper);-webkit-text-stroke:none}
@@ -1457,16 +1457,17 @@ function initMotion(){
     });
   }
 
-  // ── INTERSTITIAL REVEALS (giant text) ──
+  // ── INTERSTITIAL REVEALS (giant text - appear fast, hold long) ──
   document.querySelectorAll('.interstitial-text').forEach(function(el){
+    // Snap to visible quickly
     gsap.to(el, {
-      scale: 1, opacity: 1, duration: 1.2, ease: 'power3.out',
-      scrollTrigger: { trigger: el.parentElement, start: 'top 70%', end: 'center center', scrub: 0.5 }
+      scale: 1, opacity: 1, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: el.parentElement, start: 'top 85%', toggleActions: 'play none none none' }
     });
-    // Scale up past 1 and fade as you leave
+    // Only fade when well past
     gsap.to(el, {
-      scale: 1.5, opacity: 0,
-      scrollTrigger: { trigger: el.parentElement, start: 'center center', end: 'bottom top', scrub: 0.5 }
+      scale: 1.15, opacity: 0,
+      scrollTrigger: { trigger: el.parentElement, start: 'bottom 30%', end: 'bottom -20%', scrub: 0.5 }
     });
   });
 
