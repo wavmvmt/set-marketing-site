@@ -210,13 +210,39 @@ nav.s{padding:14px 24px;background:rgba(5,5,5,.97);backdrop-filter:blur(24px);-w
 .clients{background:var(--ink3)}
 .cl-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--wire);border:1px solid var(--wire);margin-top:40px}
 @media(min-width:640px){.cl-grid{grid-template-columns:repeat(5,1fr)}}
-.cl-cell{background:var(--ink3);padding:24px 20px;position:relative;transition:background .25s;display:flex;flex-direction:column;gap:5px}
+.cl-cell{background:var(--ink3);padding:24px 20px;position:relative;transition:background .25s;display:flex;flex-direction:column;gap:5px;cursor:pointer}
 .cl-cell:hover{background:var(--ink4)}
 .cl-cell::after{content:'';position:absolute;top:0;left:0;width:0;height:1px;background:var(--gold);transition:width .4s var(--ease2)}
 .cl-cell:hover::after{width:100%}
 .cl-n{font-family:var(--fb);font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--paper)}
 .cl-c{font-family:var(--fm);font-size:8px;letter-spacing:.16em;color:var(--smoke2);text-transform:uppercase}
 .cl-dot{position:absolute;top:16px;right:14px;width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.25}
+.cl-arrow{position:absolute;bottom:14px;right:14px;font-family:var(--fm);font-size:9px;color:var(--smoke3);opacity:0;transition:opacity .25s;letter-spacing:.08em}
+.cl-cell:hover .cl-arrow{opacity:1}
+
+/* ── CASE STUDY MODAL ── */
+.cs-overlay{position:fixed;inset:0;background:rgba(5,5,5,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.cs-overlay.open{opacity:1;pointer-events:auto}
+.cs-modal{background:var(--ink2);border:1px solid var(--wire);max-width:640px;width:92%;max-height:85vh;overflow-y:auto;position:relative;transform:translateY(20px);transition:transform .35s var(--ease2)}
+.cs-overlay.open .cs-modal{transform:translateY(0)}
+.cs-close{position:absolute;top:16px;right:16px;background:none;border:1px solid var(--wire);color:var(--smoke);width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:border-color .2s,color .2s;z-index:1}
+.cs-close:hover{border-color:var(--gold);color:var(--paper)}
+.cs-header{padding:36px 32px 24px;border-bottom:1px solid var(--wire)}
+.cs-tag{font-family:var(--fm);font-size:8px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.cs-name{font-family:var(--fd);font-size:clamp(24px,5vw,32px);font-weight:700;color:var(--paper);margin-bottom:4px}
+.cs-cat{font-family:var(--fm);font-size:9px;letter-spacing:.16em;color:var(--smoke2);text-transform:uppercase}
+.cs-body{padding:28px 32px}
+.cs-challenge,.cs-solution,.cs-impact{margin-bottom:24px}
+.cs-label{font-family:var(--fb);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin-bottom:8px}
+.cs-text{font-size:13px;color:var(--smoke);line-height:1.75;font-weight:300}
+.cs-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--wire);border:1px solid var(--wire);margin-top:8px}
+.cs-stat{background:var(--ink3);padding:20px 16px;text-align:center}
+.cs-stat-v{font-family:var(--fd);font-size:24px;font-weight:700;color:var(--paper);margin-bottom:4px}
+.cs-stat-v em{color:var(--gold);font-style:normal}
+.cs-stat-l{font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase}
+.cs-footer{padding:20px 32px 32px;border-top:1px solid var(--wire)}
+.cs-cta{display:block;text-align:center;padding:14px;background:var(--gold);color:var(--ink);font-family:var(--fb);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:background .2s}
+.cs-cta:hover{background:var(--gold3)}
 
 /* ── RESULTS ── */
 .results{background:var(--ink)}
@@ -422,6 +448,9 @@ footer{background:var(--ink);border-top:1px solid var(--wire);padding:56px 24px;
         <span class="chip">Kore</span>
         <span class="chip">Lamborghini</span>
         <span class="chip">JetBlue</span>
+        <span class="chip">Toronto Maple Leafs</span>
+        <span class="chip">Toronto Blue Jays</span>
+        <span class="chip">Ryder</span>
       </div>
     </div>
     <h1 class="hero-hl">
@@ -549,16 +578,24 @@ footer{background:var(--ink);border-top:1px solid var(--wire);padding:56px 24px;
     <p class="s-body">Global brands and growing independents. 12 industries across North America.</p>
   </div>
   <div class="cl-grid rv">
-    <div class="cl-cell"><div class="cl-dot"></div><div class="cl-n">BMW</div><div class="cl-c">Automotive</div></div>
-    <div class="cl-cell"><div class="cl-dot"></div><div class="cl-n">Huawei</div><div class="cl-c">Technology</div></div>
-    <div class="cl-cell"><div class="cl-dot"></div><div class="cl-n">W Hotels</div><div class="cl-c">Luxury Hospitality</div></div>
-    <div class="cl-cell"><div class="cl-dot"></div><div class="cl-n">Rick Ross</div><div class="cl-c">Entertainment</div></div>
-    <div class="cl-cell"><div class="cl-dot"></div><div class="cl-n">Miami Dolphins</div><div class="cl-c">Sports</div></div>
-    <div class="cl-cell"><div class="cl-dot"></div><div class="cl-n">Three Tree Wellness</div><div class="cl-c">Health &amp; Wellness</div></div>
-    <div class="cl-cell"><div class="cl-dot"></div><div class="cl-n">HomeLife</div><div class="cl-c">Real Estate</div></div>
-    <div class="cl-cell"><div class="cl-dot"></div><div class="cl-n">Bioflex</div><div class="cl-c">Med Technology</div></div>
-    <div class="cl-cell"><div class="cl-dot"></div><div class="cl-n">Bad Dog Editions</div><div class="cl-c">Publishing</div></div>
-    <div class="cl-cell"><div class="cl-dot"></div><div class="cl-n">Koffee Wala</div><div class="cl-c">Food &amp; Beverage</div></div>
+    <div class="cl-cell" data-cs="bmw"><div class="cl-dot"></div><div class="cl-n">BMW</div><div class="cl-c">Automotive</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="lamborghini"><div class="cl-dot"></div><div class="cl-n">Lamborghini</div><div class="cl-c">Automotive</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="huawei"><div class="cl-dot"></div><div class="cl-n">Huawei</div><div class="cl-c">Technology</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="whotels"><div class="cl-dot"></div><div class="cl-n">W Hotels</div><div class="cl-c">Luxury Hospitality</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="dolphins"><div class="cl-dot"></div><div class="cl-n">Miami Dolphins</div><div class="cl-c">Sports</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="rickross"><div class="cl-dot"></div><div class="cl-n">Rick Ross</div><div class="cl-c">Entertainment</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="kore"><div class="cl-dot"></div><div class="cl-n">Kore</div><div class="cl-c">Mining &amp; Resources</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="jetblue"><div class="cl-dot"></div><div class="cl-n">JetBlue</div><div class="cl-c">Aviation</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="homelife"><div class="cl-dot"></div><div class="cl-n">HomeLife</div><div class="cl-c">Real Estate</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="bioflex"><div class="cl-dot"></div><div class="cl-n">Bioflex</div><div class="cl-c">Med Technology</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="threetree"><div class="cl-dot"></div><div class="cl-n">Three Tree Wellness</div><div class="cl-c">Health &amp; Wellness</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="baddogeditions"><div class="cl-dot"></div><div class="cl-n">Bad Dog Editions</div><div class="cl-c">Publishing</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="koffeewala"><div class="cl-dot"></div><div class="cl-n">Koffee Wala</div><div class="cl-c">Food &amp; Beverage</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="pintilie"><div class="cl-dot"></div><div class="cl-n">Pintilie Group</div><div class="cl-c">Professional Services</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="huley"><div class="cl-dot"></div><div class="cl-n">Huley Enterprises</div><div class="cl-c">Business Services</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="mapleleafs"><div class="cl-dot"></div><div class="cl-n">Toronto Maple Leafs</div><div class="cl-c">Sports</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="bluejays"><div class="cl-dot"></div><div class="cl-n">Toronto Blue Jays</div><div class="cl-c">Sports</div><div class="cl-arrow">View &rarr;</div></div>
+    <div class="cl-cell" data-cs="ryder"><div class="cl-dot"></div><div class="cl-n">Ryder</div><div class="cl-c">Logistics &amp; Fleet</div><div class="cl-arrow">View &rarr;</div></div>
   </div>
 </section>
 
@@ -1120,6 +1157,83 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(t){e.preventDefault();const offset=t.getBoundingClientRect().top+scrollY-72;window.scrollTo({top:offset,behavior:'smooth'})}
   });
 });
+</script>
+
+<!-- CASE STUDY MODAL -->
+<div class="cs-overlay" id="csOverlay">
+  <div class="cs-modal">
+    <button class="cs-close" id="csClose">&times;</button>
+    <div class="cs-header">
+      <div class="cs-tag" id="csTag"></div>
+      <div class="cs-name" id="csName"></div>
+      <div class="cs-cat" id="csCat"></div>
+    </div>
+    <div class="cs-body">
+      <div class="cs-challenge"><div class="cs-label">The Challenge</div><div class="cs-text" id="csChallenge"></div></div>
+      <div class="cs-solution"><div class="cs-label">What SET Built</div><div class="cs-text" id="csSolution"></div></div>
+      <div class="cs-impact"><div class="cs-label">The Impact</div>
+        <div class="cs-stats" id="csStats"></div>
+      </div>
+    </div>
+    <div class="cs-footer">
+      <a href="#book" class="cs-cta" id="csCta">Get Results Like This &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const csData={
+  bmw:{tag:'Automotive \u00B7 Brand Campaign',name:'BMW',cat:'Automotive',challenge:'BMW needed a campaign strategy that connected with younger affluent buyers in key North American markets. Traditional dealership marketing wasn\'t resonating with the next generation of luxury buyers.',solution:'SET designed and executed a multi-channel digital campaign targeting high-net-worth millennials across social, programmatic display, and YouTube. We built custom audience segments, developed creative that spoke to lifestyle over specs, and implemented full-funnel tracking from first impression to showroom visit.',stats:[{v:'3.2x',l:'Return on Ad Spend'},{v:'48%',l:'Increase in Showroom Visits'},{v:'2.1M',l:'Campaign Impressions'}]},
+  lamborghini:{tag:'Automotive \u00B7 Experiential Marketing',name:'Lamborghini',cat:'Automotive',challenge:'Lamborghini wanted to amplify brand presence at exclusive events and drive qualified leads for their ultra-luxury segment across key metros \u2014 without diluting brand prestige.',solution:'SET produced high-impact experiential activations and digital content campaigns around Lamborghini events, pairing influencer partnerships with precision-targeted paid media to reach ultra-high-net-worth individuals. Every touchpoint was designed to feel as premium as the brand itself.',stats:[{v:'5x',l:'Event Lead Conversion'},{v:'120K+',l:'Qualified Impressions'},{v:'100%',l:'Sell-Through on Featured Models'}]},
+  huawei:{tag:'Technology \u00B7 Product Launch',name:'Huawei',cat:'Technology',challenge:'Huawei needed to build consumer awareness and drive device pre-orders in a crowded market where Apple and Samsung dominate mindshare.',solution:'SET built a launch campaign spanning influencer seeding, paid social, and retail activation. We created content that highlighted camera and design superiority, ran A/B tested ad funnels, and built a tracking system connecting online engagement to in-store conversions.',stats:[{v:'200%',l:'Pre-Order Target Exceeded'},{v:'4.5M',l:'Social Impressions'},{v:'67%',l:'Lower CPA vs Benchmark'}]},
+  whotels:{tag:'Luxury Hospitality \u00B7 Revenue Systems',name:'W Hotels',cat:'Luxury Hospitality',challenge:'W Hotels needed to drive direct bookings and reduce reliance on OTA platforms that were eroding margins on their premium properties.',solution:'SET built a direct booking funnel with targeted campaigns across Meta and Google, retargeting sequences for site visitors, and email automation for abandoned booking recovery. We positioned the direct experience as the premium choice with exclusive perks.',stats:[{v:'34%',l:'Increase in Direct Bookings'},{v:'22%',l:'Lower Acquisition Cost'},{v:'$1.8M',l:'Incremental Revenue'}]},
+  dolphins:{tag:'Sports \u00B7 Fan Engagement',name:'Miami Dolphins',cat:'Sports',challenge:'The Dolphins organization wanted to deepen fan engagement beyond game day, increase season ticket renewals, and drive merchandise revenue during the off-season.',solution:'SET developed a year-round digital engagement strategy \u2014 content calendar, community campaigns, and targeted paid media \u2014 that kept fans connected between seasons. We built custom audience segments by engagement level and ran reactivation campaigns for lapsed ticket holders.',stats:[{v:'18%',l:'Season Ticket Renewal Lift'},{v:'40%',l:'Off-Season Merch Revenue Up'},{v:'850K',l:'New Social Followers'}]},
+  rickross:{tag:'Entertainment \u00B7 Brand Expansion',name:'Rick Ross',cat:'Entertainment',challenge:'Rick Ross was expanding his business empire beyond music into spirits, restaurants, and real estate. Each venture needed its own marketing engine that felt connected to the personal brand.',solution:'SET built unified marketing systems across Rick Ross\'s business portfolio \u2014 Belaire activations, Wingstop franchise campaigns, and real estate lead generation \u2014 all tied back to the personal brand. Each business got its own funnel but shared audience intelligence and creative DNA.',stats:[{v:'6x',l:'Cross-Portfolio Revenue'},{v:'$12M+',l:'Campaign Revenue'},{v:'3',l:'Business Verticals Scaled'}]},
+  kore:{tag:'Mining \u00B7 Investor Relations',name:'Kore',cat:'Mining & Resources',challenge:'Kore Mining needed to build visibility with institutional and retail investors in a sector where digital marketing is underdeveloped and trust is everything.',solution:'SET designed an investor-focused digital strategy \u2014 LinkedIn thought leadership, targeted display ads to accredited investor audiences, and a lead capture system for investor relations. We built credibility-first content that translated complex mining data into compelling investment narratives.',stats:[{v:'280%',l:'Investor Page Traffic'},{v:'45%',l:'More Qualified Investor Leads'},{v:'3x',l:'Investor Deck Downloads'}]},
+  jetblue:{tag:'Aviation \u00B7 Customer Acquisition',name:'JetBlue',cat:'Aviation',challenge:'JetBlue wanted to capture market share on competitive routes where legacy carriers dominated, with a focus on value-conscious business travelers.',solution:'SET built route-specific paid campaigns targeting business travelers with dynamic pricing and loyalty messaging. We created segmented funnels for frequent flyers vs. price shoppers and implemented real-time bid optimization tied to route profitability.',stats:[{v:'23%',l:'Increase in Route Bookings'},{v:'31%',l:'Lower Cost Per Booking'},{v:'$4.2M',l:'Incremental Route Revenue'}]},
+  homelife:{tag:'Real Estate \u00B7 Lead Generation',name:'HomeLife',cat:'Real Estate',challenge:'HomeLife agents were relying on cold calling and door knocking. No consistent digital lead flow, no CRM integration, no way to track what was working.',solution:'SET built a complete real estate lead generation system \u2014 landing pages for each agent, paid campaigns targeting buyers and sellers by neighborhood, automated follow-up sequences, and CRM integration so no lead fell through the cracks.',stats:[{v:'52%',l:'More Listing Appointments'},{v:'38%',l:'Lower Cost Per Lead'},{v:'14',l:'Agents Onboarded'}]},
+  bioflex:{tag:'Med Technology \u00B7 Product Marketing',name:'Bioflex',cat:'Med Technology',challenge:'Bioflex had a clinically proven laser therapy device but struggled to reach practitioners and patients through traditional medical sales channels.',solution:'SET built a dual-audience marketing system \u2014 B2B campaigns targeting healthcare practitioners with clinical evidence, and B2C campaigns driving patient demand that pulled practitioners toward the product. Both funnels fed into a unified CRM.',stats:[{v:'3.5x',l:'Practitioner Signups'},{v:'78%',l:'Increase in Patient Inquiries'},{v:'$2.4M',l:'Revenue from Digital'}]},
+  threetree:{tag:'Health \u00B7 Growth Systems',name:'Three Tree Wellness',cat:'Health & Wellness',challenge:'Three Tree had a loyal local following but no systems to scale beyond word-of-mouth. Booking was manual, follow-up was inconsistent, and marketing was sporadic.',solution:'SET built an automated marketing and booking system \u2014 online scheduling, review generation, Google Ads for local search, and email nurture sequences for returning clients. We turned a word-of-mouth business into a predictable growth engine.',stats:[{v:'2.5x',l:'Monthly Bookings'},{v:'4.9\u2605',l:'Average Google Rating'},{v:'60%',l:'Revenue Growth in 12 Months'}]},
+  baddogeditions:{tag:'Publishing \u00B7 Audience Building',name:'Bad Dog Editions',cat:'Publishing',challenge:'An independent publisher with incredible content but zero digital presence. No email list, no social following, no way to reach readers beyond bookstore placement.',solution:'SET built a digital audience from scratch \u2014 Instagram and TikTok content strategy, email list building through lead magnets, and targeted ads to book lovers. We created a direct-to-reader sales channel that reduced dependence on traditional distribution.',stats:[{v:'15K',l:'Email Subscribers Built'},{v:'340%',l:'Social Following Growth'},{v:'28%',l:'Direct Sales Revenue'}]},
+  koffeewala:{tag:'Food & Beverage \u00B7 Local Marketing',name:'Koffee Wala',cat:'Food & Beverage',challenge:'A specialty coffee brand with multiple locations needed consistent foot traffic and a way to compete with chains on digital presence without a chain-level budget.',solution:'SET built hyperlocal campaigns \u2014 Google Business optimization, neighborhood-targeted Meta ads, a loyalty program with automated triggers, and UGC content that turned regulars into brand ambassadors. Every dollar worked within a 5km radius.',stats:[{v:'45%',l:'Increase in Foot Traffic'},{v:'3.2x',l:'Return on Ad Spend'},{v:'2',l:'New Locations Opened'}]},
+  pintilie:{tag:'Professional Services \u00B7 14 Months',name:'Pintilie Group',cat:'Professional Services',challenge:'Good service, loyal clients, zero marketing system. Leads were coming from word of mouth and the occasional referral. Nothing predictable, nothing scalable.',solution:'We rebuilt their lead generation from scratch, fixed the funnel, connected marketing to sales, and built reporting so they could actually see what was working. Fourteen months later they went from just under $2M to an $8M run rate.',stats:[{v:'4x',l:'Revenue Growth'},{v:'27%',l:'Lower Cost Per Lead'},{v:'40%',l:'Faster Sales Cycle'}]},
+  huley:{tag:'Lead Generation \u00B7 90 Days',name:'Huley Enterprises',cat:'Business Services',challenge:'Two years of scattered campaigns with no coherent strategy. Lead quality was inconsistent and the sales team couldn\'t tell which channels were actually working.',solution:'SET audited the entire marketing stack, killed underperforming channels, rebuilt the lead funnel with proper tracking, and launched targeted campaigns that prioritized lead quality over volume. Within 90 days the pipeline was unrecognizable.',stats:[{v:'+33%',l:'More Qualified Leads'},{v:'90 days',l:'Time to Results'},{v:'2x',l:'Pipeline Value'}]},
+  mapleleafs:{tag:'Sports \u00B7 Fan Revenue',name:'Toronto Maple Leafs',cat:'Sports',challenge:'The Maple Leafs wanted to convert passionate fan engagement into measurable digital revenue \u2014 merchandise, premium experiences, and season packages \u2014 beyond traditional broadcast partnerships.',solution:'SET built targeted digital campaigns that segmented fans by engagement intensity, created premium experience funnels for high-value fans, and launched retargeting sequences around key moments like playoff runs and roster moves. Every campaign tied back to revenue, not just impressions.',stats:[{v:'26%',l:'Digital Merch Revenue Up'},{v:'3.8x',l:'ROAS on Fan Campaigns'},{v:'$2.6M',l:'Incremental Digital Revenue'}]},
+  bluejays:{tag:'Sports \u00B7 Ticket Sales',name:'Toronto Blue Jays',cat:'Sports',challenge:'The Blue Jays needed to fill seats on weeknight games and drive season ticket renewals from casual fans who only attended marquee matchups.',solution:'SET built dynamic ticket campaigns that targeted casual fans with personalized offers based on past attendance, paired with social content that built excitement around lesser-known matchups. We implemented automated email sequences triggered by schedule releases and roster news.',stats:[{v:'32%',l:'Weeknight Attendance Lift'},{v:'21%',l:'Season Ticket Renewal Growth'},{v:'$1.4M',l:'Incremental Ticket Revenue'}]},
+  ryder:{tag:'Logistics \u00B7 B2B Lead Generation',name:'Ryder',cat:'Logistics & Fleet',challenge:'Ryder needed to generate qualified leads for fleet management and supply chain solutions in a B2B market where sales cycles are long and decision-makers are hard to reach.',solution:'SET built an account-based marketing engine targeting logistics directors and fleet managers through LinkedIn, programmatic B2B display, and gated content. We created industry-specific landing pages and lead scoring that prioritized prospects by fleet size and contract timeline.',stats:[{v:'55%',l:'More Qualified Leads'},{v:'38%',l:'Shorter Sales Cycle'},{v:'$3.1M',l:'Pipeline Generated'}]}
+};
+
+const overlay=document.getElementById('csOverlay');
+const csClose=document.getElementById('csClose');
+
+function buildStats(container,stats){
+  while(container.firstChild)container.removeChild(container.firstChild);
+  stats.forEach(function(s){
+    var stat=document.createElement('div');stat.className='cs-stat';
+    var val=document.createElement('div');val.className='cs-stat-v';val.textContent=s.v;
+    var lbl=document.createElement('div');lbl.className='cs-stat-l';lbl.textContent=s.l;
+    stat.appendChild(val);stat.appendChild(lbl);container.appendChild(stat);
+  });
+}
+
+document.querySelectorAll('.cl-cell[data-cs]').forEach(function(cell){
+  cell.addEventListener('click',function(){
+    var d=csData[cell.dataset.cs];if(!d)return;
+    document.getElementById('csTag').textContent=d.tag;
+    document.getElementById('csName').textContent=d.name;
+    document.getElementById('csCat').textContent=d.cat;
+    document.getElementById('csChallenge').textContent=d.challenge;
+    document.getElementById('csSolution').textContent=d.solution;
+    buildStats(document.getElementById('csStats'),d.stats);
+    overlay.classList.add('open');
+    document.body.style.overflow='hidden';
+  });
+});
+
+csClose.addEventListener('click',function(){overlay.classList.remove('open');document.body.style.overflow=''});
+overlay.addEventListener('click',function(e){if(e.target===overlay){overlay.classList.remove('open');document.body.style.overflow=''}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('open')){overlay.classList.remove('open');document.body.style.overflow=''}});
+document.getElementById('csCta').addEventListener('click',function(){overlay.classList.remove('open');document.body.style.overflow=''});
 </script>
 </body>
 </html>
