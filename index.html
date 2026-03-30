@@ -418,7 +418,6 @@ footer{background:var(--ink);border-top:1px solid var(--wire);padding:56px 24px;
 .intro-line{width:0;height:1px;background:var(--gold);margin-top:20px}
 
 /* ── RED FLASH ── */
-.red-flash{position:fixed;inset:0;background:var(--gold);z-index:9998;opacity:0;pointer-events:none;mix-blend-mode:screen}
 
 /* ── FULL-VIEWPORT INTERSTITIALS ── */
 .interstitial{position:relative;min-height:60vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--ink)}
@@ -482,7 +481,6 @@ body.sec-light{background:#0d0d0d}
   <div class="intro-label" id="introLabel">Revenue Generated For Our Clients</div>
   <div class="intro-line" id="introLine"></div>
 </div>
-<div class="red-flash" id="redFlash"></div>
 <div class="velocity-glow" id="velocityGlow"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="set-emblem" id="setEmblem">
@@ -1209,7 +1207,6 @@ var intro = document.getElementById('intro');
 var introNum = document.getElementById('introNum');
 var introLabel = document.getElementById('introLabel');
 var introLine = document.getElementById('introLine');
-var redFlash = document.getElementById('redFlash');
 document.body.style.overflow = 'hidden';
 window.addEventListener('load', function(){
   var tl = gsap.timeline({
@@ -1240,8 +1237,7 @@ window.addEventListener('load', function(){
       .to(introNum, { scale: 20, opacity: 0, duration: 0.7, ease: 'power3.in' })
       .to(introLabel, { opacity: 0, duration: 0.2 }, '<')
       .to(introLine, { opacity: 0, scaleX: 3, duration: 0.3 }, '<')
-      .to(redFlash, { opacity: 0.6, duration: 0.08 }, '-=0.15')
-      .to(redFlash, { opacity: 0, duration: 0.4, ease: 'power2.out' });
+;
   })();
 });
 
@@ -1460,20 +1456,6 @@ function initMotion(){
     });
   });
 
-  // ── RED FLASH ON KEY TRANSITIONS ──
-  var flashTriggers = ['.outcomes', '.results-pin', '#book'];
-  flashTriggers.forEach(function(sel){
-    var el = document.querySelector(sel);
-    if(el){
-      ScrollTrigger.create({
-        trigger: el, start: 'top 80%', once: true,
-        onEnter: function(){
-          gsap.to(redFlash, { opacity: 0.15, duration: 0.06 });
-          gsap.to(redFlash, { opacity: 0, duration: 0.5, delay: 0.06, ease: 'power2.out' });
-        }
-      });
-    }
-  });
 
   // ── SCROLL VELOCITY GLOW ──
   var velocityGlow = document.getElementById('velocityGlow');
