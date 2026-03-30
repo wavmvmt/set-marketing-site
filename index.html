@@ -491,7 +491,7 @@ body.sec-light{background:#0d0d0d}
     <line x1="5" y1="100" x2="195" y2="100" stroke="rgba(178,32,48,.08)" stroke-width=".5"/>
     <line x1="30" y1="30" x2="170" y2="170" stroke="rgba(178,32,48,.06)" stroke-width=".5"/>
     <line x1="170" y1="30" x2="30" y2="170" stroke="rgba(178,32,48,.06)" stroke-width=".5"/>
-    <text x="100" y="108" text-anchor="middle" font-family="Playfair Display,serif" font-size="42" font-weight="900" fill="rgba(178,32,48,.12)">SET</text>
+    <text id="emblemText" x="100" y="108" text-anchor="middle" font-family="Playfair Display,serif" font-size="42" font-weight="900" fill="rgba(178,32,48,.12)">SET</text>
   </svg>
 </div>
 <div id="cur"></div><div id="cur-r"></div>
@@ -1372,10 +1372,18 @@ function initMotion(){
       opacity: 1,
       scrollTrigger: { trigger: '.hero', start: 'bottom 80%', end: 'bottom -20%', scrub: 0.8 }
     });
+    var emblemTxt = document.getElementById('emblemText');
     gsap.fromTo(emblemSvg, { scale: 0, rotation: 0 }, {
       scale: 1, rotation: 90,
       scrollTrigger: { trigger: '.hero', start: 'bottom 80%', end: 'bottom -50%', scrub: 0.8 }
     });
+    // Counter-rotate text so it stays horizontal
+    if(emblemTxt){
+      gsap.fromTo(emblemTxt, { attr: { transform: 'rotate(0, 100, 104)' } }, {
+        attr: { transform: 'rotate(-90, 100, 104)' },
+        scrollTrigger: { trigger: '.hero', start: 'bottom 80%', end: 'bottom -50%', scrub: 0.8 }
+      });
+    }
     // Phase 2: continue rotating + scale down
     gsap.to(emblem, {
       opacity: 0,
@@ -1385,6 +1393,12 @@ function initMotion(){
       scale: 0.3, rotation: 270,
       scrollTrigger: { trigger: '#qualify', start: 'top bottom', end: 'top top', scrub: 0.8 }
     });
+    if(emblemTxt){
+      gsap.to(emblemTxt, {
+        attr: { transform: 'rotate(-270, 100, 104)' },
+        scrollTrigger: { trigger: '#qualify', start: 'top bottom', end: 'top top', scrub: 0.8 }
+      });
+    }
   }
 
   // ── PINNED HORIZONTAL SCROLL (results section) ──
