@@ -446,13 +446,14 @@ footer{background:var(--ink);border-top:1px solid var(--wire);padding:56px 24px;
 /* ── PINNED RESULTS HORIZONTAL SCROLL ── */
 .results-pin{overflow:hidden}
 .results-track{display:flex;gap:2px;width:max-content}
-.results-panel{width:75vw;max-width:480px;flex-shrink:0;background:var(--ink3);border:1px solid var(--wire);padding:36px 32px}
-@media(min-width:768px){.results-panel{width:42vw;max-width:480px;padding:44px 40px}}
-.results-panel .r-tag{font-family:var(--fm);font-size:8px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.results-panel .r-big{font-family:var(--fd);font-size:clamp(36px,8vw,56px);font-weight:900;line-height:.9;margin-bottom:16px;letter-spacing:-.03em}
+.results-pin.section{padding-bottom:40px}
+.results-panel{width:65vw;max-width:380px;flex-shrink:0;background:var(--ink3);border:1px solid var(--wire);padding:28px 24px}
+@media(min-width:768px){.results-panel{width:36vw;max-width:400px;padding:32px 32px}}
+.results-panel .r-tag{font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.results-panel .r-big{font-family:var(--fd);font-size:clamp(28px,6vw,40px);font-weight:900;line-height:.9;margin-bottom:12px;letter-spacing:-.03em}
 .results-panel .r-big em{color:var(--gold);font-style:normal}
-.results-panel .r-txt{font-size:14px;color:var(--smoke);line-height:1.7;font-weight:300;margin-bottom:20px}
-.results-panel .r-who{font-family:var(--fm);font-size:9px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase}
+.results-panel .r-txt{font-size:12px;color:var(--smoke);line-height:1.65;font-weight:300;margin-bottom:14px}
+.results-panel .r-who{font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase}
 
 /* ── SECTION COLOR TRANSITIONS ── */
 body.sec-dark{background:var(--ink)}
@@ -703,10 +704,10 @@ body.sec-light{background:#0d0d0d}
       <div class="r-tag">Professional Services · 14 Months</div>
       <div class="r-big">$2M to <em>$8M</em></div>
       <div class="r-txt">Zero marketing system. Leads from word of mouth only. We rebuilt lead gen from scratch, connected marketing to sales, built reporting. Fourteen months later: $2M to $8M run rate.</div>
-      <div style="display:flex;gap:24px;margin-bottom:20px">
-        <div><div class="scale-num" style="font-family:var(--fd);font-size:32px;font-weight:900;color:var(--paper)">4x</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Revenue</div></div>
-        <div><div class="scale-num" style="font-family:var(--fd);font-size:32px;font-weight:900;color:var(--paper)">27%</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Lower CPL</div></div>
-        <div><div class="scale-num" style="font-family:var(--fd);font-size:32px;font-weight:900;color:var(--paper)">40%</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Faster Close</div></div>
+      <div style="display:flex;gap:16px;margin-bottom:14px">
+        <div><div class="scale-num" style="font-family:var(--fd);font-size:22px;font-weight:900;color:var(--paper)">4x</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Revenue</div></div>
+        <div><div class="scale-num" style="font-family:var(--fd);font-size:22px;font-weight:900;color:var(--paper)">27%</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Lower CPL</div></div>
+        <div><div class="scale-num" style="font-family:var(--fd);font-size:22px;font-weight:900;color:var(--paper)">40%</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Faster Close</div></div>
       </div>
       <div class="r-who">George Pintilie, Founder · Pintilie Group</div>
     </div>
@@ -714,9 +715,9 @@ body.sec-light{background:#0d0d0d}
       <div class="r-tag">Lead Generation · 90 Days</div>
       <div class="r-big"><em>+33%</em></div>
       <div class="r-txt">More qualified leads in the first 90 days. Consistent, trackable, repeatable. Replaced two years of scattered campaigns in three months.</div>
-      <div style="display:flex;gap:24px;margin-bottom:20px">
-        <div><div class="scale-num" style="font-family:var(--fd);font-size:32px;font-weight:900;color:var(--paper)">90d</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Time to Results</div></div>
-        <div><div class="scale-num" style="font-family:var(--fd);font-size:32px;font-weight:900;color:var(--paper)">2x</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Pipeline Value</div></div>
+      <div style="display:flex;gap:16px;margin-bottom:14px">
+        <div><div class="scale-num" style="font-family:var(--fd);font-size:22px;font-weight:900;color:var(--paper)">90d</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Time to Results</div></div>
+        <div><div class="scale-num" style="font-family:var(--fd);font-size:22px;font-weight:900;color:var(--paper)">2x</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Pipeline Value</div></div>
       </div>
       <div class="r-who">Sean Huley, CEO · Huley Enterprises</div>
     </div>
@@ -724,9 +725,9 @@ body.sec-light{background:#0d0d0d}
       <div class="r-tag">Automotive · Brand Campaign</div>
       <div class="r-big"><em>3.2x</em> ROAS</div>
       <div class="r-txt">Targeted high-net-worth millennials across social, programmatic, and YouTube. Full-funnel tracking from first impression to showroom visit.</div>
-      <div style="display:flex;gap:24px;margin-bottom:20px">
-        <div><div class="scale-num" style="font-family:var(--fd);font-size:32px;font-weight:900;color:var(--paper)">48%</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Showroom Visits</div></div>
-        <div><div class="scale-num" style="font-family:var(--fd);font-size:32px;font-weight:900;color:var(--paper)">2.1M</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Impressions</div></div>
+      <div style="display:flex;gap:16px;margin-bottom:14px">
+        <div><div class="scale-num" style="font-family:var(--fd);font-size:22px;font-weight:900;color:var(--paper)">48%</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Showroom Visits</div></div>
+        <div><div class="scale-num" style="font-family:var(--fd);font-size:22px;font-weight:900;color:var(--paper)">2.1M</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Impressions</div></div>
       </div>
       <div class="r-who">BMW · North America</div>
     </div>
@@ -734,9 +735,9 @@ body.sec-light{background:#0d0d0d}
       <div class="r-tag">Luxury Hospitality · Revenue Systems</div>
       <div class="r-big"><em>34%</em> More Direct</div>
       <div class="r-txt">Built a direct booking funnel that reduced OTA dependence. Retargeting sequences and automated abandoned booking recovery.</div>
-      <div style="display:flex;gap:24px;margin-bottom:20px">
-        <div><div class="scale-num" style="font-family:var(--fd);font-size:32px;font-weight:900;color:var(--paper)">22%</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Lower CAC</div></div>
-        <div><div class="scale-num" style="font-family:var(--fd);font-size:32px;font-weight:900;color:var(--paper)">$1.8M</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Revenue Added</div></div>
+      <div style="display:flex;gap:16px;margin-bottom:14px">
+        <div><div class="scale-num" style="font-family:var(--fd);font-size:22px;font-weight:900;color:var(--paper)">22%</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Lower CAC</div></div>
+        <div><div class="scale-num" style="font-family:var(--fd);font-size:22px;font-weight:900;color:var(--paper)">$1.8M</div><div style="font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:var(--smoke2);text-transform:uppercase">Revenue Added</div></div>
       </div>
       <div class="r-who">W Hotels</div>
     </div>
