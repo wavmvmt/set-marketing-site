@@ -816,7 +816,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── S·07 DEPTH PUSH — sections recede in Z as they exit viewport top ──────────
+// ── S·07 DEPTH PUSH ───────────────────────────────────────────────────────────
 if (window.innerWidth > 900) {
   document.body.style.perspective = '1400px';
   document.body.style.perspectiveOrigin = '50% 0%';
@@ -833,17 +833,10 @@ const trBurst = document.getElementById('tr-burst');
 const trFlash = document.getElementById('tr-flash');
 let trLock = false;
 function lockTr(fn){ if(trLock) return; trLock=true; fn(); setTimeout(()=>{ trLock=false; },1350); }
-
-// T·01 — Diagonal Blade (dir: 1=L→R, -1=R→L)
 function playBlade(dir){ dir=dir||1; gsap.set(trBlade,{xPercent:dir*-118}); gsap.timeline().to(trBlade,{xPercent:0,duration:.43,ease:'power3.inOut'}).to(trBlade,{xPercent:dir*118,duration:.43,ease:'power3.inOut',delay:.06}); }
-
-// T·02 — Radial Burst (fx/fy = CSS % focal point e.g. '50% 0%')
 function playBurst(fx,fy){ fx=fx||'50%'; fy=fy||'50%'; gsap.set(trBurst,{clipPath:'circle(0% at '+fx+' '+fy+')'}); gsap.timeline().to(trBurst,{clipPath:'circle(150% at '+fx+' '+fy+')',duration:.62,ease:'power2.inOut'}).to(trBurst,{clipPath:'circle(0% at '+fx+' '+fy+')',duration:.52,ease:'power2.inOut',delay:.06}); }
-
-// T·03 — Particle Vortex Collapse
 function playVortex(){ vortex.on=true; gsap.timeline().to(vortex,{str:1,duration:.95,ease:'power2.in'}).to(trFlash,{opacity:.85,duration:.07},'-=0').to(trFlash,{opacity:0,duration:.4,ease:'power2.out'}).to(vortex,{str:0,duration:.65,ease:'power3.out'},'-=0.32').call(()=>{ vortex.on=false; }); }
 
-// Section assignments — each section gets its own transition type + focal variation
 ScrollTrigger.create({ trigger:'.hero',         start:'bottom 58%', onLeave:()=>lockTr(playVortex), onEnterBack:()=>lockTr(playVortex) });
 ScrollTrigger.create({ trigger:'#clients',      start:'top 90%',    onEnter:()=>lockTr(()=>playBlade(1)) });
 ScrollTrigger.create({ trigger:'#services',     start:'top 90%',    onEnter:()=>lockTr(()=>playBurst('50%','0%')) });
