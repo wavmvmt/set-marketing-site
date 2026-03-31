@@ -25,8 +25,8 @@
   --border2:rgba(255,255,255,0.04);
   --white:#f4f1ec;
   --cream:#e6dfd4;
-  --red:#C8102E;
-  --red2:#e8203e;
+  --red:#B91C2E;
+  --red2:#D42240;
   --fd:'Cormorant Garamond',serif;
   --fb:'Syne',sans-serif;
   --fm:'DM Mono',monospace;
@@ -43,9 +43,9 @@ body{background:var(--black);color:var(--white);font-family:var(--fb);font-size:
 
 /* ─── CURSOR ─────────────────────────────────── */
 #cur{position:fixed;width:7px;height:7px;background:var(--red);border-radius:50%;pointer-events:none;z-index:8999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
-#cur-r{position:fixed;width:34px;height:34px;border:1px solid rgba(200,16,46,.35);border-radius:50%;pointer-events:none;z-index:8998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
+#cur-r{position:fixed;width:34px;height:34px;border:1px solid rgba(185,28,46,.35);border-radius:50%;pointer-events:none;z-index:8998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
 body:has(a:hover) #cur,body:has(button:hover) #cur{width:14px;height:14px;background:var(--red2)}
-body:has(a:hover) #cur-r,body:has(button:hover) #cur-r{width:54px;height:54px;border-color:rgba(200,16,46,.55)}
+body:has(a:hover) #cur-r,body:has(button:hover) #cur-r{width:54px;height:54px;border-color:rgba(185,28,46,.55)}
 @media(max-width:900px){#cur,#cur-r{display:none}}
 
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");background-size:180px 180px;pointer-events:none;z-index:700;opacity:.5;mix-blend-mode:overlay}
@@ -54,8 +54,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:28px 64px;display:flex;align-items:center;justify-content:space-between;transition:padding .4s,background .4s,border-color .4s;border-bottom:1px solid transparent}
 nav.s{padding:16px 64px;background:rgba(6,6,6,.96);backdrop-filter:blur(28px);border-color:var(--border)}
 .nl{display:flex;align-items:center;text-decoration:none}
-.logo-mark{display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--red);margin-right:10px;flex-shrink:0}
-.logo-mark svg{width:20px;height:20px}
+.logo-mark{display:flex;align-items:center;justify-content:center;width:36px;height:36px;margin-right:10px;flex-shrink:0}
+.logo-mark svg{width:36px;height:36px}
 .logo-set{font-family:var(--fb);font-weight:800;font-size:15px;letter-spacing:.26em;text-transform:uppercase;color:var(--white)}
 .logo-sub{font-family:var(--fm);font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
 .nlinks{display:flex;align-items:center;gap:44px;list-style:none}
@@ -69,11 +69,11 @@ nav.s{padding:16px 64px;background:rgba(6,6,6,.96);backdrop-filter:blur(28px);bo
 .hero-vid{position:relative;overflow:hidden;background:var(--black)}
 .hero-vid iframe{position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none}
 .hero-vid::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,var(--black) 100%),linear-gradient(180deg,rgba(6,6,6,.4) 0%,transparent 30%);pointer-events:none;z-index:1}
-.hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 90px;position:relative;overflow:hidden;background:var(--black);width:100%}
+.hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding:120px 64px 90px;position:relative;overflow:hidden;background:var(--black);width:100%}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 0% 60%,rgba(200,16,46,.07) 0%,transparent 60%);z-index:1}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 0% 60%,rgba(185,28,46,.07) 0%,transparent 60%);z-index:1}
 .hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:90px 90px;mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.25) 30%,rgba(0,0,0,.08) 80%,transparent 100%);z-index:2}
-.hspotlight{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(200,16,46,.14) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0;z-index:3}
+.hspotlight{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(185,28,46,.14) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0;z-index:3}
 .h-topbar{position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);z-index:4}
 .h-eye{font-family:var(--fm);font-size:10px;letter-spacing:.35em;color:var(--red);text-transform:uppercase;margin-bottom:36px;display:flex;align-items:center;gap:16px;opacity:0;position:relative;z-index:5}
 .h-eye::before{content:'';display:block;width:36px;height:1px;background:var(--red);flex-shrink:0}
@@ -112,9 +112,10 @@ nav.s{padding:16px 64px;background:rgba(6,6,6,.96);backdrop-filter:blur(28px);bo
 .s-lbl::before{content:'';display:block;width:22px;height:1px;background:var(--red);flex-shrink:0}
 
 /* ─── REVEAL ─────────────────────────────────── */
-.rv{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .rv.on{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
 
 /* ─── CLIENTS ────────────────────────────────── */
 .clients{padding:108px 64px 0;background:var(--off-black)}
@@ -129,9 +130,9 @@ nav.s{padding:16px 64px;background:rgba(6,6,6,.96);backdrop-filter:blur(28px);bo
 .mq-track.rev{animation-direction:reverse;animation-duration:44s}
 .mq-name{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7vw,96px);font-weight:300;color:rgba(244,241,236,.3);flex-shrink:0;letter-spacing:-.02em;transition:color .5s;cursor:default;line-height:1}
 .mq-name:hover{color:rgba(244,241,236,.85)}
-.mq-name.acc{font-style:italic;color:rgba(200,16,46,.35)}
+.mq-name.acc{font-style:italic;color:rgba(185,28,46,.35)}
 .mq-name.acc:hover{color:var(--red)}
-.mq-dot{font-family:var(--fm);font-size:8px;color:rgba(200,16,46,.3);align-self:center;flex-shrink:0}
+.mq-dot{font-family:var(--fm);font-size:8px;color:rgba(185,28,46,.3);align-self:center;flex-shrink:0}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ─── SERVICES ───────────────────────────────── */
@@ -153,14 +154,14 @@ nav.s{padding:16px 64px;background:rgba(6,6,6,.96);backdrop-filter:blur(28px);bo
 .sv-desc{font-family:'Syne',sans-serif;font-size:15px;font-weight:400;color:#f4f1ec;line-height:1.8;margin-bottom:28px}
 .tags{display:flex;flex-wrap:wrap;gap:7px}
 .tag{font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--white);border:1px solid var(--border);padding:5px 10px;transition:border-color .3s,color .3s}
-.sv-card:hover .tag{border-color:rgba(200,16,46,.2);color:rgba(200,16,46,.7)}
+.sv-card:hover .tag{border-color:rgba(185,28,46,.2);color:rgba(185,28,46,.7)}
 
 /* ─── RESULTS ────────────────────────────────── */
 .results{background:var(--off-black)}
 .rs-header{padding:120px 64px 56px}
 .rs-t{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6.5vw,96px);font-weight:300;line-height:.92;margin-bottom:0}
 .rs-t em{font-style:italic;color:var(--red)}
-.rs-hint{font-family:var(--fm);font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:rgba(200,16,46,.6);margin-top:30px;display:flex;align-items:center;gap:14px}
+.rs-hint{font-family:var(--fm);font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:rgba(185,28,46,.6);margin-top:30px;display:flex;align-items:center;gap:14px}
 .rs-hint-line{display:block;width:0;height:1px;background:var(--red);animation:rs-line 2.4s ease-in-out infinite}
 @keyframes rs-line{0%{width:0;opacity:1}60%{width:44px;opacity:1}100%{width:44px;opacity:0}}
 .rs-pin{overflow:hidden}
@@ -194,7 +195,7 @@ nav.s{padding:16px 64px;background:rgba(6,6,6,.96);backdrop-filter:blur(28px);bo
 .founder{padding:140px 64px;background:var(--black);display:grid;grid-template-columns:1fr 1.1fr;gap:96px;align-items:center}
 .fv{position:relative}
 .fiw{aspect-ratio:4/5;background:var(--card);overflow:hidden;border:1px solid var(--border);position:relative}
-.f-corner{position:absolute;bottom:-18px;right:-18px;width:100px;height:100px;border:1px solid rgba(200,16,46,.2);pointer-events:none}
+.f-corner{position:absolute;bottom:-18px;right:-18px;width:100px;height:100px;border:1px solid rgba(185,28,46,.2);pointer-events:none}
 .f-badge{position:absolute;top:32px;right:-24px;background:var(--red);color:var(--white);padding:10px 18px;font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;z-index:2}
 .ft{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5vw,78px);font-weight:300;line-height:.92;margin-bottom:36px}
 .ft em{font-style:italic;color:var(--red)}
@@ -202,7 +203,7 @@ nav.s{padding:16px 64px;background:rgba(6,6,6,.96);backdrop-filter:blur(28px);bo
 .fsig{font-family:'Cormorant Garamond',serif;font-size:44px;font-style:italic;font-weight:300;color:var(--red);margin-top:40px;margin-bottom:4px}
 .frole{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--white)}
 .f-creds{display:flex;gap:28px;margin-top:36px;padding-top:36px;border-top:1px solid var(--border);flex-wrap:wrap}
-.cred{font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,16,46,.7)}
+.cred{font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(185,28,46,.7)}
 
 /* ─── PROCESS ────────────────────────────────── */
 .process{padding:120px 64px;background:var(--off-black)}
@@ -211,15 +212,15 @@ nav.s{padding:16px 64px;background:rgba(6,6,6,.96);backdrop-filter:blur(28px);bo
 .pr-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
 .ps{background:var(--off-black);padding:52px 38px;position:relative;transition:background .5s,transform .3s;overflow:hidden;cursor:default}
 .ps:hover{background:#1a0a0d;transform:translateY(-5px)}
-.ps::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,16,46,.08) 0%,transparent 60%);opacity:0;transition:opacity .5s}
+.ps::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(185,28,46,.08) 0%,transparent 60%);opacity:0;transition:opacity .5s}
 .ps:hover::before{opacity:1}
 .ps::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .5s ease}
 .ps:hover::after{transform:scaleX(1)}
-.ps-num{font-family:'Cormorant Garamond',serif;font-size:96px;font-weight:300;color:rgba(200,16,46,.22);line-height:1;margin-bottom:20px;font-style:italic;transition:color .4s,transform .4s}
-.ps:hover .ps-num{color:rgba(200,16,46,.65);transform:scale(1.04) translateX(4px)}
+.ps-num{font-family:'Cormorant Garamond',serif;font-size:96px;font-weight:300;color:rgba(185,28,46,.22);line-height:1;margin-bottom:20px;font-style:italic;transition:color .4s,transform .4s}
+.ps:hover .ps-num{color:rgba(185,28,46,.65);transform:scale(1.04) translateX(4px)}
 .ps-nm{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f4f1ec;margin-bottom:14px}
 .ps-d{font-family:'Syne',sans-serif;font-size:15px;font-weight:400;color:#f4f1ec;line-height:1.8}
-.ps-tag{display:inline-block;margin-top:20px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);border:1px solid rgba(200,16,46,.3);padding:6px 12px;transition:background .3s,color .3s}
+.ps-tag{display:inline-block;margin-top:20px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);border:1px solid rgba(185,28,46,.3);padding:6px 12px;transition:background .3s,color .3s}
 .ps:hover .ps-tag{background:var(--red);color:#fff}
 
 /* ─── TESTIMONIALS ───────────────────────────── */
@@ -239,7 +240,7 @@ nav.s{padding:16px 64px;background:rgba(6,6,6,.96);backdrop-filter:blur(28px);bo
 
 /* ─── CTA ────────────────────────────────────── */
 .cta{padding:160px 64px;background:var(--off-black);position:relative;overflow:hidden;text-align:center}
-.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(200,16,46,.04) 0%,transparent 65%)}
+.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(185,28,46,.04) 0%,transparent 65%)}
 .cta-topline{position:absolute;top:0;left:0;right:0;height:2px;background:var(--red)}
 .cta-lbl{font-family:var(--fm);font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--red);margin-bottom:26px;display:block}
 .cta-t{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,8.5vw,128px);font-weight:300;line-height:.88;margin-bottom:36px}
@@ -251,8 +252,8 @@ nav.s{padding:16px 64px;background:rgba(6,6,6,.96);backdrop-filter:blur(28px);bo
 footer{background:var(--black);border-top:1px solid var(--border);padding:84px 64px 48px}
 .ft-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:60px;margin-bottom:72px}
 .fb-logo-wrap{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.fb-mark{width:28px;height:28px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.fb-mark svg{width:16px;height:16px}
+.fb-mark{width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fb-mark svg{width:28px;height:28px}
 .fb-set{font-family:var(--fb);font-weight:800;font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--white);line-height:1}
 .fb-marketing{font-family:var(--fm);font-size:7px;letter-spacing:.28em;text-transform:uppercase;color:var(--red);line-height:1;margin-top:2px}
 .fb-tag{font-family:'Syne',sans-serif;font-size:14px;font-weight:400;color:#f4f1ec;line-height:1.75;max-width:260px;margin-bottom:28px}
@@ -264,7 +265,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 .flinks a:hover{color:var(--red)}
 .fb-bot{display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid var(--border2)}
 .fb-copy{font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,241,236,.4)}
-.fb-tag2{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,16,46,.5)}
+.fb-tag2{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(185,28,46,.5)}
 
 /* ─── KEYFRAMES ──────────────────────────────── */
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -313,12 +314,6 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   .pr-steps{grid-template-columns:1fr}
   .ft-top{grid-template-columns:1fr}
 }
-
-/* ─── TRANSITION OVERLAYS ────────────────────── */
-#tr-blade{position:fixed;inset:0;pointer-events:none;z-index:850;overflow:hidden}
-#tr-blade-inner{position:absolute;top:-15%;left:0;width:110%;height:130%;background:var(--red);transform-origin:left center;transform:skewX(-12deg) translateX(-115%)}
-#tr-burst{position:fixed;inset:0;pointer-events:none;z-index:850;background:var(--red);clip-path:circle(0% at 50% 50%)}
-#tr-flash{position:fixed;inset:0;pointer-events:none;z-index:851;background:#fff;opacity:0}
 </style>
 </head>
 <body>
@@ -339,7 +334,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 <nav id="nav">
   <a href="#" class="nl" aria-label="SET Marketing Home">
     <div class="logo-mark">
-      <svg viewBox="0 0 20 20" fill="none"><path d="M3 6h14M3 10h10M3 14h7" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="13" height="13" rx="3" fill="#fff"/><rect x="18" y="2" width="13" height="10" rx="3" fill="var(--red)"/><rect x="15" y="13" width="19" height="13" rx="3" fill="#fff"/><rect x="5" y="21" width="10" height="10" rx="3" fill="#fff"/></svg>
     </div>
     <div style="display:flex;flex-direction:column;">
       <div class="logo-set">SET</div>
@@ -358,7 +353,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 
 <section class="hero" aria-label="SET Marketing Hero">
   <div class="hero-vid">
-    <iframe src="https://player.vimeo.com/video/1174452087?background=1&autoplay=1&loop=1&muted=1&quality=1080p" allow="autoplay; fullscreen" title="SET Marketing Background Video"></iframe>
+    <iframe src="https://player.vimeo.com/video/1174452087?background=1&autoplay=1&loop=1&muted=1&autopause=0&transparent=0" allow="autoplay; fullscreen" title="SET Marketing Background Video"></iframe>
   </div>
   <div class="hero-right">
     <canvas id="hero-canvas"></canvas>
@@ -442,15 +437,15 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
     </div>
     <div class="mq-row">
       <div class="mq-track rev">
-        <span class="mq-name">Three Tree Wellness</span><span class="mq-dot">✦</span>
+        <span class="mq-name">Tissot</span><span class="mq-dot">✦</span>
         <span class="mq-name acc">HomeLife</span><span class="mq-dot">✦</span>
         <span class="mq-name">Bioflex</span><span class="mq-dot">✦</span>
-        <span class="mq-name acc">Bad Dog Editions</span><span class="mq-dot">✦</span>
+        <span class="mq-name acc">Marriott</span><span class="mq-dot">✦</span>
         <span class="mq-name">Lamborghini</span><span class="mq-dot">✦</span>
-        <span class="mq-name">Three Tree Wellness</span><span class="mq-dot">✦</span>
+        <span class="mq-name">Tissot</span><span class="mq-dot">✦</span>
         <span class="mq-name acc">HomeLife</span><span class="mq-dot">✦</span>
         <span class="mq-name">Bioflex</span><span class="mq-dot">✦</span>
-        <span class="mq-name acc">Bad Dog Editions</span><span class="mq-dot">✦</span>
+        <span class="mq-name acc">Marriott</span><span class="mq-dot">✦</span>
         <span class="mq-name">Lamborghini</span><span class="mq-dot">✦</span>
       </div>
     </div>
@@ -518,7 +513,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 <section class="founder" id="founder" aria-label="About Chris Marchese">
   <div class="fv rv">
     <div class="fiw">
-      <iframe src="https://player.vimeo.com/video/1174206252?background=1&autoplay=1&loop=1&muted=1&quality=1080p" style="position:absolute;top:50%;left:50%;width:177.78%;height:100%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none;" allow="autoplay; fullscreen" title="Chris Marchese Founder Video"></iframe>
+      <iframe src="https://player.vimeo.com/video/1174206252?background=1&autoplay=1&loop=1&muted=1&autopause=0&transparent=0" style="position:absolute;top:50%;left:50%;width:177.78%;height:100%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none;" allow="autoplay; fullscreen" title="Chris Marchese Founder Video"></iframe>
     </div>
     <div class="f-badge">Founder &amp; CEO</div>
     <div class="f-corner"></div>
@@ -592,7 +587,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   <div class="ft-top">
     <div>
       <div class="fb-logo-wrap">
-        <div class="fb-mark"><svg viewBox="0 0 16 16" fill="none"><path d="M2 5h12M2 8h8M2 11h6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div class="fb-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="13" height="13" rx="3" fill="#fff"/><rect x="18" y="2" width="13" height="10" rx="3" fill="var(--red)"/><rect x="15" y="13" width="19" height="13" rx="3" fill="#fff"/><rect x="5" y="21" width="10" height="10" rx="3" fill="#fff"/></svg></div>
         <div><div class="fb-set">SET</div><div class="fb-marketing">Marketing</div></div>
       </div>
       <p class="fb-tag">Revenue architecture for operators generating $1M to $20M who are ready to scale beyond founder-led growth.</p>
@@ -639,16 +634,8 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   </div>
 </footer>
 
-<div id="tr-blade"><div id="tr-blade-inner"></div></div>
-<div id="tr-burst"></div>
-<div id="tr-flash"></div>
-
 <script>
 gsap.registerPlugin(ScrollTrigger);
-
-// ── SHARED VORTEX STATE ───────────────────────────────────────────────────────
-// Particle IIFE reads this each frame — lives at module scope
-const vortex = { on: false, str: 0, cx: 0, cy: 0 };
 
 // ── LENIS ────────────────────────────────────────────────────────────────────
 const lenis = new Lenis({ lerp: 0.075, smoothWheel: true, wheelMultiplier: 1 });
@@ -672,7 +659,7 @@ gsap.timeline()
     gsap.fromTo('.hbot',  { opacity:0, y:20 }, { opacity:1, y:0, duration:.7,  delay:.42, ease:'power3.out' });
   });
 
-// ── CANVAS PARTICLES + VORTEX ─────────────────────────────────────────────────
+// ── CANVAS PARTICLES ─────────────────────────────────────────────────────────
 (function() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
@@ -682,8 +669,6 @@ gsap.timeline()
   function resize() {
     W = canvas.width  = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
-    vortex.cx = W * .5;
-    vortex.cy = H * .5;
   }
   resize();
   window.addEventListener('resize', () => { resize(); initP(); });
@@ -702,96 +687,40 @@ gsap.timeline()
     particles = Array.from({ length: n }, () => ({
       x: Math.random() * W, y: Math.random() * H,
       vx: (Math.random() - .5) * .32, vy: (Math.random() - .5) * .32,
-      r: Math.random() * 1.6 + .5, base: Math.random() * .35 + .15,
-      trail: []
+      r: Math.random() * 1.6 + .5, base: Math.random() * .35 + .15
     }));
   }
   initP();
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
-    const alpha = vortex.on ? Math.max(0, 1 - vortex.str * .75) : 1;
-
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
-
-      // Mouse repel (disabled deep in vortex)
-      if (!vortex.on || vortex.str < .25) {
-        const dx = hmx - p.x, dy = hmy - p.y, dist = Math.hypot(dx, dy);
-        if (dist < 180 && dist > 0) {
-          const f = ((180 - dist) / 180) * .09;
-          p.vx -= dx / dist * f; p.vy -= dy / dist * f;
-        }
+      const dx = hmx - p.x, dy = hmy - p.y, dist = Math.hypot(dx, dy);
+      if (dist < 180 && dist > 0) {
+        const f = ((180 - dist) / 180) * .09;
+        p.vx -= dx / dist * f; p.vy -= dy / dist * f;
       }
-
-      // Vortex: centripetal + tangential spiral
-      if (vortex.on && vortex.str > 0) {
-        const dvx = vortex.cx - p.x, dvy = vortex.cy - p.y;
-        const d2 = Math.hypot(dvx, dvy) || 1;
-        const s = vortex.str * .016;
-        p.vx += dvx / d2 * d2 * s * .55 - dvy / d2 * d2 * s * .38;
-        p.vy += dvy / d2 * d2 * s * .55 + dvx / d2 * d2 * s * .38;
-        const spd = Math.hypot(p.vx, p.vy);
-        const cap = 3 + vortex.str * 11;
-        if (spd > cap) { p.vx = p.vx/spd*cap; p.vy = p.vy/spd*cap; }
-      }
-
       p.vx *= .978; p.vy *= .978;
       p.x += p.vx; p.y += p.vy;
-
-      // Wrap only when not vortexing
-      if (!vortex.on) {
-        if (p.x < -10) p.x = W + 10;
-        if (p.x > W + 10) p.x = -10;
-        if (p.y < -10) p.y = H + 10;
-        if (p.y > H + 10) p.y = -10;
-      }
-
-      // Trail
-      if (vortex.on && vortex.str > .08) {
-        p.trail.push({ x: p.x, y: p.y });
-        if (p.trail.length > 14) p.trail.shift();
-        for (let t = 1; t < p.trail.length; t++) {
-          const ta = (t / p.trail.length) * vortex.str * alpha * .55;
-          ctx.beginPath();
-          ctx.moveTo(p.trail[t-1].x, p.trail[t-1].y);
-          ctx.lineTo(p.trail[t].x, p.trail[t].y);
-          ctx.strokeStyle = `rgba(200,16,46,${ta})`;
-          ctx.lineWidth = p.r * 1.4; ctx.stroke();
-        }
-      } else { p.trail = []; }
-
-      // Dot
+      if (p.x < -10) p.x = W + 10;
+      if (p.x > W + 10) p.x = -10;
+      if (p.y < -10) p.y = H + 10;
+      if (p.y > H + 10) p.y = -10;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * (1 + vortex.str * .6), 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200,16,46,${p.base * alpha})`; ctx.fill();
-
-      // Connection lines
-      if (alpha > .1) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const d = Math.hypot(p.x - p2.x, p.y - p2.y);
-          if (d < 140) {
-            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(200,16,46,${(1-d/140)*.11*alpha})`;
-            ctx.lineWidth = .6; ctx.stroke();
-          }
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(185,28,46,${p.base})`;
+      ctx.fill();
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const d = Math.hypot(p.x - p2.x, p.y - p2.y);
+        if (d < 140) {
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = `rgba(185,28,46,${(1 - d / 140) * .11})`;
+          ctx.lineWidth = .6; ctx.stroke();
         }
       }
     }
-
-    // Singularity glow at peak
-    if (vortex.on && vortex.str > .45) {
-      const gA = (vortex.str - .45) / .55;
-      const gR = 80 * vortex.str;
-      const g = ctx.createRadialGradient(vortex.cx, vortex.cy, 0, vortex.cx, vortex.cy, gR);
-      g.addColorStop(0, `rgba(200,16,46,${gA * .95})`);
-      g.addColorStop(.45, `rgba(200,16,46,${gA * .35})`);
-      g.addColorStop(1, `rgba(200,16,46,0)`);
-      ctx.beginPath(); ctx.arc(vortex.cx, vortex.cy, gR, 0, Math.PI*2);
-      ctx.fillStyle = g; ctx.fill();
-    }
-
     requestAnimationFrame(draw);
   }
   draw();
@@ -889,112 +818,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const t = document.querySelector(a.getAttribute('href'));
     if (t) { e.preventDefault(); lenis.scrollTo(t, { offset:-80, duration:1.5 }); }
   });
-});
-
-// ─────────────────────────────────────────────────────────────────────────────
-// ── SECTION TRANSITION ENGINE ─────────────────────────────────────────────────
-// Three transition types, each fired on section entry
-// ─────────────────────────────────────────────────────────────────────────────
-
-const trBlade = document.getElementById('tr-blade-inner');
-const trBurst = document.getElementById('tr-burst');
-const trFlash = document.getElementById('tr-flash');
-let trLock = false;
-
-function lockTr(fn) {
-  if (trLock) return;
-  trLock = true;
-  fn();
-  setTimeout(() => { trLock = false; }, 1300);
-}
-
-// ── 1. DIAGONAL BLADE ────────────────────────────────────────────────────────
-// dir 1 = slashes left→right, -1 = right→left
-function playBlade(dir) {
-  dir = dir || 1;
-  gsap.set(trBlade, { xPercent: dir * -118 });
-  gsap.timeline()
-    .to(trBlade, { xPercent: 0,           duration: .43, ease: 'power3.inOut' })
-    .to(trBlade, { xPercent: dir * 118,   duration: .43, ease: 'power3.inOut', delay: .07 });
-}
-
-// ── 2. RADIAL BURST ───────────────────────────────────────────────────────────
-// fx/fy = focal point in CSS % e.g. '50% 0%'
-function playBurst(fx, fy) {
-  fx = fx || '50%'; fy = fy || '50%';
-  gsap.set(trBurst, { clipPath: 'circle(0% at ' + fx + ' ' + fy + ')' });
-  gsap.timeline()
-    .to(trBurst, { clipPath: 'circle(150% at ' + fx + ' ' + fy + ')', duration: .62, ease: 'power2.inOut' })
-    .to(trBurst, { clipPath: 'circle(0% at '   + fx + ' ' + fy + ')', duration: .52, ease: 'power2.inOut', delay: .07 });
-}
-
-// ── 3. PARTICLE VORTEX COLLAPSE ───────────────────────────────────────────────
-function playVortex() {
-  vortex.on = true;
-  gsap.timeline()
-    .to(vortex, { str: 1, duration: .95, ease: 'power2.in' })
-    .to(trFlash, { opacity: .9, duration: .07 }, '-=0')
-    .to(trFlash, { opacity: 0,  duration: .38, ease: 'power2.out' })
-    .to(vortex, { str: 0, duration: .65, ease: 'power3.out' }, '-=0.32')
-    .call(() => { vortex.on = false; });
-}
-
-// ── ASSIGNMENTS ───────────────────────────────────────────────────────────────
-// Hero → Stats: Particle Vortex — particles collapse as you leave the hero
-ScrollTrigger.create({
-  trigger: '.hero',
-  start: 'bottom 58%',
-  onLeave:     () => lockTr(playVortex),
-  onEnterBack: () => lockTr(playVortex),
-});
-
-// Stats → Clients: Blade left→right
-ScrollTrigger.create({
-  trigger: '#clients',
-  start: 'top 90%',
-  onEnter: () => lockTr(() => playBlade(1)),
-});
-
-// Clients → Services: Burst from top-center (sun-rise)
-ScrollTrigger.create({
-  trigger: '#services',
-  start: 'top 90%',
-  onEnter: () => lockTr(() => playBurst('50%', '0%')),
-});
-
-// Services → Results: Blade right→left (reverse slash)
-ScrollTrigger.create({
-  trigger: '#results',
-  start: 'top 90%',
-  onEnter: () => lockTr(() => playBlade(-1)),
-});
-
-// Results → Founder: Burst from bottom-right corner
-ScrollTrigger.create({
-  trigger: '#founder',
-  start: 'top 90%',
-  onEnter: () => lockTr(() => playBurst('100%', '100%')),
-});
-
-// Founder → Process: Blade left→right
-ScrollTrigger.create({
-  trigger: '#process',
-  start: 'top 90%',
-  onEnter: () => lockTr(() => playBlade(1)),
-});
-
-// Process → Testimonials: Burst from left-center
-ScrollTrigger.create({
-  trigger: '#testimonials',
-  start: 'top 90%',
-  onEnter: () => lockTr(() => playBurst('0%', '60%')),
-});
-
-// Testimonials → CTA: Blade right→left then Burst from center (double-hit)
-ScrollTrigger.create({
-  trigger: '#contact',
-  start: 'top 90%',
-  onEnter: () => lockTr(() => playBlade(-1)),
 });
 </script>
 </body>
