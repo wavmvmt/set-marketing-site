@@ -61,12 +61,7 @@ body:has(.sv-card:hover,.tc:hover,.ps:hover) #cur-r{width:88px;height:88px;borde
 .st::after,.tc::after{content:'';position:absolute;inset:0;background:linear-gradient(118deg,transparent 22%,rgba(255,255,255,.026) 50%,transparent 78%);transform:translateX(-145%);transition:transform .65s ease;pointer-events:none;z-index:2}
 .st:hover::after,.tc:hover::after{transform:translateX(145%)}
 
-/* ─── SCRUB TRANSITION OVERLAYS ─── */
-/* Logo overlay — subtle red tint + small SET mark */
-#tr-logo-ov{position:fixed;inset:0;pointer-events:none;z-index:860;background:rgba(185,28,46,.82);opacity:0;display:flex;align-items:center;justify-content:center;will-change:opacity}
-#tr-logo-mark{width:min(18vw,18vh);height:min(18vw,18vh);will-change:transform;flex-shrink:0}
-/* Particle canvas */
-#tr-ptcl-cv{position:fixed;inset:0;pointer-events:none;z-index:859;opacity:0;will-change:opacity}
+/* transitions removed */
 @media(max-width:900px){#cur,#cur-r{display:none}}
 
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");background-size:180px 180px;pointer-events:none;z-index:700;opacity:.5;mix-blend-mode:overlay}
@@ -544,15 +539,6 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 </div>
 
 <div id="bg-gradient"></div>
-<div id="tr-logo-ov">
-  <svg id="tr-logo-mark" viewBox="0 0 36 36" fill="none">
-    <rect x="2"  y="2"  width="13" height="13" rx="3" fill="rgba(255,255,255,.88)"/>
-    <rect x="18" y="2"  width="13" height="10" rx="3" fill="rgba(0,0,0,.18)"/>
-    <rect x="15" y="13" width="19" height="13" rx="3" fill="rgba(255,255,255,.88)"/>
-    <rect x="5"  y="21" width="10" height="10" rx="3" fill="rgba(255,255,255,.88)"/>
-  </svg>
-</div>
-<canvas id="tr-ptcl-cv"></canvas>
 
 <div id="cur"></div>
 <div id="cur-r"></div>
@@ -898,7 +884,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 gsap.registerPlugin(ScrollTrigger);
 
 // ── LENIS ─────────────────────────────────────────────────────────────────────
-const lenis = new Lenis({ lerp:0.075, smoothWheel:true, wheelMultiplier:1 });
+const lenis = new Lenis({ lerp:0.12, smoothWheel:true, wheelMultiplier:1 });
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add(t => lenis.raf(t * 1000));
 gsap.ticker.lagSmoothing(0);
@@ -980,16 +966,13 @@ function closeMobileNav() {
   document.body.style.overflow = '';
 }
 
-// ── VORTEX STATE ──────────────────────────────────────────────────────────────
-const vortex = { on:false, str:0, cx:0, cy:0 };
-
 // ── HERO CANVAS PARTICLES ─────────────────────────────────────────────────────
 (function() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let hmx=0, hmy=-999, W, H, particles=[];
-  function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; vortex.cx=W*.5; vortex.cy=H*.5; }
+  function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; }
   resize();
   window.addEventListener('resize', () => { resize(); initP(); });
   const hr = document.querySelector('.hero-right');
@@ -997,22 +980,22 @@ const vortex = { on:false, str:0, cx:0, cy:0 };
     hr.addEventListener('mousemove', e => { const r=canvas.getBoundingClientRect(); hmx=e.clientX-r.left; hmy=e.clientY-r.top; });
     hr.addEventListener('mouseleave', () => { hmy=-999; });
   }
-  function initP(){ const n=window.innerWidth<900?28:58; particles=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.32,vy:(Math.random()-.5)*.32,r:Math.random()*1.6+.5,base:Math.random()*.35+.15,trail:[]})); }
+  function initP(){ const n=window.innerWidth<900?20:48; particles=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.4+.5,base:Math.random()*.28+.1})); }
   initP();
   function draw(){
     ctx.clearRect(0,0,W,H);
-    const alpha=vortex.on?Math.max(0,1-vortex.str*.75):1;
     for(let i=0;i<particles.length;i++){
       const p=particles[i];
-      if(!vortex.on||vortex.str<.2){ const dx=hmx-p.x,dy=hmy-p.y,dist=Math.hypot(dx,dy); if(dist<180&&dist>0){const f=((180-dist)/180)*.09;p.vx-=dx/dist*f;p.vy-=dy/dist*f;} }
-      if(vortex.on&&vortex.str>0){ const dvx=vortex.cx-p.x,dvy=vortex.cy-p.y,d2=Math.hypot(dvx,dvy)||1,s=vortex.str*.016; p.vx+=dvx/d2*d2*s*.55-dvy/d2*d2*s*.38; p.vy+=dvy/d2*d2*s*.55+dvx/d2*d2*s*.38; const spd=Math.hypot(p.vx,p.vy),cap=3+vortex.str*11; if(spd>cap){p.vx=p.vx/spd*cap;p.vy=p.vy/spd*cap;} }
-      p.vx*=.978;p.vy*=.978;p.x+=p.vx;p.y+=p.vy;
-      if(!vortex.on){if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;if(p.y<-10)p.y=H+10;if(p.y>H+10)p.y=-10;}
-      if(vortex.on&&vortex.str>.08){p.trail.push({x:p.x,y:p.y});if(p.trail.length>14)p.trail.shift();for(let t=1;t<p.trail.length;t++){const ta=(t/p.trail.length)*vortex.str*alpha*.5;ctx.beginPath();ctx.moveTo(p.trail[t-1].x,p.trail[t-1].y);ctx.lineTo(p.trail[t].x,p.trail[t].y);ctx.strokeStyle=`rgba(185,28,46,${ta})`;ctx.lineWidth=p.r*1.4;ctx.stroke();}}else{p.trail=[];}
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r*(1+vortex.str*.6),0,Math.PI*2);ctx.fillStyle=`rgba(185,28,46,${p.base*alpha})`;ctx.fill();
-      if(alpha>.1){for(let j=i+1;j<particles.length;j++){const p2=particles[j],d=Math.hypot(p.x-p2.x,p.y-p2.y);if(d<140){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);ctx.strokeStyle=`rgba(185,28,46,${(1-d/140)*.11*alpha})`;ctx.lineWidth=.6;ctx.stroke();}}}
+      const dx=hmx-p.x,dy=hmy-p.y,dist=Math.hypot(dx,dy);
+      if(dist<160&&dist>0){const f=((160-dist)/160)*.07;p.vx-=dx/dist*f;p.vy-=dy/dist*f;}
+      p.vx*=.982;p.vy*=.982;p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;if(p.y<-10)p.y=H+10;if(p.y>H+10)p.y=-10;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(185,28,46,${p.base})`;ctx.fill();
+      for(let j=i+1;j<particles.length;j++){
+        const p2=particles[j],d=Math.hypot(p.x-p2.x,p.y-p2.y);
+        if(d<120){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);ctx.strokeStyle=`rgba(185,28,46,${(1-d/120)*.09})`;ctx.lineWidth=.5;ctx.stroke();}
+      }
     }
-    if(vortex.on&&vortex.str>.45){const gA=(vortex.str-.45)/.55,gR=80*vortex.str,g=ctx.createRadialGradient(vortex.cx,vortex.cy,0,vortex.cx,vortex.cy,gR);g.addColorStop(0,`rgba(185,28,46,${gA*.95})`);g.addColorStop(.45,`rgba(185,28,46,${gA*.35})`);g.addColorStop(1,'rgba(185,28,46,0)');ctx.beginPath();ctx.arc(vortex.cx,vortex.cy,gR,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();}
     requestAnimationFrame(draw);
   }
   draw();
@@ -1081,7 +1064,12 @@ if (window.innerWidth > 900) {
     gsap.to(rsTrack, {
       x: () => -(rsTrack.scrollWidth - rsPin.offsetWidth),
       ease: 'none',
-      scrollTrigger: { trigger:rsPin, start:'top top', end:()=>`+=${rsTrack.scrollWidth-rsPin.offsetWidth}`, pin:true, scrub:.85, invalidateOnRefresh:true }
+      scrollTrigger: {
+        trigger: rsPin, start: 'top top',
+        end: () => `+=${rsTrack.scrollWidth - rsPin.offsetWidth}`,
+        pin: true, scrub: .6, invalidateOnRefresh: true, pinSpacing: true,
+        anticipatePin: 1
+      }
     });
   }
 }
@@ -1182,84 +1170,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 // S·07 removed — was causing flash on scroll
 
-// ── SCRUB TRANSITION ENGINE ───────────────────────────────────────────────────
-const trLogoOv  = document.getElementById('tr-logo-ov');
-const trLogoMrk = document.getElementById('tr-logo-mark');
-
-function buildLogoTr(trigger) {
-  const tl = gsap.timeline({ defaults:{ ease:'none' }, paused:true });
-  tl
-    .set(trLogoMrk, { scale:0.6, transformOrigin:'50% 50%' })
-    .to(trLogoOv,  { opacity:0.72, duration:0.35 })
-    .to(trLogoMrk, { scale:1,     duration:0.3 }, 0)
-    .to(trLogoMrk, { scale:1.08,  duration:0.15 })
-    .to(trLogoOv,  { opacity:0,   duration:0.35 })
-    .to(trLogoMrk, { scale:0.6,   duration:0.15 }, '-=0.2');
-  ScrollTrigger.create({
-    trigger, start:'top 80%', end:'top 20%', scrub:1.8, animation:tl,
-    onLeaveBack: () => gsap.set(trLogoOv, { opacity:0 }),
-  });
-}
-
-const ptclCv  = document.getElementById('tr-ptcl-cv');
-const ptclCtx = ptclCv.getContext('2d');
-let ptW=0, ptH=0, ptcls=[], ptProg=0, ptRAF=false;
-function resizePt(){ ptW=ptclCv.width=window.innerWidth; ptH=ptclCv.height=window.innerHeight; }
-resizePt();
-window.addEventListener('resize', () => { resizePt(); initPtcls(); });
-function buildTargets(){
-  const cx=ptW/2, cy=ptH/2, u=Math.min(ptW,ptH)*0.022;
-  const rects=[{x:cx-17*u,y:cy-11*u,w:11*u,h:11*u},{x:cx-1*u,y:cy-11*u,w:11*u,h:8*u},{x:cx-4*u,y:cy-1*u,w:15*u,h:11*u},{x:cx-13*u,y:cy+11*u,w:9*u,h:9*u}];
-  const pts=[];
-  rects.forEach(r=>{ for(let i=0;i<22;i++) pts.push({tx:r.x+Math.random()*r.w,ty:r.y+Math.random()*r.h}); });
-  return pts;
-}
-function initPtcls(){
-  const tgts=buildTargets();
-  ptcls=tgts.map(t=>({ox:Math.random()*ptW,oy:Math.random()*ptH,tx:t.tx,ty:t.ty,r:Math.random()*1.8+0.8,a:Math.random()*.45+.25}));
-}
-initPtcls();
-function drawPtcls(prog){
-  ptclCtx.clearRect(0,0,ptW,ptH);
-  if(prog<=0) return;
-  const conv=prog<0.5?prog*2:(1-prog)*2;
-  const eased=conv<0.5?2*conv*conv:1-Math.pow(-2*conv+2,2)/2;
-  const ga=Math.sin(prog*Math.PI);
-  ptcls.forEach(p=>{
-    const x=p.ox+(p.tx-p.ox)*eased, y=p.oy+(p.ty-p.oy)*eased;
-    ptclCtx.beginPath();ptclCtx.arc(x,y,p.r*(1+eased*.4),0,Math.PI*2);
-    ptclCtx.fillStyle=`rgba(185,28,46,${p.a*ga*0.55})`;ptclCtx.fill();
-  });
-  if(eased>.55){
-    const la=(eased-.55)/.45*ga*.08;
-    for(let i=0;i<ptcls.length;i++){
-      const pi=ptcls[i],xi=pi.ox+(pi.tx-pi.ox)*eased,yi=pi.oy+(pi.ty-pi.oy)*eased;
-      for(let j=i+1;j<ptcls.length;j++){
-        const pj=ptcls[j],xj=pj.ox+(pj.tx-pj.ox)*eased,yj=pj.oy+(pj.ty-pj.oy)*eased,d=Math.hypot(xi-xj,yi-yj);
-        if(d<48){ptclCtx.beginPath();ptclCtx.moveTo(xi,yi);ptclCtx.lineTo(xj,yj);ptclCtx.strokeStyle=`rgba(185,28,46,${la*(1-d/48)})`;ptclCtx.lineWidth=.6;ptclCtx.stroke();}
-      }
-    }
-  }
-}
-function ptclLoop(){
-  if(ptProg>.005){ drawPtcls(ptProg); ptRAF=true; requestAnimationFrame(ptclLoop); }
-  else{ ptclCtx.clearRect(0,0,ptW,ptH); ptRAF=false; }
-}
-function buildPtclTr(trigger){
-  ScrollTrigger.create({
-    trigger, start:'top 82%', end:'top 18%', scrub:1.4,
-    onUpdate(self){ ptProg=self.progress; ptclCv.style.opacity=ptProg>.01?'1':'0'; if(!ptRAF) ptclLoop(); },
-    onLeaveBack(){ ptProg=0; ptclCv.style.opacity='0'; ptclCtx.clearRect(0,0,ptW,ptH); },
-  });
-}
-
-buildLogoTr('#clients');
-buildPtclTr('#services');
-buildLogoTr('#results');
-buildPtclTr('#founder');
-buildLogoTr('#process');
-buildPtclTr('#testimonials');
-buildLogoTr('#contact');
+// transitions removed — clean scroll only
 </script>
 </body>
 </html>
