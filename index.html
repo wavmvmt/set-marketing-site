@@ -62,9 +62,9 @@ body:has(.sv-card:hover,.tc:hover,.ps:hover) #cur-r{width:88px;height:88px;borde
 .st:hover::after,.tc:hover::after{transform:translateX(145%)}
 
 /* ─── SCRUB TRANSITION OVERLAYS ─── */
-/* Logo overlay — red field + SET mark at center */
-#tr-logo-ov{position:fixed;inset:0;pointer-events:none;z-index:860;background:var(--red);opacity:0;display:flex;align-items:center;justify-content:center;will-change:opacity}
-#tr-logo-mark{width:min(44vw,44vh);height:min(44vw,44vh);will-change:transform;flex-shrink:0}
+/* Logo overlay — subtle red tint + small SET mark */
+#tr-logo-ov{position:fixed;inset:0;pointer-events:none;z-index:860;background:rgba(185,28,46,.82);opacity:0;display:flex;align-items:center;justify-content:center;will-change:opacity}
+#tr-logo-mark{width:min(18vw,18vh);height:min(18vw,18vh);will-change:transform;flex-shrink:0}
 /* Particle canvas */
 #tr-ptcl-cv{position:fixed;inset:0;pointer-events:none;z-index:859;opacity:0;will-change:opacity}
 @media(max-width:900px){#cur,#cur-r{display:none}}
@@ -1114,7 +1114,7 @@ document.querySelectorAll('.sv-card, .tc').forEach(card => {
     gsap.to(card, { rotateY:x, rotateX:y, duration:.35, ease:'power2.out', transformPerspective:800 });
   });
   card.addEventListener('mouseleave', () => {
-    gsap.to(card, { rotateY:0, rotateX:0, duration:.65, ease:'elastic.out(1,.55)' });
+    gsap.to(card, { rotateY:0, rotateX:0, duration:.5, ease:'power2.out' });
   });
 });
 
@@ -1134,11 +1134,10 @@ document.querySelectorAll('.services, .process').forEach(sec => {
 
 // ── M·07 STAGGER ENTRANCE VARIATION ──────────────────────────────────────────
 document.querySelectorAll('.sv-card').forEach((el, i) => {
-  el.style.transitionDelay = (0.08 * i + Math.random()*0.04) + 's';
+  el.style.transitionDelay = (0.06 * i) + 's';
 });
 document.querySelectorAll('.tc').forEach((el, i) => {
-  el.style.transitionDelay = (0.1 * i + Math.random()*0.04) + 's';
-  el.style.transitionTimingFunction = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+  el.style.transitionDelay = (0.08 * i) + 's';
 });
 
 // ── TEXT REVEAL SCRUB ─────────────────────────────────────────────────────────
@@ -1181,16 +1180,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── S·07 DEPTH PUSH ───────────────────────────────────────────────────────────
-if (window.innerWidth > 900) {
-  document.body.style.perspective = '1400px';
-  document.body.style.perspectiveOrigin = '50% 0%';
-  gsap.utils.toArray('.stats,.clients,.services,.founder,.process,.testimonials').forEach(sec => {
-    gsap.to(sec, { scale:.93, z:-80, opacity:.74, ease:'none',
-      scrollTrigger:{ trigger:sec, start:'top top', end:'bottom top', scrub:1.4 }
-    });
-  });
-}
+// S·07 removed — was causing flash on scroll
 
 // ── SCRUB TRANSITION ENGINE ───────────────────────────────────────────────────
 const trLogoOv  = document.getElementById('tr-logo-ov');
@@ -1199,14 +1189,14 @@ const trLogoMrk = document.getElementById('tr-logo-mark');
 function buildLogoTr(trigger) {
   const tl = gsap.timeline({ defaults:{ ease:'none' }, paused:true });
   tl
-    .set(trLogoMrk, { scale:0.04, transformOrigin:'50% 50%' })
-    .to(trLogoOv,  { opacity:1, duration:0.28 })
-    .to(trLogoMrk, { scale:1, duration:0.44 }, 0.06)
-    .to(trLogoMrk, { scale:1.06, duration:0.18 })
-    .to(trLogoMrk, { scale:4, duration:0.4 })
-    .to(trLogoOv,  { opacity:0, duration:0.4 }, '-=0.4');
+    .set(trLogoMrk, { scale:0.6, transformOrigin:'50% 50%' })
+    .to(trLogoOv,  { opacity:0.72, duration:0.35 })
+    .to(trLogoMrk, { scale:1,     duration:0.3 }, 0)
+    .to(trLogoMrk, { scale:1.08,  duration:0.15 })
+    .to(trLogoOv,  { opacity:0,   duration:0.35 })
+    .to(trLogoMrk, { scale:0.6,   duration:0.15 }, '-=0.2');
   ScrollTrigger.create({
-    trigger, start:'top 82%', end:'top 18%', scrub:1.4, animation:tl,
+    trigger, start:'top 80%', end:'top 20%', scrub:1.8, animation:tl,
     onLeaveBack: () => gsap.set(trLogoOv, { opacity:0 }),
   });
 }
@@ -1237,8 +1227,8 @@ function drawPtcls(prog){
   const ga=Math.sin(prog*Math.PI);
   ptcls.forEach(p=>{
     const x=p.ox+(p.tx-p.ox)*eased, y=p.oy+(p.ty-p.oy)*eased;
-    ptclCtx.beginPath();ptclCtx.arc(x,y,p.r*(1+eased*.6),0,Math.PI*2);
-    ptclCtx.fillStyle=`rgba(185,28,46,${p.a*ga})`;ptclCtx.fill();
+    ptclCtx.beginPath();ptclCtx.arc(x,y,p.r*(1+eased*.4),0,Math.PI*2);
+    ptclCtx.fillStyle=`rgba(185,28,46,${p.a*ga*0.55})`;ptclCtx.fill();
   });
   if(eased>.55){
     const la=(eased-.55)/.45*ga*.08;
