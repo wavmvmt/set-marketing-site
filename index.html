@@ -65,7 +65,10 @@ nav.s{padding:16px 64px;background:rgba(6,6,6,.96);backdrop-filter:blur(28px);bo
 .ncta:hover{background:var(--red2)}
 
 /* ─── HERO ───────────────────────────────────── */
-.hero{min-height:100vh;display:flex;position:relative;overflow:hidden}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-vid{position:relative;overflow:hidden;background:var(--black)}
+.hero-vid iframe{position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none}
+.hero-vid::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,var(--black) 100%),linear-gradient(180deg,rgba(6,6,6,.4) 0%,transparent 30%);pointer-events:none;z-index:1}
 .hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 90px;position:relative;overflow:hidden;background:var(--black);width:100%}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .hbg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 0% 60%,rgba(200,16,46,.07) 0%,transparent 60%);z-index:1}
@@ -272,7 +275,8 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   nav.s{padding:14px 24px}
   .nlinks{display:none}
   .ncta{padding:10px 20px;font-size:10px}
-  .hero{min-height:100svh}
+  .hero{grid-template-columns:1fr;min-height:100svh}
+  .hero-vid{height:50vh}
   .hero-right{padding:40px 24px 60px}
   .h-eye{font-size:9px;margin-bottom:24px}
   .hbot{gap:24px;margin-top:32px}
@@ -347,6 +351,9 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 </nav>
 
 <section class="hero" aria-label="SET Marketing Hero">
+  <div class="hero-vid">
+    <iframe src="https://player.vimeo.com/video/1174452087?background=1&autoplay=1&loop=1&muted=1&quality=1080p" allow="autoplay; fullscreen" title="SET Marketing Background Video"></iframe>
+  </div>
   <div class="hero-right">
     <canvas id="hero-canvas"></canvas>
     <div class="hbg"></div>
@@ -505,7 +512,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 <section class="founder" id="founder" aria-label="About Chris Marchese">
   <div class="fv rv">
     <div class="fiw">
-      <img src="chris-marchese-stage.jpeg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" alt="Chris Marchese, Founder and CEO of SET Marketing, speaking on stage"/>
+      <iframe src="https://player.vimeo.com/video/1174206252?background=1&autoplay=1&loop=1&muted=1&quality=1080p" style="position:absolute;top:50%;left:50%;width:177.78%;height:100%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none;" allow="autoplay; fullscreen" title="Chris Marchese Founder Video"></iframe>
     </div>
     <div class="f-badge">Founder &amp; CEO</div>
     <div class="f-corner"></div>
