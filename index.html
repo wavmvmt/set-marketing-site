@@ -313,6 +313,12 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   .pr-steps{grid-template-columns:1fr}
   .ft-top{grid-template-columns:1fr}
 }
+
+/* ─── TRANSITION OVERLAYS ────────────────────── */
+#tr-blade{position:fixed;inset:0;pointer-events:none;z-index:850;overflow:hidden}
+#tr-blade-inner{position:absolute;top:-15%;left:0;width:110%;height:130%;background:var(--red);transform-origin:left center;transform:skewX(-12deg) translateX(-115%)}
+#tr-burst{position:fixed;inset:0;pointer-events:none;z-index:850;background:var(--red);clip-path:circle(0% at 50% 50%)}
+#tr-flash{position:fixed;inset:0;pointer-events:none;z-index:851;background:#fff;opacity:0}
 </style>
 </head>
 <body>
@@ -633,8 +639,16 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   </div>
 </footer>
 
+<div id="tr-blade"><div id="tr-blade-inner"></div></div>
+<div id="tr-burst"></div>
+<div id="tr-flash"></div>
+
 <script>
 gsap.registerPlugin(ScrollTrigger);
+
+// ── SHARED VORTEX STATE ───────────────────────────────────────────────────────
+// Particle IIFE reads this each frame — lives at module scope
+const vortex = { on: false, str: 0, cx: 0, cy: 0 };
 
 // ── LENIS ────────────────────────────────────────────────────────────────────
 const lenis = new Lenis({ lerp: 0.075, smoothWheel: true, wheelMultiplier: 1 });
@@ -658,7 +672,7 @@ gsap.timeline()
     gsap.fromTo('.hbot',  { opacity:0, y:20 }, { opacity:1, y:0, duration:.7,  delay:.42, ease:'power3.out' });
   });
 
-// ── CANVAS PARTICLES ─────────────────────────────────────────────────────────
+// ── CANVAS PARTICLES + VORTEX ─────────────────────────────────────────────────
 (function() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
@@ -668,6 +682,8 @@ gsap.timeline()
   function resize() {
     W = canvas.width  = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
+    vortex.cx = W * .5;
+    vortex.cy = H * .5;
   }
   resize();
   window.addEventListener('resize', () => { resize(); initP(); });
@@ -686,40 +702,96 @@ gsap.timeline()
     particles = Array.from({ length: n }, () => ({
       x: Math.random() * W, y: Math.random() * H,
       vx: (Math.random() - .5) * .32, vy: (Math.random() - .5) * .32,
-      r: Math.random() * 1.6 + .5, base: Math.random() * .35 + .15
+      r: Math.random() * 1.6 + .5, base: Math.random() * .35 + .15,
+      trail: []
     }));
   }
   initP();
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
+    const alpha = vortex.on ? Math.max(0, 1 - vortex.str * .75) : 1;
+
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
-      const dx = hmx - p.x, dy = hmy - p.y, dist = Math.hypot(dx, dy);
-      if (dist < 180 && dist > 0) {
-        const f = ((180 - dist) / 180) * .09;
-        p.vx -= dx / dist * f; p.vy -= dy / dist * f;
+
+      // Mouse repel (disabled deep in vortex)
+      if (!vortex.on || vortex.str < .25) {
+        const dx = hmx - p.x, dy = hmy - p.y, dist = Math.hypot(dx, dy);
+        if (dist < 180 && dist > 0) {
+          const f = ((180 - dist) / 180) * .09;
+          p.vx -= dx / dist * f; p.vy -= dy / dist * f;
+        }
       }
+
+      // Vortex: centripetal + tangential spiral
+      if (vortex.on && vortex.str > 0) {
+        const dvx = vortex.cx - p.x, dvy = vortex.cy - p.y;
+        const d2 = Math.hypot(dvx, dvy) || 1;
+        const s = vortex.str * .016;
+        p.vx += dvx / d2 * d2 * s * .55 - dvy / d2 * d2 * s * .38;
+        p.vy += dvy / d2 * d2 * s * .55 + dvx / d2 * d2 * s * .38;
+        const spd = Math.hypot(p.vx, p.vy);
+        const cap = 3 + vortex.str * 11;
+        if (spd > cap) { p.vx = p.vx/spd*cap; p.vy = p.vy/spd*cap; }
+      }
+
       p.vx *= .978; p.vy *= .978;
       p.x += p.vx; p.y += p.vy;
-      if (p.x < -10) p.x = W + 10;
-      if (p.x > W + 10) p.x = -10;
-      if (p.y < -10) p.y = H + 10;
-      if (p.y > H + 10) p.y = -10;
+
+      // Wrap only when not vortexing
+      if (!vortex.on) {
+        if (p.x < -10) p.x = W + 10;
+        if (p.x > W + 10) p.x = -10;
+        if (p.y < -10) p.y = H + 10;
+        if (p.y > H + 10) p.y = -10;
+      }
+
+      // Trail
+      if (vortex.on && vortex.str > .08) {
+        p.trail.push({ x: p.x, y: p.y });
+        if (p.trail.length > 14) p.trail.shift();
+        for (let t = 1; t < p.trail.length; t++) {
+          const ta = (t / p.trail.length) * vortex.str * alpha * .55;
+          ctx.beginPath();
+          ctx.moveTo(p.trail[t-1].x, p.trail[t-1].y);
+          ctx.lineTo(p.trail[t].x, p.trail[t].y);
+          ctx.strokeStyle = `rgba(200,16,46,${ta})`;
+          ctx.lineWidth = p.r * 1.4; ctx.stroke();
+        }
+      } else { p.trail = []; }
+
+      // Dot
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200,16,46,${p.base})`;
-      ctx.fill();
-      for (let j = i + 1; j < particles.length; j++) {
-        const p2 = particles[j];
-        const d = Math.hypot(p.x - p2.x, p.y - p2.y);
-        if (d < 140) {
-          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(200,16,46,${(1 - d / 140) * .11})`;
-          ctx.lineWidth = .6; ctx.stroke();
+      ctx.arc(p.x, p.y, p.r * (1 + vortex.str * .6), 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,16,46,${p.base * alpha})`; ctx.fill();
+
+      // Connection lines
+      if (alpha > .1) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const d = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (d < 140) {
+            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(200,16,46,${(1-d/140)*.11*alpha})`;
+            ctx.lineWidth = .6; ctx.stroke();
+          }
         }
       }
     }
+
+    // Singularity glow at peak
+    if (vortex.on && vortex.str > .45) {
+      const gA = (vortex.str - .45) / .55;
+      const gR = 80 * vortex.str;
+      const g = ctx.createRadialGradient(vortex.cx, vortex.cy, 0, vortex.cx, vortex.cy, gR);
+      g.addColorStop(0, `rgba(200,16,46,${gA * .95})`);
+      g.addColorStop(.45, `rgba(200,16,46,${gA * .35})`);
+      g.addColorStop(1, `rgba(200,16,46,0)`);
+      ctx.beginPath(); ctx.arc(vortex.cx, vortex.cy, gR, 0, Math.PI*2);
+      ctx.fillStyle = g; ctx.fill();
+    }
+
     requestAnimationFrame(draw);
   }
   draw();
@@ -817,6 +889,112 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const t = document.querySelector(a.getAttribute('href'));
     if (t) { e.preventDefault(); lenis.scrollTo(t, { offset:-80, duration:1.5 }); }
   });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ── SECTION TRANSITION ENGINE ─────────────────────────────────────────────────
+// Three transition types, each fired on section entry
+// ─────────────────────────────────────────────────────────────────────────────
+
+const trBlade = document.getElementById('tr-blade-inner');
+const trBurst = document.getElementById('tr-burst');
+const trFlash = document.getElementById('tr-flash');
+let trLock = false;
+
+function lockTr(fn) {
+  if (trLock) return;
+  trLock = true;
+  fn();
+  setTimeout(() => { trLock = false; }, 1300);
+}
+
+// ── 1. DIAGONAL BLADE ────────────────────────────────────────────────────────
+// dir 1 = slashes left→right, -1 = right→left
+function playBlade(dir) {
+  dir = dir || 1;
+  gsap.set(trBlade, { xPercent: dir * -118 });
+  gsap.timeline()
+    .to(trBlade, { xPercent: 0,           duration: .43, ease: 'power3.inOut' })
+    .to(trBlade, { xPercent: dir * 118,   duration: .43, ease: 'power3.inOut', delay: .07 });
+}
+
+// ── 2. RADIAL BURST ───────────────────────────────────────────────────────────
+// fx/fy = focal point in CSS % e.g. '50% 0%'
+function playBurst(fx, fy) {
+  fx = fx || '50%'; fy = fy || '50%';
+  gsap.set(trBurst, { clipPath: 'circle(0% at ' + fx + ' ' + fy + ')' });
+  gsap.timeline()
+    .to(trBurst, { clipPath: 'circle(150% at ' + fx + ' ' + fy + ')', duration: .62, ease: 'power2.inOut' })
+    .to(trBurst, { clipPath: 'circle(0% at '   + fx + ' ' + fy + ')', duration: .52, ease: 'power2.inOut', delay: .07 });
+}
+
+// ── 3. PARTICLE VORTEX COLLAPSE ───────────────────────────────────────────────
+function playVortex() {
+  vortex.on = true;
+  gsap.timeline()
+    .to(vortex, { str: 1, duration: .95, ease: 'power2.in' })
+    .to(trFlash, { opacity: .9, duration: .07 }, '-=0')
+    .to(trFlash, { opacity: 0,  duration: .38, ease: 'power2.out' })
+    .to(vortex, { str: 0, duration: .65, ease: 'power3.out' }, '-=0.32')
+    .call(() => { vortex.on = false; });
+}
+
+// ── ASSIGNMENTS ───────────────────────────────────────────────────────────────
+// Hero → Stats: Particle Vortex — particles collapse as you leave the hero
+ScrollTrigger.create({
+  trigger: '.hero',
+  start: 'bottom 58%',
+  onLeave:     () => lockTr(playVortex),
+  onEnterBack: () => lockTr(playVortex),
+});
+
+// Stats → Clients: Blade left→right
+ScrollTrigger.create({
+  trigger: '#clients',
+  start: 'top 90%',
+  onEnter: () => lockTr(() => playBlade(1)),
+});
+
+// Clients → Services: Burst from top-center (sun-rise)
+ScrollTrigger.create({
+  trigger: '#services',
+  start: 'top 90%',
+  onEnter: () => lockTr(() => playBurst('50%', '0%')),
+});
+
+// Services → Results: Blade right→left (reverse slash)
+ScrollTrigger.create({
+  trigger: '#results',
+  start: 'top 90%',
+  onEnter: () => lockTr(() => playBlade(-1)),
+});
+
+// Results → Founder: Burst from bottom-right corner
+ScrollTrigger.create({
+  trigger: '#founder',
+  start: 'top 90%',
+  onEnter: () => lockTr(() => playBurst('100%', '100%')),
+});
+
+// Founder → Process: Blade left→right
+ScrollTrigger.create({
+  trigger: '#process',
+  start: 'top 90%',
+  onEnter: () => lockTr(() => playBlade(1)),
+});
+
+// Process → Testimonials: Burst from left-center
+ScrollTrigger.create({
+  trigger: '#testimonials',
+  start: 'top 90%',
+  onEnter: () => lockTr(() => playBurst('0%', '60%')),
+});
+
+// Testimonials → CTA: Blade right→left then Burst from center (double-hit)
+ScrollTrigger.create({
+  trigger: '#contact',
+  start: 'top 90%',
+  onEnter: () => lockTr(() => playBlade(-1)),
 });
 </script>
 </body>
