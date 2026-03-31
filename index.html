@@ -2,19 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="SET Marketing is a revenue architecture agency for operators generating $1M to $20M. We install acquisition systems, paid media infrastructure, and SET OS to drive predictable growth. Toronto and Miami.">
 <meta name="keywords" content="marketing agency Toronto, lead generation agency, fractional CMO, revenue growth agency, paid advertising agency, SET Marketing, Chris Marchese, SET OS, digital marketing agency Miami">
 <meta property="og:title" content="SET Marketing — Revenue Architecture for Operators">
 <meta property="og:description" content="We don't run campaigns. We install systems. $500M+ in client revenue generated across 12 industries.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://marketingbyset.com">
-<title>SET Marketing | #1 Revenue Architecture Agency | Toronto & Miami | $500M+ Generated</title>
+<title>SET Marketing | Revenue Architecture Agency | Toronto & Miami | $500M+ Generated</title>
+<!-- DNS prefetch for all external origins -->
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="dns-prefetch" href="https://player.vimeo.com">
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<!-- Preconnect critical origins -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts: only weights actually used, font-display:swap -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Syne:wght@400;700;800&family=DM+Mono:wght@0,400&display=swap" rel="stylesheet">
+<!-- Scripts: defer so they don't block render -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js" defer></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -27,12 +37,17 @@
   --cream:#e6dfd4;
   --red:#B91C2E;
   --red2:#D42240;
-  --fd:'Cormorant Garamond',serif;
-  --fb:'Syne',sans-serif;
-  --fm:'DM Mono',monospace;
+  --fd:'Cormorant Garamond',Georgia,serif;
+  --fb:'Syne',system-ui,sans-serif;
+  --fm:'DM Mono','Courier New',monospace;
 }
-html{scroll-behavior:auto}
+html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
 body{background:var(--black);color:var(--white);font-family:var(--fb);font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none}
+/* Reduce layout recalculation on sections */
+section,.stats,.ticker,footer{contain:layout style}
+/* Only use will-change on actively animating elements */
+.rv{will-change:opacity,transform}
+.rv.on{will-change:auto}
 
 /* ─── LOADER ─────────────────────────────────── */
 #loader{position:fixed;inset:0;background:var(--black);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
@@ -52,9 +67,11 @@ body:has(.sv-card:hover,.tc:hover,.ps:hover) #cur-r{width:88px;height:88px;borde
 
 /* BG·04 — breathing ambient red gradient drifts across entire page */
 #bg-gradient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-#bg-gradient::before{content:'';position:absolute;width:90vw;height:90vw;border-radius:50%;background:radial-gradient(circle,rgba(185,28,46,.055) 0%,rgba(185,28,46,.016) 38%,transparent 70%);top:-30%;left:-20%;animation:bgFloat 22s ease-in-out infinite;will-change:transform}
-#bg-gradient::after{content:'';position:absolute;width:65vw;height:65vw;border-radius:50%;background:radial-gradient(circle,rgba(185,28,46,.03) 0%,transparent 70%);bottom:0;right:-18%;animation:bgFloat 28s ease-in-out infinite reverse;will-change:transform}
+#bg-gradient::before{content:'';position:absolute;width:90vw;height:90vw;border-radius:50%;background:radial-gradient(circle,rgba(185,28,46,.055) 0%,rgba(185,28,46,.016) 38%,transparent 70%);top:-30%;left:-20%;animation:bgFloat 22s ease-in-out infinite}
+#bg-gradient::after{content:'';position:absolute;width:65vw;height:65vw;border-radius:50%;background:radial-gradient(circle,rgba(185,28,46,.03) 0%,transparent 70%);bottom:0;right:-18%;animation:bgFloat 28s ease-in-out infinite reverse}
 @keyframes bgFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(20%,24%) scale(1.09)}50%{transform:translate(30%,-14%) scale(.94)}75%{transform:translate(-10%,20%) scale(1.06)}}
+/* Disable expensive bg animation on mobile */
+@media(max-width:900px){#bg-gradient{display:none}}
 
 /* H·04 — shimmer sweep on stat + testimonial cards */
 .st{overflow:hidden}.tc{overflow:hidden}
@@ -63,6 +80,8 @@ body:has(.sv-card:hover,.tc:hover,.ps:hover) #cur-r{width:88px;height:88px;borde
 
 /* transitions removed */
 @media(max-width:900px){#cur,#cur-r{display:none}}
+/* Disable film grain on mobile - costly paint */
+@media(max-width:900px){body::after{display:none}}
 
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");background-size:180px 180px;pointer-events:none;z-index:700;opacity:.5;mix-blend-mode:overlay}
 
@@ -568,7 +587,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 
 <section class="hero" aria-label="SET Marketing Hero">
   <div class="hero-vid">
-    <iframe src="https://player.vimeo.com/video/1174452087?background=1&autoplay=1&loop=1&muted=1&autopause=0&transparent=0" allow="autoplay; fullscreen" title="SET Marketing Background Video"></iframe>
+    <iframe src="https://player.vimeo.com/video/1174452087?background=1&autoplay=1&loop=1&muted=1&autopause=0&transparent=0" allow="autoplay; fullscreen" title="SET Marketing Background Video" loading="lazy"></iframe>
   </div>
   <div class="hero-right">
     <canvas id="hero-canvas"></canvas>
@@ -737,7 +756,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   <div class="sec-num-bg">04</div>
   <div class="fv rv">
     <div class="fiw">
-      <iframe src="https://player.vimeo.com/video/1174206252?background=1&autoplay=1&loop=1&muted=1&autopause=0&transparent=0" style="position:absolute;top:50%;left:50%;width:177.78%;height:100%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none;" allow="autoplay; fullscreen" title="Chris Marchese Founder Video"></iframe>
+      <iframe src="https://player.vimeo.com/video/1174206252?background=1&autoplay=1&loop=1&muted=1&autopause=0&transparent=0" style="position:absolute;top:50%;left:50%;width:177.78%;height:100%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none;" allow="autoplay; fullscreen" title="Chris Marchese Founder Video" loading="lazy"></iframe>
     </div>
     <div class="f-badge">Founder &amp; CEO</div>
     <div class="f-corner"></div>
@@ -881,14 +900,23 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 </footer>
 
 <script>
+// Wait for deferred scripts to load
+window.addEventListener('load', function() {
+
 gsap.registerPlugin(ScrollTrigger);
 
+const IS_MOBILE = window.innerWidth <= 900;
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // ── LENIS ─────────────────────────────────────────────────────────────────────
-const lenis = new Lenis({ lerp:0.12, smoothWheel:true, wheelMultiplier:1 });
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add(t => lenis.raf(t * 1000));
-gsap.ticker.lagSmoothing(0);
-lenis.stop();
+// Disable Lenis on mobile — native scroll is faster and smoother on touch
+const lenis = IS_MOBILE ? null : new Lenis({ lerp:0.12, smoothWheel:true, wheelMultiplier:1 });
+if (lenis) {
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+  lenis.stop();
+}
 
 // ── LOADER ────────────────────────────────────────────────────────────────────
 const loader = document.getElementById('loader');
@@ -899,29 +927,37 @@ gsap.timeline()
   .to(loader, { xPercent:100, duration:.58, ease:'power3.inOut' }, 2.1)
   .call(() => {
     loader.style.display = 'none';
-    lenis.start();
-    // Sequential hero entrance (M·08)
-    gsap.fromTo('.h-eye',  { opacity:0, y:18 }, { opacity:1, y:0, duration:.7, ease:'power3.out' });
-    gsap.fromTo('.h-hl',   { opacity:0, y:28 }, { opacity:1, y:0, duration:.95, delay:.14, ease:'power3.out' });
-    gsap.fromTo('.hbot',   { opacity:0, y:20 }, { opacity:1, y:0, duration:.7, delay:.42, ease:'power3.out' });
+    if (lenis) lenis.start();
+    if (!REDUCED) {
+      gsap.fromTo('.h-eye',  { opacity:0, y:18 }, { opacity:1, y:0, duration:.7, ease:'power3.out' });
+      gsap.fromTo('.h-hl',   { opacity:0, y:28 }, { opacity:1, y:0, duration:.95, delay:.14, ease:'power3.out' });
+      gsap.fromTo('.hbot',   { opacity:0, y:20 }, { opacity:1, y:0, duration:.7, delay:.42, ease:'power3.out' });
+    } else {
+      document.querySelectorAll('.h-eye,.h-hl,.hbot').forEach(el => el.style.opacity = '1');
+    }
   });
 
 // ── C·03 SCROLL PROGRESS BAR ──────────────────────────────────────────────────
 const progressBar = document.getElementById('scroll-progress');
-lenis.on('scroll', ({ progress }) => {
-  progressBar.style.width = (progress * 100) + '%';
-});
+function updateProgress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+}
+if (lenis) { lenis.on('scroll', updateProgress); }
+else { window.addEventListener('scroll', updateProgress, { passive:true }); }
 
 // ── C·09 STICKY CTA ───────────────────────────────────────────────────────────
 const stickyCTA = document.getElementById('sticky-cta');
 const contactSec = document.getElementById('contact');
-let stickyDismissed = false;
-lenis.on('scroll', ({ scroll }) => {
-  if (stickyDismissed) return;
+function updateStickyCTA() {
+  if (!stickyCTA) return;
   const contactTop = contactSec ? contactSec.getBoundingClientRect().top : 9999;
-  const show = scroll > window.innerHeight * 0.45 && contactTop > window.innerHeight * 0.6;
+  const show = window.scrollY > window.innerHeight * 0.45 && contactTop > window.innerHeight * 0.6;
   stickyCTA.classList.toggle('show', show);
-});
+}
+if (lenis) { lenis.on('scroll', updateStickyCTA); }
+else { window.addEventListener('scroll', updateStickyCTA, { passive:true }); }
 
 // ── C·01 BOOKING MODAL ────────────────────────────────────────────────────────
 function openModal() {
@@ -966,8 +1002,8 @@ function closeMobileNav() {
   document.body.style.overflow = '';
 }
 
-// ── HERO CANVAS PARTICLES ─────────────────────────────────────────────────────
-(function() {
+// ── HERO CANVAS PARTICLES — desktop only ─────────────────────────────────────
+if (!IS_MOBILE && !REDUCED) (function() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
@@ -1001,20 +1037,24 @@ function closeMobileNav() {
   draw();
 })();
 
-// ── CURSOR ────────────────────────────────────────────────────────────────────
+// ── CURSOR — desktop only ─────────────────────────────────────────────────────
+if (!IS_MOBILE) {
 const cur = document.getElementById('cur'), cr = document.getElementById('cur-r');
 let mx=0, my=0, rx=0, ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; }, { passive:true });
 (function loop() {
   cur.style.left=mx+'px'; cur.style.top=my+'px';
   rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
   cr.style.left=rx+'px'; cr.style.top=ry+'px';
   requestAnimationFrame(loop);
 })();
+}
 
 // ── NAV ───────────────────────────────────────────────────────────────────────
 const navEl = document.getElementById('nav');
-lenis.on('scroll', ({ scroll }) => navEl.classList.toggle('s', scroll > 60));
+function updateNav() { navEl.classList.toggle('s', window.scrollY > 60); }
+if (lenis) { lenis.on('scroll', ({ scroll }) => navEl.classList.toggle('s', scroll > 60)); }
+else { window.addEventListener('scroll', updateNav, { passive:true }); }
 
 // ── HERO SPOTLIGHT ────────────────────────────────────────────────────────────
 const spotlight = document.getElementById('spotlight');
@@ -1030,12 +1070,11 @@ if (heroRight) {
 }
 
 // ── M·01 KINETIC HEADLINE CYCLE ───────────────────────────────────────────────
-(function() {
+if (!REDUCED) (function() {
   const inner = document.querySelector('.h-cycle-inner');
   if (!inner) return;
-  const words = inner.querySelectorAll('.h-cycle-word');
   let idx = 0;
-  inner.style.transform = 'translateY(0)';
+  const words = inner.querySelectorAll('.h-cycle-word');
   setInterval(() => {
     idx = (idx + 1) % words.length;
     inner.style.transform = `translateY(${-idx * 100}%)`;
@@ -1044,20 +1083,22 @@ if (heroRight) {
 
 // ── REVEAL ────────────────────────────────────────────────────────────────────
 const rvObs = new IntersectionObserver(
-  es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
-  { threshold:.08, rootMargin:'0px 0px -50px 0px' }
+  es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); rvObs.unobserve(e.target); } }),
+  { threshold:.06, rootMargin:'0px 0px -40px 0px' }
 );
 document.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
 
-// ── C·02 SCARCITY BAR ANIMATE ─────────────────────────────────────────────────
+// ── C·02 SCARCITY BAR ────────────────────────────────────────────────────────
 const scarcityFill = document.getElementById('scarcity-fill');
-const scarcityObs = new IntersectionObserver(es => {
-  es.forEach(e => { if (e.isIntersecting && scarcityFill) { setTimeout(()=>scarcityFill.style.width='75%', 200); scarcityObs.disconnect(); } });
-}, { threshold:.3 });
-if (scarcityFill) scarcityObs.observe(scarcityFill.closest('.scarcity-bar'));
+if (scarcityFill) {
+  const scObs = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { setTimeout(()=>scarcityFill.style.width='75%', 200); scObs.disconnect(); } });
+  }, { threshold:.3 });
+  scObs.observe(scarcityFill.closest('.scarcity-bar'));
+}
 
 // ── HORIZONTAL RESULTS SCROLL ─────────────────────────────────────────────────
-if (window.innerWidth > 900) {
+if (!IS_MOBILE) {
   const rsTrack = document.querySelector('.rs-track');
   const rsPin   = document.querySelector('.rs-pin');
   if (rsTrack && rsPin) {
@@ -1067,108 +1108,104 @@ if (window.innerWidth > 900) {
       scrollTrigger: {
         trigger: rsPin, start: 'top top',
         end: () => `+=${rsTrack.scrollWidth - rsPin.offsetWidth}`,
-        pin: true, scrub: .6, invalidateOnRefresh: true, pinSpacing: true,
-        anticipatePin: 1
+        pin: true, scrub: .6, invalidateOnRefresh: true, anticipatePin: 1
       }
     });
   }
 }
 
-// ── M·04 VIDEO PARALLAX ───────────────────────────────────────────────────────
-gsap.to('.hero-vid iframe', {
-  yPercent: 15, ease:'none',
-  scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:1.2 }
-});
-gsap.to('.fiw', {
-  yPercent: -14, ease:'none',
-  scrollTrigger:{ trigger:'.founder', start:'top bottom', end:'bottom top', scrub:1.3 }
-});
+// ── M·04 VIDEO PARALLAX — desktop only ────────────────────────────────────────
+if (!IS_MOBILE && !REDUCED) {
+  gsap.to('.hero-vid iframe', { yPercent:15, ease:'none',
+    scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:1.2 } });
+  gsap.to('.fiw', { yPercent:-14, ease:'none',
+    scrollTrigger:{ trigger:'.founder', start:'top bottom', end:'bottom top', scrub:1.3 } });
+}
 
-// ── MAGNETIC BUTTONS ─────────────────────────────────────────────────────────
-document.querySelectorAll('.btn-p, .ncta, .btn-g').forEach(btn => {
-  btn.addEventListener('mousemove', e => {
-    const r = btn.getBoundingClientRect();
-    gsap.to(btn, { x:(e.clientX-r.left-r.width/2)*.24, y:(e.clientY-r.top-r.height/2)*.24, duration:.38, ease:'power2.out' });
+// ── MAGNETIC BUTTONS — desktop only ──────────────────────────────────────────
+if (!IS_MOBILE) {
+  document.querySelectorAll('.btn-p,.ncta,.btn-g').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      gsap.to(btn, { x:(e.clientX-r.left-r.width/2)*.22, y:(e.clientY-r.top-r.height/2)*.22, duration:.35, ease:'power2.out' });
+    }, {passive:true});
+    btn.addEventListener('mouseleave', () => gsap.to(btn, { x:0, y:0, duration:.55, ease:'power2.out' }));
   });
-  btn.addEventListener('mouseleave', () => gsap.to(btn, { x:0, y:0, duration:.65, ease:'elastic.out(1,.55)' }));
-});
+}
 
-// ── M·03 3D CARD TILT ─────────────────────────────────────────────────────────
-document.querySelectorAll('.sv-card, .tc').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const x = ((e.clientX-r.left)/r.width-.5)*8;
-    const y = ((e.clientY-r.top)/r.height-.5)*-8;
-    gsap.to(card, { rotateY:x, rotateX:y, duration:.35, ease:'power2.out', transformPerspective:800 });
+// ── M·03 3D CARD TILT — desktop only ─────────────────────────────────────────
+if (!IS_MOBILE && !REDUCED) {
+  document.querySelectorAll('.sv-card,.tc').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      gsap.to(card, { rotateY:((e.clientX-r.left)/r.width-.5)*7, rotateX:((e.clientY-r.top)/r.height-.5)*-7, duration:.3, ease:'power2.out', transformPerspective:800 });
+    }, {passive:true});
+    card.addEventListener('mouseleave', () => gsap.to(card, { rotateY:0, rotateX:0, duration:.5, ease:'power2.out' }));
   });
-  card.addEventListener('mouseleave', () => {
-    gsap.to(card, { rotateY:0, rotateX:0, duration:.5, ease:'power2.out' });
-  });
-});
+}
 
-// ── M·06 AMBIENT CURSOR GLOW ──────────────────────────────────────────────────
-document.querySelectorAll('.services, .process').forEach(sec => {
-  const glow = document.createElement('div');
-  glow.className = 'section-glow';
-  sec.appendChild(glow);
-  sec.addEventListener('mousemove', e => {
-    const r = sec.getBoundingClientRect();
-    glow.style.left = (e.clientX-r.left)+'px';
-    glow.style.top  = (e.clientY-r.top)+'px';
-    glow.style.opacity = '1';
+// ── M·06 AMBIENT GLOW — desktop only ─────────────────────────────────────────
+if (!IS_MOBILE) {
+  document.querySelectorAll('.services,.process').forEach(sec => {
+    const glow = document.createElement('div');
+    glow.className = 'section-glow';
+    sec.appendChild(glow);
+    sec.addEventListener('mousemove', e => {
+      const r = sec.getBoundingClientRect();
+      glow.style.cssText = `left:${e.clientX-r.left}px;top:${e.clientY-r.top}px;opacity:1`;
+    }, {passive:true});
+    sec.addEventListener('mouseleave', () => glow.style.opacity='0');
   });
-  sec.addEventListener('mouseleave', () => glow.style.opacity='0');
-});
+}
 
-// ── M·07 STAGGER ENTRANCE VARIATION ──────────────────────────────────────────
-document.querySelectorAll('.sv-card').forEach((el, i) => {
-  el.style.transitionDelay = (0.06 * i) + 's';
-});
-document.querySelectorAll('.tc').forEach((el, i) => {
-  el.style.transitionDelay = (0.08 * i) + 's';
-});
+// ── STAGGER ───────────────────────────────────────────────────────────────────
+document.querySelectorAll('.sv-card').forEach((el,i) => { el.style.transitionDelay=(0.06*i)+'s'; });
+document.querySelectorAll('.tc').forEach((el,i) => { el.style.transitionDelay=(0.08*i)+'s'; });
 
-// ── TEXT REVEAL SCRUB ─────────────────────────────────────────────────────────
-const REVEAL_SEL = ['.sv-intro','.sv-desc','.r-desc','.r-q','.ps-d','.cl-s','.cta-s','.fc p'];
-const isMobile = window.matchMedia('(max-width:900px)').matches;
-REVEAL_SEL.forEach(sel => {
-  document.querySelectorAll(sel).forEach(el => {
-    el.innerHTML = el.innerHTML.split(' ')
-      .map(w => w.trim() ? `<span class="trw" style="display:inline-block">${w}</span>` : w).join(' ');
-    const words = el.querySelectorAll('.trw');
-    if (!words.length) return;
-    if (isMobile) {
-      gsap.fromTo(words, { opacity:.1, y:5 }, { opacity:1, y:0, duration:.5, stagger:.016, ease:'power2.out',
-        scrollTrigger:{ trigger:el, start:'top 88%' } });
-    } else {
-      gsap.fromTo(words, { opacity:.06, filter:'blur(2.5px)' }, { opacity:1, filter:'blur(0px)', stagger:.042, ease:'none',
-        scrollTrigger:{ trigger:el, start:'top 84%', end:'bottom 50%', scrub:.85 } });
-    }
+// ── TEXT REVEAL ───────────────────────────────────────────────────────────────
+if (!REDUCED) {
+  ['.sv-intro','.sv-desc','.r-desc','.r-q','.ps-d','.cl-s','.cta-s','.fc p'].forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => {
+      const words = el.textContent.trim().split(/\s+/);
+      el.innerHTML = words.map(w=>`<span class="trw" style="display:inline-block">${w}</span>`).join(' ');
+      const spans = el.querySelectorAll('.trw');
+      if (IS_MOBILE) {
+        gsap.fromTo(spans,{opacity:.15,y:4},{opacity:1,y:0,duration:.4,stagger:.01,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 90%'}});
+      } else {
+        gsap.fromTo(spans,{opacity:.06,filter:'blur(2px)'},{opacity:1,filter:'blur(0)',stagger:.035,ease:'none',scrollTrigger:{trigger:el,start:'top 84%',end:'bottom 52%',scrub:.7}});
+      }
+    });
   });
-});
+}
 
-// ── TY·04 TICKER VELOCITY RESPONSE ────────────────────────────────────────────
-const tTrack = document.querySelector('.t-track');
-if (tTrack) {
-  let tickerSpeed = 28, targetSpeed = 28;
-  lenis.on('scroll', ({ velocity }) => {
-    targetSpeed = Math.max(8, 28 - Math.abs(velocity) * 2.5);
-  });
-  setInterval(() => {
-    tickerSpeed += (targetSpeed - tickerSpeed) * 0.08;
-    tTrack.style.animationDuration = tickerSpeed.toFixed(2) + 's';
-  }, 50);
+// ── TICKER VELOCITY — desktop only ───────────────────────────────────────────
+if (!IS_MOBILE) {
+  const tTrack = document.querySelector('.t-track');
+  if (tTrack) {
+    let spd=28, lastY=0;
+    window.addEventListener('scroll', () => {
+      const v = Math.abs(window.scrollY - lastY);
+      lastY = window.scrollY;
+      spd = spd * 0.92 + Math.max(8, 28 - v * 0.4) * 0.08;
+      tTrack.style.animationDuration = spd.toFixed(1)+'s';
+    }, {passive:true});
+  }
 }
 
 // ── ANCHOR SCROLL ─────────────────────────────────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); lenis.scrollTo(t, { offset:-80, duration:1.5 }); }
+    if (!t) return;
+    e.preventDefault();
+    if (lenis) { lenis.scrollTo(t, { offset:-80, duration:1.4 }); }
+    else { t.scrollIntoView({ behavior:'smooth', block:'start' }); }
   });
 });
 
 // S·07 removed — was causing flash on scroll
+
+}); // end window.load
 
 // transitions removed — clean scroll only
 </script>
