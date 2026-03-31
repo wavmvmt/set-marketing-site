@@ -335,6 +335,136 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   .pr-steps{grid-template-columns:1fr}
   .ft-top{grid-template-columns:1fr}
 }
+
+/* ═══════════════════════════════════════════════
+   ENHANCEMENT LAYER — 40 UX/UI IMPROVEMENTS
+═══════════════════════════════════════════════ */
+
+/* C·03 — Scroll progress bar */
+#scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--red);z-index:9000;transition:width .05s linear;pointer-events:none}
+
+/* C·09 — Sticky bottom CTA */
+#sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:490;background:var(--red);display:flex;align-items:center;justify-content:center;gap:16px;padding:14px 24px;transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);pointer-events:none}
+#sticky-cta.show{transform:translateY(0);pointer-events:all}
+#sticky-cta span{font-family:var(--fm);font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+#sticky-cta a{font-family:var(--fb);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px}
+#sticky-cta a::after{content:'→';font-size:14px}
+#sticky-cta .sc-close{margin-left:auto;cursor:pointer;color:rgba(255,255,255,.5);font-size:16px;line-height:1;padding:4px;background:none;border:none;font-family:inherit}
+
+/* C·01 — Booking modal */
+#modal-overlay{position:fixed;inset:0;z-index:9100;background:rgba(6,6,6,.94);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s ease}
+#modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--off-black);border:1px solid var(--border);border-top:2px solid var(--red);padding:52px 56px;max-width:520px;width:calc(100% - 48px);position:relative;transform:translateY(24px);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+#modal-overlay.open .modal-box{transform:translateY(0)}
+.modal-close{position:absolute;top:20px;right:20px;background:none;border:none;color:rgba(244,241,236,.4);cursor:pointer;font-size:20px;line-height:1;padding:4px;transition:color .2s}
+.modal-close:hover{color:var(--white)}
+.modal-eyebrow{font-family:var(--fm);font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+.modal-title{font-family:var(--fd);font-size:clamp(28px,3vw,38px);font-weight:300;line-height:1.1;margin-bottom:8px}
+.modal-title em{font-style:italic;color:var(--red)}
+.modal-sub{font-family:var(--fb);font-size:13px;color:rgba(244,241,236,.55);line-height:1.6;margin-bottom:32px}
+.modal-field{margin-bottom:20px}
+.modal-label{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,241,236,.5);display:block;margin-bottom:8px}
+.modal-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--white);font-family:var(--fb);font-size:15px;padding:14px 16px;outline:none;transition:border-color .25s}
+.modal-input:focus{border-color:rgba(185,28,46,.6)}
+.modal-input::placeholder{color:rgba(244,241,236,.25)}
+.modal-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.modal-pill{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--border);color:rgba(244,241,236,.5);cursor:pointer;transition:all .2s;background:none}
+.modal-pill:hover,.modal-pill.sel{border-color:var(--red);color:var(--red);background:rgba(185,28,46,.08)}
+.modal-submit{width:100%;background:var(--red);color:#fff;border:none;font-family:var(--fb);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:18px;cursor:pointer;margin-top:8px;transition:background .25s;position:relative;overflow:hidden}
+.modal-submit:hover{background:var(--red2)}
+.modal-submit.loading{pointer-events:none}
+.modal-submit.loading::after{content:'';position:absolute;inset:0;background:var(--red2);animation:submitLoad 1.2s ease-in-out infinite}
+@keyframes submitLoad{0%,100%{opacity:0}50%{opacity:1}}
+.modal-disc{font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,241,236,.25);text-align:center;margin-top:14px}
+.modal-success{display:none;text-align:center;padding:20px 0}
+.modal-success.show{display:block}
+.modal-success-icon{font-size:48px;margin-bottom:20px;color:var(--red)}
+.modal-success-title{font-family:var(--fd);font-size:28px;font-weight:300;margin-bottom:10px}
+.modal-success-sub{font-family:var(--fb);font-size:14px;color:rgba(244,241,236,.55);line-height:1.65}
+.modal-form-wrap{transition:opacity .25s}
+
+/* L·04 — Mobile hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;z-index:520}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:all .3s ease;transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+@media(max-width:900px){.hamburger{display:flex}}
+#mobile-nav{position:fixed;inset:0;z-index:510;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;opacity:0;pointer-events:none;transform:translateX(100%);transition:all .45s cubic-bezier(.16,1,.3,1)}
+#mobile-nav.open{opacity:1;pointer-events:all;transform:translateX(0)}
+#mobile-nav a{font-family:var(--fd);font-size:clamp(36px,8vw,52px);font-weight:300;color:var(--white);text-decoration:none;letter-spacing:-.01em;transition:color .2s}
+#mobile-nav a:hover{color:var(--red)}
+#mobile-nav a em{font-style:italic;color:var(--red)}
+#mobile-nav .mn-cta{background:var(--red);color:#fff;padding:16px 40px;font-family:var(--fb);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-style:normal;margin-top:16px}
+
+/* MI·02 — Link underline draw */
+.nlinks a,.flinks a{position:relative}
+.nlinks a::after,.flinks a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--red);transition:width .3s ease}
+.nlinks a:hover::after,.flinks a:hover::after{width:100%}
+
+/* MI·04 — Process step pulse */
+@keyframes numPulse{0%,100%{opacity:.22;transform:scale(1) translateX(0)}50%{opacity:.65;transform:scale(1.04) translateX(4px)}}
+.ps:hover .ps-num{animation:numPulse 1.8s ease-in-out infinite}
+
+/* MI·05 — Star stagger reveal */
+@keyframes starReveal{from{color:rgba(185,28,46,.08);transform:scale(.5)}to{color:var(--red);transform:scale(1)}}
+.tc.on .star{animation:starReveal .35s ease-out forwards}
+.tc.on .star:nth-child(1){animation-delay:.0s}
+.tc.on .star:nth-child(2){animation-delay:.08s}
+.tc.on .star:nth-child(3){animation-delay:.16s}
+.tc.on .star:nth-child(4){animation-delay:.24s}
+.tc.on .star:nth-child(5){animation-delay:.32s}
+.star{color:rgba(185,28,46,.08)}
+
+/* TY·06 — Mono data labels */
+.mono-num{font-family:var(--fm);color:rgba(185,28,46,.9);font-size:.93em}
+
+/* C·02 — Scarcity bar */
+.scarcity-bar{margin:0 auto 40px;max-width:420px}
+.scarcity-label{font-family:var(--fm);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(244,241,236,.5);display:flex;justify-content:space-between;margin-bottom:8px}
+.scarcity-label span{color:var(--red)}
+.scarcity-track{height:3px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.scarcity-fill{height:100%;background:var(--red);width:0;border-radius:2px;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+
+/* C·04 — Section micro CTAs */
+.section-cta{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(185,28,46,.6);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-top:28px;transition:color .25s}
+.section-cta:hover{color:var(--red)}
+.section-cta::after{content:'→';font-size:11px}
+
+/* M·01 — Kinetic headline word cycle */
+.h-cycle{display:inline-block;position:relative;overflow:hidden;vertical-align:baseline}
+.h-cycle-inner{display:inline-flex;flex-direction:column;transition:transform .55s cubic-bezier(.16,1,.3,1)}
+.h-cycle-word{display:block;white-space:nowrap}
+
+/* Pullquote */
+.pullquote-section{padding:80px 64px;background:var(--black);border-top:1px solid var(--border);text-align:center}
+.pullquote-text{font-family:var(--fd);font-size:clamp(22px,2.8vw,36px);font-style:italic;font-weight:300;color:var(--cream);line-height:1.55;max-width:780px;margin:0 auto 16px}
+.pullquote-attr{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(185,28,46,.6)}
+@media(max-width:900px){.pullquote-section{padding:56px 24px}}
+
+/* L·05 — Footer CTA band */
+.footer-cta-band{background:var(--off-black);border-top:2px solid var(--red);padding:64px;text-align:center}
+.footer-cta-q{font-family:var(--fd);font-size:clamp(32px,4vw,52px);font-weight:300;margin-bottom:24px;line-height:1}
+.footer-cta-q em{font-style:italic;color:var(--red)}
+@media(max-width:900px){.footer-cta-band{padding:48px 24px}}
+
+/* M·03 — 3D Card tilt */
+.sv-card,.tc{transform-style:preserve-3d;transform:perspective(800px) rotateX(0) rotateY(0)}
+
+/* M·04 — Video parallax */
+.hero-vid,.fiw{overflow:hidden}
+
+/* Ambient cursor glow for dark sections */
+.section-glow{position:absolute;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(185,28,46,.045) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:0;opacity:0;transition:opacity .4s;will-change:transform}
+
+/* Section number decorative giant */
+.sec-num-bg{position:absolute;font-family:var(--fd);font-size:clamp(180px,24vw,340px);font-weight:300;color:rgba(244,241,236,.028);right:-0.04em;bottom:-0.18em;line-height:1;pointer-events:none;user-select:none;z-index:0;overflow:hidden}
+.clients,.services,.results,.founder,.process,.testimonials{position:relative;overflow:hidden}
+
+@media(max-width:900px){
+  #sticky-cta span{display:none}
+  .modal-box{padding:36px 24px}
+}
 </style>
 </head>
 <body>
@@ -347,6 +477,70 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   </div>
   <div class="lo-sub">Revenue Architecture</div>
   <div class="lo-wipe"></div>
+</div>
+
+<!-- C·03 Scroll progress -->
+<div id="scroll-progress"></div>
+
+<!-- C·09 Sticky bottom CTA -->
+<div id="sticky-cta">
+  <span>Q2 2026 · 3 of 4 spots filled</span>
+  <a href="#contact" onclick="openModal();return false;">Book Revenue Strategy Call</a>
+  <button class="sc-close" onclick="document.getElementById('sticky-cta').classList.remove('show')">×</button>
+</div>
+
+<!-- C·01 Booking modal -->
+<div id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-form-wrap">
+      <div class="modal-eyebrow">Revenue Strategy Call · Q2 2026</div>
+      <h2 class="modal-title">Let's Build Your <em>System</em></h2>
+      <p class="modal-sub">We work with a select number of operators each quarter. Two quick questions first.</p>
+      <div class="modal-field">
+        <label class="modal-label">Your Name</label>
+        <input class="modal-input" type="text" id="m-name" placeholder="First &amp; Last Name">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Best Phone / Email</label>
+        <input class="modal-input" type="text" id="m-contact" placeholder="Phone or email">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Current Annual Revenue</label>
+        <div class="modal-pills">
+          <button class="modal-pill" onclick="selectPill(this,'rev')">$500K–$1M</button>
+          <button class="modal-pill" onclick="selectPill(this,'rev')">$1M–$5M</button>
+          <button class="modal-pill" onclick="selectPill(this,'rev')">$5M–$20M</button>
+          <button class="modal-pill" onclick="selectPill(this,'rev')">$20M+</button>
+        </div>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Biggest Growth Obstacle</label>
+        <div class="modal-pills">
+          <button class="modal-pill" onclick="selectPill(this,'obs')">Lead generation</button>
+          <button class="modal-pill" onclick="selectPill(this,'obs')">Conversion rate</button>
+          <button class="modal-pill" onclick="selectPill(this,'obs')">Team / systems</button>
+          <button class="modal-pill" onclick="selectPill(this,'obs')">Scaling profitably</button>
+        </div>
+      </div>
+      <button class="modal-submit" id="modal-btn" onclick="submitModal()">Book My Strategy Call →</button>
+      <p class="modal-disc">Confidential · No commitment · 45-minute working session</p>
+    </div>
+    <div class="modal-success" id="modal-success">
+      <div class="modal-success-icon">✦</div>
+      <div class="modal-success-title">You're on the list.</div>
+      <p class="modal-success-sub">Chris or the SET team will reach out within 24 hours to confirm your session. Check your inbox.</p>
+    </div>
+  </div>
+</div>
+
+<!-- L·04 Mobile nav -->
+<div id="mobile-nav">
+  <a href="#services" onclick="closeMobileNav()">Services</a>
+  <a href="#results" onclick="closeMobileNav()"><em>Results</em></a>
+  <a href="#founder" onclick="closeMobileNav()">About</a>
+  <a href="#process" onclick="closeMobileNav()">Process</a>
+  <a href="#contact" onclick="closeMobileNav();openModal();return false;" class="mn-cta">Book Strategy Call</a>
 </div>
 
 <div id="bg-gradient"></div>
@@ -380,7 +574,10 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
     <li><a href="#process">Process</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="ncta">Book Strategy Call</a>
+  <a href="#contact" class="ncta" onclick="openModal();return false;">Book Strategy Call</a>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <section class="hero" aria-label="SET Marketing Hero">
@@ -397,15 +594,15 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
     <h1 class="h-hl">
       We Don't<br>
       Run <em>Campaigns.</em><br>
-      We Install <span class="outline">Systems.</span>
+      We Install <span class="h-cycle"><span class="h-cycle-inner"><span class="h-cycle-word outline">Systems.</span><span class="h-cycle-word outline">Processes.</span><span class="h-cycle-word outline">Revenue.</span></span></span>
     </h1>
     <div class="hbot">
-      <p style="font-family:'Syne',sans-serif;font-size:15px;font-weight:400;color:#f4f1ec;line-height:1.75;max-width:520px;">SET Marketing engineers acquisition, conversion, and automation infrastructure for operators generating $1M to $20M who are ready to scale beyond founder-led growth. Powered by SET OS, our proprietary growth intelligence platform.</p>
+      <p style="font-family:'Syne',sans-serif;font-size:15px;font-weight:400;color:#f4f1ec;line-height:1.75;max-width:520px;">SET Marketing engineers acquisition, conversion, and automation infrastructure for operators generating <span class="mono-num">$1M</span> to <span class="mono-num">$20M</span> who are ready to scale beyond founder-led growth. Powered by SET OS, our proprietary growth intelligence platform.</p>
       <div class="hact">
-        <a href="#contact" class="btn-p">
+        <button class="btn-p" onclick="openModal()">
           Book Revenue Strategy Call
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5H12.5M12.5 7.5L8.5 3.5M12.5 7.5L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        </button>
         <a href="#results" class="btn-g">View Client Results →</a>
       </div>
     </div>
@@ -437,7 +634,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   </div>
 </div>
 
-<div class="stats">
+<div class="stats" id="stats">
   <div class="st rv"><div class="sn">$500<em>M+</em></div><div class="sl">Revenue Generated</div><div class="sd">Across all client campaigns</div></div>
   <div class="st rv d1"><div class="sn">$60<em>M+</em></div><div class="sl">Ad Spend Deployed</div><div class="sd">Meta, Google &amp; YouTube</div></div>
   <div class="st rv d2"><div class="sn">150<em>+</em></div><div class="sl">Companies Scaled</div><div class="sd">$1M operators and beyond</div></div>
@@ -445,6 +642,8 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 </div>
 
 <section class="clients" id="clients" aria-label="Client Roster">
+  <div class="sec-num-bg">01</div>
+  <div class="section-glow" id="glow-clients"></div>
   <div class="cl-hd rv">
     <div>
       <div class="s-lbl">Trusted By</div>
@@ -485,6 +684,8 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 </section>
 
 <section class="services" id="services" aria-label="Services">
+  <div class="sec-num-bg">02</div>
+  <div class="section-glow" id="glow-services"></div>
   <div class="sv-hd">
     <div>
       <div class="s-lbl rv">What We Build</div>
@@ -503,6 +704,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 </section>
 
 <section class="results" id="results" aria-label="Client Results">
+  <div class="sec-num-bg">03</div>
   <div class="rs-header">
     <div class="s-lbl rv">Client Results</div>
     <h2 class="rs-t rv">Real Numbers.<br><em>Real</em> Impact.</h2>
@@ -514,9 +716,10 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
         <div>
           <div class="r-cat">Revenue OS · Full Funnel · 18 Months</div>
           <h3 class="r-cl">From $250M<br>to <em>$500M</em></h3>
-          <p class="r-desc">A scaling operator came to SET with a fragmented acquisition strategy and no unified growth infrastructure. We installed Revenue OS, rebuilt their funnel from the ground up, and aligned marketing directly with sales. Revenue doubled in 18 months, cost per acquisition dropped 27%, and the sales cycle compressed by 40%.</p>
+          <p class="r-desc">A scaling operator came to SET with a fragmented acquisition strategy and no unified growth infrastructure. We installed Revenue OS, rebuilt their funnel from the ground up, and aligned marketing directly with sales. Revenue doubled in <span class="mono-num">18</span> months, cost per acquisition dropped <span class="mono-num">27%</span>, and the sales cycle compressed by <span class="mono-num">40%</span>.</p>
           <div class="r-q">"SET installed Revenue OS and reduced our cost per acquisition by 27%. We doubled revenue in 18 months. The system works."</div>
           <div class="r-qa">George Pintilie, Founder</div>
+          <a href="#contact" class="section-cta" onclick="openModal();return false;">See if you qualify</a>
         </div>
         <div class="metrics">
           <div class="metric"><div class="mv">2×</div><div class="ml">Revenue doubled in 18 months, scaling from $250M to $500M</div></div>
@@ -530,6 +733,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
         <p class="r-desc">Replaced scattered campaigns with structured acquisition systems and measurable KPIs, delivering qualified, consistent lead flow from day one of the engagement.</p>
         <div class="r-q">"If you are serious about scaling your business, bet on SET. They increased my leads by 33% in 90 days."</div>
         <div class="r-qa">Sean Huley, CEO</div>
+        <a href="#contact" class="section-cta" onclick="openModal();return false;">Get your lead system</a>
       </div>
       <div class="rc">
         <div class="r-cat">Strategy · Positioning · Growth Architecture</div>
@@ -537,12 +741,14 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
         <p class="r-desc">Repositioned brand, sharpened messaging, and built a full go-to-market playbook that replaced guesswork with structure and gave leadership a clear system for growth.</p>
         <div class="r-q">"SET completely reframed how we approach growth. Instead of random campaigns, we now operate with structured acquisition systems."</div>
         <div class="r-qa">Mahmoud Elminawi, Founder</div>
+        <a href="#contact" class="section-cta" onclick="openModal();return false;">Start with strategy</a>
       </div>
     </div>
   </div>
 </section>
 
 <section class="founder" id="founder" aria-label="About Chris Marchese">
+  <div class="sec-num-bg">04</div>
   <div class="fv rv">
     <div class="fiw">
       <iframe src="https://player.vimeo.com/video/1174206252?background=1&autoplay=1&loop=1&muted=1&autopause=0&transparent=0" style="position:absolute;top:50%;left:50%;width:177.78%;height:100%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none;" allow="autoplay; fullscreen" title="Chris Marchese Founder Video"></iframe>
@@ -552,22 +758,24 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   </div>
   <div class="fc rv d1">
     <div class="s-lbl">The Operator Behind SET</div>
-    <h2 class="ft">Built From<br><em>Zero.</em><br>Scaled With<br>System.</h2>
-    <p>12 years as an industrial millwright. No trust fund. No connections. Just discipline, pattern recognition, and an obsession with figuring out what actually moves people to act. That obsession became Strategic Emotional Targeting. That framework became SET.</p>
-    <p>When we started scaling our own business we ran into the same wall every serious operator hits. The tools existed but nothing talked to each other. No real intelligence. No unified system. So we built one. SET OS. A proprietary platform that connects how we deploy capital, run acquisition, and build growth infrastructure into one operating layer. We proved it on ourselves first.</p>
-    <p>Then we started installing it into our clients. BMW. Huawei. W Hotels. Operators scaling from $1M to $500M. The system does not change. The results speak. If you are ready to stop running campaigns and start building infrastructure, this is where that conversation starts.</p>
+    <h2 class="ft"><em>$500M+</em> in client<br>revenue built.<br>System-first.</h2>
+    <p><span class="mono-num">150+</span> companies scaled. <span class="mono-num">$60M+</span> in ad spend deployed across <span class="mono-num">12</span> industries. BMW. Huawei. W Hotels. The system does not change — only the operator changes. If you are generating revenue and ready to stop guessing, this is where that conversation starts.</p>
+    <p>12 years as an industrial millwright before marketing. No trust fund. No shortcuts. Just pattern recognition and an obsession with what actually moves people to act. That obsession became Strategic Emotional Targeting. That framework became SET.</p>
+    <p>We built SET OS because nothing on the market connected acquisition, automation, and intelligence into one layer. We proved it on ourselves first. Then we started installing it into our clients.</p>
     <div class="fsig">Chris Marchese</div>
     <div class="frole">Founder &amp; CEO · SET Enterprises · Toronto &amp; Miami</div>
     <div class="f-creds">
-      <span class="cred">SET Enterprises</span>
-      <span class="cred">SET Ventures</span>
-      <span class="cred">SET Sales Academy</span>
+      <span class="cred" title="Full-service revenue architecture agency">SET Enterprises</span>
+      <span class="cred" title="Commercial real estate capital advisory">SET Ventures</span>
+      <span class="cred" title="Sales training and methodology">SET Sales Academy</span>
       <span class="cred">Est. 2019</span>
     </div>
+    <a href="#contact" class="section-cta" onclick="openModal();return false;">Work with Chris</a>
   </div>
 </section>
 
 <section class="process" id="process" aria-label="Our Process">
+  <div class="sec-num-bg">05</div>
   <div class="s-lbl rv">How It Works</div>
   <h2 class="pr-t rv">The SET<br><em>Method</em></h2>
   <div class="pr-steps">
@@ -579,6 +787,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 </section>
 
 <section class="testimonials" id="testimonials" aria-label="Client Testimonials">
+  <div class="sec-num-bg">06</div>
   <div class="s-lbl rv">Client Voices</div>
   <h2 class="tst-t rv">Operators<br>Who <em>Scaled</em></h2>
   <div class="tst-grid">
@@ -589,31 +798,50 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
     </div>
     <div class="tc rv d1">
       <div class="tstars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-      <p class="ttext">"What impressed me most was the strategic depth. If you are serious about scaling your business, bet on SET. They increased my leads by 33% in 90 days, with systems, not guesswork."</p>
+      <p class="ttext">"What impressed me most was the strategic depth. If you are serious about scaling your business, bet on SET. They increased my leads by <span class="mono-num">33%</span> in <span class="mono-num">90</span> days, with systems, not guesswork."</p>
       <div class="tau"><div class="tav">S</div><div><div class="tan">Sean Huley</div><div class="tac">CEO, Huley Enterprises</div></div></div>
     </div>
     <div class="tc rv d2">
       <div class="tstars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-      <p class="ttext">"SET installed Revenue OS and reduced our cost per acquisition by 27%. We doubled revenue in 18 months. The system works because they built it to last."</p>
+      <p class="ttext">"SET installed Revenue OS and reduced our cost per acquisition by <span class="mono-num">27%</span>. We doubled revenue in <span class="mono-num">18</span> months. The system works because they built it to last."</p>
       <div class="tau"><div class="tav">G</div><div><div class="tan">George Pintilie</div><div class="tac">Founder, Pintilie Group</div></div></div>
     </div>
   </div>
 </section>
 
+<!-- Pullquote moment between testimonials and CTA -->
+<div class="pullquote-section rv">
+  <p class="pullquote-text">"The system works because they built it to last."</p>
+  <p class="pullquote-attr">George Pintilie · Founder, Pintilie Group</p>
+</div>
+
 <section class="cta" id="contact" aria-label="Book a Strategy Call">
   <div class="cta-bg"></div>
   <div class="cta-topline"></div>
   <span class="cta-lbl rv">Limited Availability · Q2 2026</span>
+  <div class="scarcity-bar rv">
+    <div class="scarcity-label"><span>Q2 2026 Spots</span><span>3 of 4 filled</span></div>
+    <div class="scarcity-track"><div class="scarcity-fill" id="scarcity-fill"></div></div>
+  </div>
   <h2 class="cta-t rv">Ready to<br><em>Install</em><br>the System?</h2>
-  <p class="cta-s rv">We work with a select number of operators each quarter. If you are generating $1M to $20M and serious about structured, predictable growth, this is where it starts.</p>
+  <p class="cta-s rv">We work with a select number of operators each quarter. If you are generating <span class="mono-num">$1M</span> to <span class="mono-num">$20M</span> and serious about structured, predictable growth, this is where it starts.</p>
   <div class="rv">
-    <a href="mailto:chris@marketingbyset.com" class="btn-p">
+    <button class="btn-p" onclick="openModal()">
       Book Your Revenue Strategy Call
       <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5H12.5M12.5 7.5L8.5 3.5M12.5 7.5L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    </button>
   </div>
   <p class="cta-disc rv">Confidential · No Commitment · 45-Minute Working Session</p>
 </section>
+
+<!-- L·05 Footer CTA band -->
+<div class="footer-cta-band">
+  <div class="footer-cta-q rv"><em>Still thinking</em> about it?</div>
+  <button class="btn-p rv" onclick="openModal()">
+    Book Revenue Strategy Call
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5H12.5M12.5 7.5L8.5 3.5M12.5 7.5L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
 
 <footer>
   <div class="ft-top">
@@ -669,14 +897,14 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-// ── LENIS ────────────────────────────────────────────────────────────────────
-const lenis = new Lenis({ lerp: 0.075, smoothWheel: true, wheelMultiplier: 1 });
+// ── LENIS ─────────────────────────────────────────────────────────────────────
+const lenis = new Lenis({ lerp:0.075, smoothWheel:true, wheelMultiplier:1 });
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add(t => lenis.raf(t * 1000));
 gsap.ticker.lagSmoothing(0);
 lenis.stop();
 
-// ── LOADER ───────────────────────────────────────────────────────────────────
+// ── LOADER ────────────────────────────────────────────────────────────────────
 const loader = document.getElementById('loader');
 gsap.timeline()
   .to('.lo-letter', { y:'0%', duration:.7, stagger:.09, ease:'power4.out' }, 0.25)
@@ -686,20 +914,81 @@ gsap.timeline()
   .call(() => {
     loader.style.display = 'none';
     lenis.start();
-    gsap.fromTo('.h-eye', { opacity:0, y:18 }, { opacity:1, y:0, duration:.7, ease:'power3.out' });
-    gsap.fromTo('.h-hl',  { opacity:0, y:28 }, { opacity:1, y:0, duration:.95, delay:.14, ease:'power3.out' });
-    gsap.fromTo('.hbot',  { opacity:0, y:20 }, { opacity:1, y:0, duration:.7,  delay:.42, ease:'power3.out' });
+    // Sequential hero entrance (M·08)
+    gsap.fromTo('.h-eye',  { opacity:0, y:18 }, { opacity:1, y:0, duration:.7, ease:'power3.out' });
+    gsap.fromTo('.h-hl',   { opacity:0, y:28 }, { opacity:1, y:0, duration:.95, delay:.14, ease:'power3.out' });
+    gsap.fromTo('.hbot',   { opacity:0, y:20 }, { opacity:1, y:0, duration:.7, delay:.42, ease:'power3.out' });
   });
+
+// ── C·03 SCROLL PROGRESS BAR ──────────────────────────────────────────────────
+const progressBar = document.getElementById('scroll-progress');
+lenis.on('scroll', ({ progress }) => {
+  progressBar.style.width = (progress * 100) + '%';
+});
+
+// ── C·09 STICKY CTA ───────────────────────────────────────────────────────────
+const stickyCTA = document.getElementById('sticky-cta');
+const contactSec = document.getElementById('contact');
+let stickyDismissed = false;
+lenis.on('scroll', ({ scroll }) => {
+  if (stickyDismissed) return;
+  const contactTop = contactSec ? contactSec.getBoundingClientRect().top : 9999;
+  const show = scroll > window.innerHeight * 0.45 && contactTop > window.innerHeight * 0.6;
+  stickyCTA.classList.toggle('show', show);
+});
+
+// ── C·01 BOOKING MODAL ────────────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Animate scarcity fill
+  setTimeout(() => {
+    const sf = document.getElementById('scarcity-fill');
+    if (sf) sf.style.width = '75%';
+  }, 400);
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function selectPill(el, group) {
+  el.closest('.modal-pills').querySelectorAll('.modal-pill').forEach(p => p.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function submitModal() {
+  const btn = document.getElementById('modal-btn');
+  btn.textContent = 'Sending...';
+  btn.classList.add('loading');
+  setTimeout(() => {
+    document.querySelector('.modal-form-wrap').style.display = 'none';
+    document.getElementById('modal-success').classList.add('show');
+  }, 1600);
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── L·04 MOBILE NAV ───────────────────────────────────────────────────────────
+function toggleMobileNav() {
+  const nav = document.getElementById('mobile-nav');
+  const ham = document.getElementById('hamburger');
+  const open = nav.classList.toggle('open');
+  ham.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+function closeMobileNav() {
+  document.getElementById('mobile-nav').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
 // ── VORTEX STATE ──────────────────────────────────────────────────────────────
 const vortex = { on:false, str:0, cx:0, cy:0 };
 
-// ── CANVAS PARTICLES + VORTEX ─────────────────────────────────────────────────
+// ── HERO CANVAS PARTICLES ─────────────────────────────────────────────────────
 (function() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let hmx = 0, hmy = -999, W, H, particles = [];
+  let hmx=0, hmy=-999, W, H, particles=[];
   function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; vortex.cx=W*.5; vortex.cy=H*.5; }
   resize();
   window.addEventListener('resize', () => { resize(); initP(); });
@@ -723,48 +1012,68 @@ const vortex = { on:false, str:0, cx:0, cy:0 };
       ctx.beginPath();ctx.arc(p.x,p.y,p.r*(1+vortex.str*.6),0,Math.PI*2);ctx.fillStyle=`rgba(185,28,46,${p.base*alpha})`;ctx.fill();
       if(alpha>.1){for(let j=i+1;j<particles.length;j++){const p2=particles[j],d=Math.hypot(p.x-p2.x,p.y-p2.y);if(d<140){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);ctx.strokeStyle=`rgba(185,28,46,${(1-d/140)*.11*alpha})`;ctx.lineWidth=.6;ctx.stroke();}}}
     }
-    if(vortex.on&&vortex.str>.45){const gA=(vortex.str-.45)/.55,gR=80*vortex.str,g=ctx.createRadialGradient(vortex.cx,vortex.cy,0,vortex.cx,vortex.cy,gR);g.addColorStop(0,`rgba(185,28,46,${gA*.95})`);g.addColorStop(.45,`rgba(185,28,46,${gA*.35})`);g.addColorStop(1,`rgba(185,28,46,0)`);ctx.beginPath();ctx.arc(vortex.cx,vortex.cy,gR,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();}
+    if(vortex.on&&vortex.str>.45){const gA=(vortex.str-.45)/.55,gR=80*vortex.str,g=ctx.createRadialGradient(vortex.cx,vortex.cy,0,vortex.cx,vortex.cy,gR);g.addColorStop(0,`rgba(185,28,46,${gA*.95})`);g.addColorStop(.45,`rgba(185,28,46,${gA*.35})`);g.addColorStop(1,'rgba(185,28,46,0)');ctx.beginPath();ctx.arc(vortex.cx,vortex.cy,gR,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();}
     requestAnimationFrame(draw);
   }
   draw();
 })();
 
-// ── CURSOR ───────────────────────────────────────────────────────────────────
+// ── CURSOR ────────────────────────────────────────────────────────────────────
 const cur = document.getElementById('cur'), cr = document.getElementById('cur-r');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
 (function loop() {
-  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
-  rx += (mx - rx) * .1; ry += (my - ry) * .1;
-  cr.style.left = rx + 'px'; cr.style.top = ry + 'px';
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+  rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+  cr.style.left=rx+'px'; cr.style.top=ry+'px';
   requestAnimationFrame(loop);
 })();
 
-// ── NAV ──────────────────────────────────────────────────────────────────────
-const nav = document.getElementById('nav');
-lenis.on('scroll', ({ scroll }) => nav.classList.toggle('s', scroll > 60));
+// ── NAV ───────────────────────────────────────────────────────────────────────
+const navEl = document.getElementById('nav');
+lenis.on('scroll', ({ scroll }) => navEl.classList.toggle('s', scroll > 60));
 
 // ── HERO SPOTLIGHT ────────────────────────────────────────────────────────────
 const spotlight = document.getElementById('spotlight');
-const heroRight  = document.querySelector('.hero-right');
+const heroRight = document.querySelector('.hero-right');
 if (heroRight) {
   heroRight.addEventListener('mousemove', e => {
     const r = heroRight.getBoundingClientRect();
-    spotlight.style.left = (e.clientX - r.left) + 'px';
-    spotlight.style.top  = (e.clientY - r.top)  + 'px';
+    spotlight.style.left = (e.clientX-r.left)+'px';
+    spotlight.style.top  = (e.clientY-r.top)+'px';
     spotlight.style.opacity = '1';
   });
-  heroRight.addEventListener('mouseleave', () => spotlight.style.opacity = '0');
+  heroRight.addEventListener('mouseleave', () => spotlight.style.opacity='0');
 }
 
-// ── REVEAL ───────────────────────────────────────────────────────────────────
+// ── M·01 KINETIC HEADLINE CYCLE ───────────────────────────────────────────────
+(function() {
+  const inner = document.querySelector('.h-cycle-inner');
+  if (!inner) return;
+  const words = inner.querySelectorAll('.h-cycle-word');
+  let idx = 0;
+  inner.style.transform = 'translateY(0)';
+  setInterval(() => {
+    idx = (idx + 1) % words.length;
+    inner.style.transform = `translateY(${-idx * 100}%)`;
+  }, 2800);
+})();
+
+// ── REVEAL ────────────────────────────────────────────────────────────────────
 const rvObs = new IntersectionObserver(
   es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
-  { threshold: .08, rootMargin: '0px 0px -50px 0px' }
+  { threshold:.08, rootMargin:'0px 0px -50px 0px' }
 );
 document.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
 
-// ── HORIZONTAL RESULTS SCROLL ────────────────────────────────────────────────
+// ── C·02 SCARCITY BAR ANIMATE ─────────────────────────────────────────────────
+const scarcityFill = document.getElementById('scarcity-fill');
+const scarcityObs = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting && scarcityFill) { setTimeout(()=>scarcityFill.style.width='75%', 200); scarcityObs.disconnect(); } });
+}, { threshold:.3 });
+if (scarcityFill) scarcityObs.observe(scarcityFill.closest('.scarcity-bar'));
+
+// ── HORIZONTAL RESULTS SCROLL ─────────────────────────────────────────────────
 if (window.innerWidth > 900) {
   const rsTrack = document.querySelector('.rs-track');
   const rsPin   = document.querySelector('.rs-pin');
@@ -772,19 +1081,19 @@ if (window.innerWidth > 900) {
     gsap.to(rsTrack, {
       x: () => -(rsTrack.scrollWidth - rsPin.offsetWidth),
       ease: 'none',
-      scrollTrigger: {
-        trigger: rsPin, start: 'top top',
-        end: () => `+=${rsTrack.scrollWidth - rsPin.offsetWidth}`,
-        pin: true, scrub: .85, invalidateOnRefresh: true
-      }
+      scrollTrigger: { trigger:rsPin, start:'top top', end:()=>`+=${rsTrack.scrollWidth-rsPin.offsetWidth}`, pin:true, scrub:.85, invalidateOnRefresh:true }
     });
   }
 }
 
-// ── PARALLAX FOUNDER ─────────────────────────────────────────────────────────
+// ── M·04 VIDEO PARALLAX ───────────────────────────────────────────────────────
+gsap.to('.hero-vid iframe', {
+  yPercent: 15, ease:'none',
+  scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:1.2 }
+});
 gsap.to('.fiw', {
-  yPercent: -14, ease: 'none',
-  scrollTrigger: { trigger: '.founder', start: 'top bottom', end: 'bottom top', scrub: 1.3 }
+  yPercent: -14, ease:'none',
+  scrollTrigger:{ trigger:'.founder', start:'top bottom', end:'bottom top', scrub:1.3 }
 });
 
 // ── MAGNETIC BUTTONS ─────────────────────────────────────────────────────────
@@ -796,7 +1105,43 @@ document.querySelectorAll('.btn-p, .ncta, .btn-g').forEach(btn => {
   btn.addEventListener('mouseleave', () => gsap.to(btn, { x:0, y:0, duration:.65, ease:'elastic.out(1,.55)' }));
 });
 
-// ── TEXT REVEAL SCRUB ────────────────────────────────────────────────────────
+// ── M·03 3D CARD TILT ─────────────────────────────────────────────────────────
+document.querySelectorAll('.sv-card, .tc').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = ((e.clientX-r.left)/r.width-.5)*8;
+    const y = ((e.clientY-r.top)/r.height-.5)*-8;
+    gsap.to(card, { rotateY:x, rotateX:y, duration:.35, ease:'power2.out', transformPerspective:800 });
+  });
+  card.addEventListener('mouseleave', () => {
+    gsap.to(card, { rotateY:0, rotateX:0, duration:.65, ease:'elastic.out(1,.55)' });
+  });
+});
+
+// ── M·06 AMBIENT CURSOR GLOW ──────────────────────────────────────────────────
+document.querySelectorAll('.services, .process').forEach(sec => {
+  const glow = document.createElement('div');
+  glow.className = 'section-glow';
+  sec.appendChild(glow);
+  sec.addEventListener('mousemove', e => {
+    const r = sec.getBoundingClientRect();
+    glow.style.left = (e.clientX-r.left)+'px';
+    glow.style.top  = (e.clientY-r.top)+'px';
+    glow.style.opacity = '1';
+  });
+  sec.addEventListener('mouseleave', () => glow.style.opacity='0');
+});
+
+// ── M·07 STAGGER ENTRANCE VARIATION ──────────────────────────────────────────
+document.querySelectorAll('.sv-card').forEach((el, i) => {
+  el.style.transitionDelay = (0.08 * i + Math.random()*0.04) + 's';
+});
+document.querySelectorAll('.tc').forEach((el, i) => {
+  el.style.transitionDelay = (0.1 * i + Math.random()*0.04) + 's';
+  el.style.transitionTimingFunction = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+});
+
+// ── TEXT REVEAL SCRUB ─────────────────────────────────────────────────────────
 const REVEAL_SEL = ['.sv-intro','.sv-desc','.r-desc','.r-q','.ps-d','.cl-s','.cta-s','.fc p'];
 const isMobile = window.matchMedia('(max-width:900px)').matches;
 REVEAL_SEL.forEach(sel => {
@@ -807,15 +1152,28 @@ REVEAL_SEL.forEach(sel => {
     if (!words.length) return;
     if (isMobile) {
       gsap.fromTo(words, { opacity:.1, y:5 }, { opacity:1, y:0, duration:.5, stagger:.016, ease:'power2.out',
-        scrollTrigger: { trigger:el, start:'top 88%' } });
+        scrollTrigger:{ trigger:el, start:'top 88%' } });
     } else {
       gsap.fromTo(words, { opacity:.06, filter:'blur(2.5px)' }, { opacity:1, filter:'blur(0px)', stagger:.042, ease:'none',
-        scrollTrigger: { trigger:el, start:'top 84%', end:'bottom 50%', scrub:.85 } });
+        scrollTrigger:{ trigger:el, start:'top 84%', end:'bottom 50%', scrub:.85 } });
     }
   });
 });
 
-// ── ANCHOR SCROLL ────────────────────────────────────────────────────────────
+// ── TY·04 TICKER VELOCITY RESPONSE ────────────────────────────────────────────
+const tTrack = document.querySelector('.t-track');
+if (tTrack) {
+  let tickerSpeed = 28, targetSpeed = 28;
+  lenis.on('scroll', ({ velocity }) => {
+    targetSpeed = Math.max(8, 28 - Math.abs(velocity) * 2.5);
+  });
+  setInterval(() => {
+    tickerSpeed += (targetSpeed - tickerSpeed) * 0.08;
+    tTrack.style.animationDuration = tickerSpeed.toFixed(2) + 's';
+  }, 50);
+}
+
+// ── ANCHOR SCROLL ─────────────────────────────────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
@@ -834,157 +1192,77 @@ if (window.innerWidth > 900) {
   });
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
 // ── SCRUB TRANSITION ENGINE ───────────────────────────────────────────────────
-// Two types — both 1:1 with scroll. Stops when you stop. Reverses when you go back.
-// Type A: SET logo mark scales from tiny → full → fades (sections: clients/results/process/contact)
-// Type B: Particles converge to SET logo shape → disperse  (sections: services/founder/testimonials)
-// ─────────────────────────────────────────────────────────────────────────────
-
 const trLogoOv  = document.getElementById('tr-logo-ov');
 const trLogoMrk = document.getElementById('tr-logo-mark');
 
-// ── A: SET LOGO MARK SCALE ───────────────────────────────────────────────────
 function buildLogoTr(trigger) {
   const tl = gsap.timeline({ defaults:{ ease:'none' }, paused:true });
   tl
-    // Fade in + logo grows from micro to full
     .set(trLogoMrk, { scale:0.04, transformOrigin:'50% 50%' })
-    .to(trLogoOv,  { opacity:1,    duration:0.28 })
-    .to(trLogoMrk, { scale:1,      duration:0.44 }, 0.06)
-    // Brief full-screen hold
-    .to(trLogoMrk, { scale:1.06,   duration:0.18 })
-    // Logo keeps growing as red field fades — reveals next section through scale
-    .to(trLogoMrk, { scale:4,      duration:0.4 })
-    .to(trLogoOv,  { opacity:0,    duration:0.4 }, '-=0.4');
-
+    .to(trLogoOv,  { opacity:1, duration:0.28 })
+    .to(trLogoMrk, { scale:1, duration:0.44 }, 0.06)
+    .to(trLogoMrk, { scale:1.06, duration:0.18 })
+    .to(trLogoMrk, { scale:4, duration:0.4 })
+    .to(trLogoOv,  { opacity:0, duration:0.4 }, '-=0.4');
   ScrollTrigger.create({
-    trigger,
-    start: 'top 82%',
-    end:   'top 18%',
-    scrub: 1.4,
-    animation: tl,
+    trigger, start:'top 82%', end:'top 18%', scrub:1.4, animation:tl,
     onLeaveBack: () => gsap.set(trLogoOv, { opacity:0 }),
   });
 }
 
-// ── B: PARTICLE CONVERGE ─────────────────────────────────────────────────────
 const ptclCv  = document.getElementById('tr-ptcl-cv');
 const ptclCtx = ptclCv.getContext('2d');
-let ptW = 0, ptH = 0, ptcls = [], ptProg = 0, ptRAF = false;
-
-function resizePt() {
-  ptW = ptclCv.width  = window.innerWidth;
-  ptH = ptclCv.height = window.innerHeight;
-}
+let ptW=0, ptH=0, ptcls=[], ptProg=0, ptRAF=false;
+function resizePt(){ ptW=ptclCv.width=window.innerWidth; ptH=ptclCv.height=window.innerHeight; }
 resizePt();
 window.addEventListener('resize', () => { resizePt(); initPtcls(); });
-
-// Target positions that outline the SET logo mark shape
-function buildTargets() {
-  const cx = ptW/2, cy = ptH/2;
-  const u  = Math.min(ptW, ptH) * 0.022;
-  // Four rects matching SET logo geometry (scaled)
-  const rects = [
-    { x:cx-17*u, y:cy-11*u, w:11*u, h:11*u },  // top-left block
-    { x:cx-1*u,  y:cy-11*u, w:11*u, h:8*u  },  // top-right accent
-    { x:cx-4*u,  y:cy-1*u,  w:15*u, h:11*u },  // middle bar
-    { x:cx-13*u, y:cy+11*u, w:9*u,  h:9*u  },  // bottom-left block
-  ];
-  const pts = [];
-  rects.forEach(r => {
-    for (let i = 0; i < 22; i++) {
-      pts.push({ tx: r.x + Math.random()*r.w, ty: r.y + Math.random()*r.h });
-    }
-  });
+function buildTargets(){
+  const cx=ptW/2, cy=ptH/2, u=Math.min(ptW,ptH)*0.022;
+  const rects=[{x:cx-17*u,y:cy-11*u,w:11*u,h:11*u},{x:cx-1*u,y:cy-11*u,w:11*u,h:8*u},{x:cx-4*u,y:cy-1*u,w:15*u,h:11*u},{x:cx-13*u,y:cy+11*u,w:9*u,h:9*u}];
+  const pts=[];
+  rects.forEach(r=>{ for(let i=0;i<22;i++) pts.push({tx:r.x+Math.random()*r.w,ty:r.y+Math.random()*r.h}); });
   return pts;
 }
-
-function initPtcls() {
-  const tgts = buildTargets();
-  ptcls = tgts.map(t => ({
-    ox: Math.random()*ptW, oy: Math.random()*ptH, // origin (scattered)
-    tx: t.tx, ty: t.ty,                            // target (logo shape)
-    r:  Math.random()*1.8 + 0.8,
-    a:  Math.random()*0.45 + 0.25,
-  }));
+function initPtcls(){
+  const tgts=buildTargets();
+  ptcls=tgts.map(t=>({ox:Math.random()*ptW,oy:Math.random()*ptH,tx:t.tx,ty:t.ty,r:Math.random()*1.8+0.8,a:Math.random()*.45+.25}));
 }
 initPtcls();
-
-function drawPtcls(prog) {
-  ptclCtx.clearRect(0, 0, ptW, ptH);
-  if (prog <= 0) return;
-
-  // conv: 0→1 as prog 0→0.5, then 1→0 as prog 0.5→1
-  const conv  = prog < 0.5 ? prog*2 : (1-prog)*2;
-  // ease in-out
-  const eased = conv < 0.5 ? 2*conv*conv : 1-Math.pow(-2*conv+2,2)/2;
-  // global alpha: full sine arc
-  const ga = Math.sin(prog * Math.PI);
-
-  ptcls.forEach(p => {
-    const x = p.ox + (p.tx - p.ox) * eased;
-    const y = p.oy + (p.ty - p.oy) * eased;
-    ptclCtx.beginPath();
-    ptclCtx.arc(x, y, p.r * (1 + eased*0.6), 0, Math.PI*2);
-    ptclCtx.fillStyle = `rgba(185,28,46,${p.a * ga})`;
-    ptclCtx.fill();
+function drawPtcls(prog){
+  ptclCtx.clearRect(0,0,ptW,ptH);
+  if(prog<=0) return;
+  const conv=prog<0.5?prog*2:(1-prog)*2;
+  const eased=conv<0.5?2*conv*conv:1-Math.pow(-2*conv+2,2)/2;
+  const ga=Math.sin(prog*Math.PI);
+  ptcls.forEach(p=>{
+    const x=p.ox+(p.tx-p.ox)*eased, y=p.oy+(p.ty-p.oy)*eased;
+    ptclCtx.beginPath();ptclCtx.arc(x,y,p.r*(1+eased*.6),0,Math.PI*2);
+    ptclCtx.fillStyle=`rgba(185,28,46,${p.a*ga})`;ptclCtx.fill();
   });
-
-  // At peak convergence draw faint connecting lines between nearby particles
-  if (eased > 0.55) {
-    const la = (eased - 0.55)/0.45 * ga * 0.08;
-    for (let i = 0; i < ptcls.length; i++) {
-      const pi = ptcls[i];
-      const xi = pi.ox + (pi.tx-pi.ox)*eased;
-      const yi = pi.oy + (pi.ty-pi.oy)*eased;
-      for (let j = i+1; j < ptcls.length; j++) {
-        const pj = ptcls[j];
-        const xj = pj.ox + (pj.tx-pj.ox)*eased;
-        const yj = pj.oy + (pj.ty-pj.oy)*eased;
-        const d  = Math.hypot(xi-xj, yi-yj);
-        if (d < 48) {
-          ptclCtx.beginPath();
-          ptclCtx.moveTo(xi, yi); ptclCtx.lineTo(xj, yj);
-          ptclCtx.strokeStyle = `rgba(185,28,46,${la*(1-d/48)})`;
-          ptclCtx.lineWidth = 0.6; ptclCtx.stroke();
-        }
+  if(eased>.55){
+    const la=(eased-.55)/.45*ga*.08;
+    for(let i=0;i<ptcls.length;i++){
+      const pi=ptcls[i],xi=pi.ox+(pi.tx-pi.ox)*eased,yi=pi.oy+(pi.ty-pi.oy)*eased;
+      for(let j=i+1;j<ptcls.length;j++){
+        const pj=ptcls[j],xj=pj.ox+(pj.tx-pj.ox)*eased,yj=pj.oy+(pj.ty-pj.oy)*eased,d=Math.hypot(xi-xj,yi-yj);
+        if(d<48){ptclCtx.beginPath();ptclCtx.moveTo(xi,yi);ptclCtx.lineTo(xj,yj);ptclCtx.strokeStyle=`rgba(185,28,46,${la*(1-d/48)})`;ptclCtx.lineWidth=.6;ptclCtx.stroke();}
       }
     }
   }
 }
-
-function ptclLoop() {
-  if (ptProg > 0.005) {
-    drawPtcls(ptProg);
-    ptRAF = true;
-    requestAnimationFrame(ptclLoop);
-  } else {
-    ptclCtx.clearRect(0, 0, ptW, ptH);
-    ptRAF = false;
-  }
+function ptclLoop(){
+  if(ptProg>.005){ drawPtcls(ptProg); ptRAF=true; requestAnimationFrame(ptclLoop); }
+  else{ ptclCtx.clearRect(0,0,ptW,ptH); ptRAF=false; }
 }
-
-function buildPtclTr(trigger) {
+function buildPtclTr(trigger){
   ScrollTrigger.create({
-    trigger,
-    start: 'top 82%',
-    end:   'top 18%',
-    scrub: 1.4,
-    onUpdate(self) {
-      ptProg = self.progress;
-      ptclCv.style.opacity = ptProg > 0.01 ? '1' : '0';
-      if (!ptRAF) ptclLoop();
-    },
-    onLeaveBack() {
-      ptProg = 0;
-      ptclCv.style.opacity = '0';
-      ptclCtx.clearRect(0, 0, ptW, ptH);
-    },
+    trigger, start:'top 82%', end:'top 18%', scrub:1.4,
+    onUpdate(self){ ptProg=self.progress; ptclCv.style.opacity=ptProg>.01?'1':'0'; if(!ptRAF) ptclLoop(); },
+    onLeaveBack(){ ptProg=0; ptclCv.style.opacity='0'; ptclCtx.clearRect(0,0,ptW,ptH); },
   });
 }
 
-// Assign: logo on even sections, particles on odd
 buildLogoTr('#clients');
 buildPtclTr('#services');
 buildLogoTr('#results');
@@ -995,4 +1273,3 @@ buildLogoTr('#contact');
 </script>
 </body>
 </html>
-<!-- deployed 2026-03-31T07:55:01Z -->
