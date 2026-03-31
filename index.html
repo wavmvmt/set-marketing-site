@@ -61,11 +61,12 @@ body:has(.sv-card:hover,.tc:hover,.ps:hover) #cur-r{width:88px;height:88px;borde
 .st::after,.tc::after{content:'';position:absolute;inset:0;background:linear-gradient(118deg,transparent 22%,rgba(255,255,255,.026) 50%,transparent 78%);transform:translateX(-145%);transition:transform .65s ease;pointer-events:none;z-index:2}
 .st:hover::after,.tc:hover::after{transform:translateX(145%)}
 
-/* ─── TRANSITION OVERLAYS T01 / T02 / T03 ─── */
-#tr-blade{position:fixed;inset:0;pointer-events:none;z-index:850;overflow:hidden}
-#tr-blade-inner{position:absolute;top:-15%;left:0;width:110%;height:130%;background:var(--red);transform-origin:left center;transform:skewX(-12deg) translateX(-115%);will-change:transform}
-#tr-burst{position:fixed;inset:0;pointer-events:none;z-index:850;background:var(--red);clip-path:circle(0% at 50% 50%);will-change:clip-path}
-#tr-flash{position:fixed;inset:0;pointer-events:none;z-index:851;background:#fff;opacity:0}
+/* ─── SCRUB TRANSITION OVERLAYS ─── */
+/* Logo overlay — red field + SET mark at center */
+#tr-logo-ov{position:fixed;inset:0;pointer-events:none;z-index:860;background:var(--red);opacity:0;display:flex;align-items:center;justify-content:center;will-change:opacity}
+#tr-logo-mark{width:min(44vw,44vh);height:min(44vw,44vh);will-change:transform;flex-shrink:0}
+/* Particle canvas */
+#tr-ptcl-cv{position:fixed;inset:0;pointer-events:none;z-index:859;opacity:0;will-change:opacity}
 @media(max-width:900px){#cur,#cur-r{display:none}}
 
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");background-size:180px 180px;pointer-events:none;z-index:700;opacity:.5;mix-blend-mode:overlay}
@@ -349,9 +350,15 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 </div>
 
 <div id="bg-gradient"></div>
-<div id="tr-blade"><div id="tr-blade-inner"></div></div>
-<div id="tr-burst"></div>
-<div id="tr-flash"></div>
+<div id="tr-logo-ov">
+  <svg id="tr-logo-mark" viewBox="0 0 36 36" fill="none">
+    <rect x="2"  y="2"  width="13" height="13" rx="3" fill="rgba(255,255,255,.88)"/>
+    <rect x="18" y="2"  width="13" height="10" rx="3" fill="rgba(0,0,0,.18)"/>
+    <rect x="15" y="13" width="19" height="13" rx="3" fill="rgba(255,255,255,.88)"/>
+    <rect x="5"  y="21" width="10" height="10" rx="3" fill="rgba(255,255,255,.88)"/>
+  </svg>
+</div>
+<canvas id="tr-ptcl-cv"></canvas>
 
 <div id="cur"></div>
 <div id="cur-r"></div>
@@ -827,24 +834,164 @@ if (window.innerWidth > 900) {
   });
 }
 
-// ── TRANSITION ENGINE — T·01 Blade · T·02 Burst · T·03 Vortex ────────────────
-const trBlade = document.getElementById('tr-blade-inner');
-const trBurst = document.getElementById('tr-burst');
-const trFlash = document.getElementById('tr-flash');
-let trLock = false;
-function lockTr(fn){ if(trLock) return; trLock=true; fn(); setTimeout(()=>{ trLock=false; },1350); }
-function playBlade(dir){ dir=dir||1; gsap.set(trBlade,{xPercent:dir*-118}); gsap.timeline().to(trBlade,{xPercent:0,duration:.43,ease:'power3.inOut'}).to(trBlade,{xPercent:dir*118,duration:.43,ease:'power3.inOut',delay:.06}); }
-function playBurst(fx,fy){ fx=fx||'50%'; fy=fy||'50%'; gsap.set(trBurst,{clipPath:'circle(0% at '+fx+' '+fy+')'}); gsap.timeline().to(trBurst,{clipPath:'circle(150% at '+fx+' '+fy+')',duration:.62,ease:'power2.inOut'}).to(trBurst,{clipPath:'circle(0% at '+fx+' '+fy+')',duration:.52,ease:'power2.inOut',delay:.06}); }
-function playVortex(){ vortex.on=true; gsap.timeline().to(vortex,{str:1,duration:.95,ease:'power2.in'}).to(trFlash,{opacity:.85,duration:.07},'-=0').to(trFlash,{opacity:0,duration:.4,ease:'power2.out'}).to(vortex,{str:0,duration:.65,ease:'power3.out'},'-=0.32').call(()=>{ vortex.on=false; }); }
+// ─────────────────────────────────────────────────────────────────────────────
+// ── SCRUB TRANSITION ENGINE ───────────────────────────────────────────────────
+// Two types — both 1:1 with scroll. Stops when you stop. Reverses when you go back.
+// Type A: SET logo mark scales from tiny → full → fades (sections: clients/results/process/contact)
+// Type B: Particles converge to SET logo shape → disperse  (sections: services/founder/testimonials)
+// ─────────────────────────────────────────────────────────────────────────────
 
-ScrollTrigger.create({ trigger:'.hero',         start:'bottom 58%', onLeave:()=>lockTr(playVortex), onEnterBack:()=>lockTr(playVortex) });
-ScrollTrigger.create({ trigger:'#clients',      start:'top 90%',    onEnter:()=>lockTr(()=>playBlade(1)) });
-ScrollTrigger.create({ trigger:'#services',     start:'top 90%',    onEnter:()=>lockTr(()=>playBurst('50%','0%')) });
-ScrollTrigger.create({ trigger:'#results',      start:'top 90%',    onEnter:()=>lockTr(()=>playBlade(-1)) });
-ScrollTrigger.create({ trigger:'#founder',      start:'top 90%',    onEnter:()=>lockTr(()=>playBurst('100%','100%')) });
-ScrollTrigger.create({ trigger:'#process',      start:'top 90%',    onEnter:()=>lockTr(()=>playBlade(1)) });
-ScrollTrigger.create({ trigger:'#testimonials', start:'top 90%',    onEnter:()=>lockTr(()=>playBurst('0%','60%')) });
-ScrollTrigger.create({ trigger:'#contact',      start:'top 90%',    onEnter:()=>lockTr(()=>playBlade(-1)) });
+const trLogoOv  = document.getElementById('tr-logo-ov');
+const trLogoMrk = document.getElementById('tr-logo-mark');
+
+// ── A: SET LOGO MARK SCALE ───────────────────────────────────────────────────
+function buildLogoTr(trigger) {
+  const tl = gsap.timeline({ defaults:{ ease:'none' }, paused:true });
+  tl
+    // Fade in + logo grows from micro to full
+    .set(trLogoMrk, { scale:0.04, transformOrigin:'50% 50%' })
+    .to(trLogoOv,  { opacity:1,    duration:0.28 })
+    .to(trLogoMrk, { scale:1,      duration:0.44 }, 0.06)
+    // Brief full-screen hold
+    .to(trLogoMrk, { scale:1.06,   duration:0.18 })
+    // Logo keeps growing as red field fades — reveals next section through scale
+    .to(trLogoMrk, { scale:4,      duration:0.4 })
+    .to(trLogoOv,  { opacity:0,    duration:0.4 }, '-=0.4');
+
+  ScrollTrigger.create({
+    trigger,
+    start: 'top 82%',
+    end:   'top 18%',
+    scrub: 1.4,
+    animation: tl,
+    onLeaveBack: () => gsap.set(trLogoOv, { opacity:0 }),
+  });
+}
+
+// ── B: PARTICLE CONVERGE ─────────────────────────────────────────────────────
+const ptclCv  = document.getElementById('tr-ptcl-cv');
+const ptclCtx = ptclCv.getContext('2d');
+let ptW = 0, ptH = 0, ptcls = [], ptProg = 0, ptRAF = false;
+
+function resizePt() {
+  ptW = ptclCv.width  = window.innerWidth;
+  ptH = ptclCv.height = window.innerHeight;
+}
+resizePt();
+window.addEventListener('resize', () => { resizePt(); initPtcls(); });
+
+// Target positions that outline the SET logo mark shape
+function buildTargets() {
+  const cx = ptW/2, cy = ptH/2;
+  const u  = Math.min(ptW, ptH) * 0.022;
+  // Four rects matching SET logo geometry (scaled)
+  const rects = [
+    { x:cx-17*u, y:cy-11*u, w:11*u, h:11*u },  // top-left block
+    { x:cx-1*u,  y:cy-11*u, w:11*u, h:8*u  },  // top-right accent
+    { x:cx-4*u,  y:cy-1*u,  w:15*u, h:11*u },  // middle bar
+    { x:cx-13*u, y:cy+11*u, w:9*u,  h:9*u  },  // bottom-left block
+  ];
+  const pts = [];
+  rects.forEach(r => {
+    for (let i = 0; i < 22; i++) {
+      pts.push({ tx: r.x + Math.random()*r.w, ty: r.y + Math.random()*r.h });
+    }
+  });
+  return pts;
+}
+
+function initPtcls() {
+  const tgts = buildTargets();
+  ptcls = tgts.map(t => ({
+    ox: Math.random()*ptW, oy: Math.random()*ptH, // origin (scattered)
+    tx: t.tx, ty: t.ty,                            // target (logo shape)
+    r:  Math.random()*1.8 + 0.8,
+    a:  Math.random()*0.45 + 0.25,
+  }));
+}
+initPtcls();
+
+function drawPtcls(prog) {
+  ptclCtx.clearRect(0, 0, ptW, ptH);
+  if (prog <= 0) return;
+
+  // conv: 0→1 as prog 0→0.5, then 1→0 as prog 0.5→1
+  const conv  = prog < 0.5 ? prog*2 : (1-prog)*2;
+  // ease in-out
+  const eased = conv < 0.5 ? 2*conv*conv : 1-Math.pow(-2*conv+2,2)/2;
+  // global alpha: full sine arc
+  const ga = Math.sin(prog * Math.PI);
+
+  ptcls.forEach(p => {
+    const x = p.ox + (p.tx - p.ox) * eased;
+    const y = p.oy + (p.ty - p.oy) * eased;
+    ptclCtx.beginPath();
+    ptclCtx.arc(x, y, p.r * (1 + eased*0.6), 0, Math.PI*2);
+    ptclCtx.fillStyle = `rgba(185,28,46,${p.a * ga})`;
+    ptclCtx.fill();
+  });
+
+  // At peak convergence draw faint connecting lines between nearby particles
+  if (eased > 0.55) {
+    const la = (eased - 0.55)/0.45 * ga * 0.08;
+    for (let i = 0; i < ptcls.length; i++) {
+      const pi = ptcls[i];
+      const xi = pi.ox + (pi.tx-pi.ox)*eased;
+      const yi = pi.oy + (pi.ty-pi.oy)*eased;
+      for (let j = i+1; j < ptcls.length; j++) {
+        const pj = ptcls[j];
+        const xj = pj.ox + (pj.tx-pj.ox)*eased;
+        const yj = pj.oy + (pj.ty-pj.oy)*eased;
+        const d  = Math.hypot(xi-xj, yi-yj);
+        if (d < 48) {
+          ptclCtx.beginPath();
+          ptclCtx.moveTo(xi, yi); ptclCtx.lineTo(xj, yj);
+          ptclCtx.strokeStyle = `rgba(185,28,46,${la*(1-d/48)})`;
+          ptclCtx.lineWidth = 0.6; ptclCtx.stroke();
+        }
+      }
+    }
+  }
+}
+
+function ptclLoop() {
+  if (ptProg > 0.005) {
+    drawPtcls(ptProg);
+    ptRAF = true;
+    requestAnimationFrame(ptclLoop);
+  } else {
+    ptclCtx.clearRect(0, 0, ptW, ptH);
+    ptRAF = false;
+  }
+}
+
+function buildPtclTr(trigger) {
+  ScrollTrigger.create({
+    trigger,
+    start: 'top 82%',
+    end:   'top 18%',
+    scrub: 1.4,
+    onUpdate(self) {
+      ptProg = self.progress;
+      ptclCv.style.opacity = ptProg > 0.01 ? '1' : '0';
+      if (!ptRAF) ptclLoop();
+    },
+    onLeaveBack() {
+      ptProg = 0;
+      ptclCv.style.opacity = '0';
+      ptclCtx.clearRect(0, 0, ptW, ptH);
+    },
+  });
+}
+
+// Assign: logo on even sections, particles on odd
+buildLogoTr('#clients');
+buildPtclTr('#services');
+buildLogoTr('#results');
+buildPtclTr('#founder');
+buildLogoTr('#process');
+buildPtclTr('#testimonials');
+buildLogoTr('#contact');
 </script>
 </body>
 </html>
