@@ -44,8 +44,28 @@ body{background:var(--black);color:var(--white);font-family:var(--fb);font-size:
 /* ─── CURSOR ─────────────────────────────────── */
 #cur{position:fixed;width:7px;height:7px;background:var(--red);border-radius:50%;pointer-events:none;z-index:8999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
 #cur-r{position:fixed;width:34px;height:34px;border:1px solid rgba(185,28,46,.35);border-radius:50%;pointer-events:none;z-index:8998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
-body:has(a:hover) #cur,body:has(button:hover) #cur{width:14px;height:14px;background:var(--red2)}
-body:has(a:hover) #cur-r,body:has(button:hover) #cur-r{width:54px;height:54px;border-color:rgba(185,28,46,.55)}
+/* C·03 — cursor grows larger on all card surfaces */
+body:has(a:hover,button:hover,.sv-card:hover,.st:hover,.tc:hover,.ps:hover) #cur{width:14px;height:14px;background:var(--red2)}
+body:has(a:hover,button:hover,.sv-card:hover,.st:hover,.tc:hover,.ps:hover) #cur-r{width:54px;height:54px;border-color:rgba(185,28,46,.55)}
+body:has(.sv-card:hover,.tc:hover,.ps:hover) #cur{width:22px;height:22px}
+body:has(.sv-card:hover,.tc:hover,.ps:hover) #cur-r{width:88px;height:88px;border-color:rgba(185,28,46,.28)}
+
+/* BG·04 — breathing ambient red gradient drifts across entire page */
+#bg-gradient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#bg-gradient::before{content:'';position:absolute;width:90vw;height:90vw;border-radius:50%;background:radial-gradient(circle,rgba(185,28,46,.055) 0%,rgba(185,28,46,.016) 38%,transparent 70%);top:-30%;left:-20%;animation:bgFloat 22s ease-in-out infinite;will-change:transform}
+#bg-gradient::after{content:'';position:absolute;width:65vw;height:65vw;border-radius:50%;background:radial-gradient(circle,rgba(185,28,46,.03) 0%,transparent 70%);bottom:0;right:-18%;animation:bgFloat 28s ease-in-out infinite reverse;will-change:transform}
+@keyframes bgFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(20%,24%) scale(1.09)}50%{transform:translate(30%,-14%) scale(.94)}75%{transform:translate(-10%,20%) scale(1.06)}}
+
+/* H·04 — shimmer sweep on stat + testimonial cards */
+.st{overflow:hidden}.tc{overflow:hidden}
+.st::after,.tc::after{content:'';position:absolute;inset:0;background:linear-gradient(118deg,transparent 22%,rgba(255,255,255,.026) 50%,transparent 78%);transform:translateX(-145%);transition:transform .65s ease;pointer-events:none;z-index:2}
+.st:hover::after,.tc:hover::after{transform:translateX(145%)}
+
+/* ─── TRANSITION OVERLAYS T01 / T02 / T03 ─── */
+#tr-blade{position:fixed;inset:0;pointer-events:none;z-index:850;overflow:hidden}
+#tr-blade-inner{position:absolute;top:-15%;left:0;width:110%;height:130%;background:var(--red);transform-origin:left center;transform:skewX(-12deg) translateX(-115%);will-change:transform}
+#tr-burst{position:fixed;inset:0;pointer-events:none;z-index:850;background:var(--red);clip-path:circle(0% at 50% 50%);will-change:clip-path}
+#tr-flash{position:fixed;inset:0;pointer-events:none;z-index:851;background:#fff;opacity:0}
 @media(max-width:900px){#cur,#cur-r{display:none}}
 
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");background-size:180px 180px;pointer-events:none;z-index:700;opacity:.5;mix-blend-mode:overlay}
@@ -327,6 +347,11 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   <div class="lo-sub">Revenue Architecture</div>
   <div class="lo-wipe"></div>
 </div>
+
+<div id="bg-gradient"></div>
+<div id="tr-blade"><div id="tr-blade-inner"></div></div>
+<div id="tr-burst"></div>
+<div id="tr-flash"></div>
 
 <div id="cur"></div>
 <div id="cur-r"></div>
@@ -659,68 +684,39 @@ gsap.timeline()
     gsap.fromTo('.hbot',  { opacity:0, y:20 }, { opacity:1, y:0, duration:.7,  delay:.42, ease:'power3.out' });
   });
 
-// ── CANVAS PARTICLES ─────────────────────────────────────────────────────────
+// ── VORTEX STATE ──────────────────────────────────────────────────────────────
+const vortex = { on:false, str:0, cx:0, cy:0 };
+
+// ── CANVAS PARTICLES + VORTEX ─────────────────────────────────────────────────
 (function() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let hmx = 0, hmy = -999, W, H, particles = [];
-
-  function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
+  function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; vortex.cx=W*.5; vortex.cy=H*.5; }
   resize();
   window.addEventListener('resize', () => { resize(); initP(); });
-
   const hr = document.querySelector('.hero-right');
   if (hr) {
-    hr.addEventListener('mousemove', e => {
-      const r = canvas.getBoundingClientRect();
-      hmx = e.clientX - r.left; hmy = e.clientY - r.top;
-    });
-    hr.addEventListener('mouseleave', () => { hmy = -999; });
+    hr.addEventListener('mousemove', e => { const r=canvas.getBoundingClientRect(); hmx=e.clientX-r.left; hmy=e.clientY-r.top; });
+    hr.addEventListener('mouseleave', () => { hmy=-999; });
   }
-
-  function initP() {
-    const n = window.innerWidth < 900 ? 28 : 58;
-    particles = Array.from({ length: n }, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random() - .5) * .32, vy: (Math.random() - .5) * .32,
-      r: Math.random() * 1.6 + .5, base: Math.random() * .35 + .15
-    }));
-  }
+  function initP(){ const n=window.innerWidth<900?28:58; particles=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.32,vy:(Math.random()-.5)*.32,r:Math.random()*1.6+.5,base:Math.random()*.35+.15,trail:[]})); }
   initP();
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      const dx = hmx - p.x, dy = hmy - p.y, dist = Math.hypot(dx, dy);
-      if (dist < 180 && dist > 0) {
-        const f = ((180 - dist) / 180) * .09;
-        p.vx -= dx / dist * f; p.vy -= dy / dist * f;
-      }
-      p.vx *= .978; p.vy *= .978;
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < -10) p.x = W + 10;
-      if (p.x > W + 10) p.x = -10;
-      if (p.y < -10) p.y = H + 10;
-      if (p.y > H + 10) p.y = -10;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(185,28,46,${p.base})`;
-      ctx.fill();
-      for (let j = i + 1; j < particles.length; j++) {
-        const p2 = particles[j];
-        const d = Math.hypot(p.x - p2.x, p.y - p2.y);
-        if (d < 140) {
-          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(185,28,46,${(1 - d / 140) * .11})`;
-          ctx.lineWidth = .6; ctx.stroke();
-        }
-      }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const alpha=vortex.on?Math.max(0,1-vortex.str*.75):1;
+    for(let i=0;i<particles.length;i++){
+      const p=particles[i];
+      if(!vortex.on||vortex.str<.2){ const dx=hmx-p.x,dy=hmy-p.y,dist=Math.hypot(dx,dy); if(dist<180&&dist>0){const f=((180-dist)/180)*.09;p.vx-=dx/dist*f;p.vy-=dy/dist*f;} }
+      if(vortex.on&&vortex.str>0){ const dvx=vortex.cx-p.x,dvy=vortex.cy-p.y,d2=Math.hypot(dvx,dvy)||1,s=vortex.str*.016; p.vx+=dvx/d2*d2*s*.55-dvy/d2*d2*s*.38; p.vy+=dvy/d2*d2*s*.55+dvx/d2*d2*s*.38; const spd=Math.hypot(p.vx,p.vy),cap=3+vortex.str*11; if(spd>cap){p.vx=p.vx/spd*cap;p.vy=p.vy/spd*cap;} }
+      p.vx*=.978;p.vy*=.978;p.x+=p.vx;p.y+=p.vy;
+      if(!vortex.on){if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;if(p.y<-10)p.y=H+10;if(p.y>H+10)p.y=-10;}
+      if(vortex.on&&vortex.str>.08){p.trail.push({x:p.x,y:p.y});if(p.trail.length>14)p.trail.shift();for(let t=1;t<p.trail.length;t++){const ta=(t/p.trail.length)*vortex.str*alpha*.5;ctx.beginPath();ctx.moveTo(p.trail[t-1].x,p.trail[t-1].y);ctx.lineTo(p.trail[t].x,p.trail[t].y);ctx.strokeStyle=`rgba(185,28,46,${ta})`;ctx.lineWidth=p.r*1.4;ctx.stroke();}}else{p.trail=[];}
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*(1+vortex.str*.6),0,Math.PI*2);ctx.fillStyle=`rgba(185,28,46,${p.base*alpha})`;ctx.fill();
+      if(alpha>.1){for(let j=i+1;j<particles.length;j++){const p2=particles[j],d=Math.hypot(p.x-p2.x,p.y-p2.y);if(d<140){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);ctx.strokeStyle=`rgba(185,28,46,${(1-d/140)*.11*alpha})`;ctx.lineWidth=.6;ctx.stroke();}}}
     }
+    if(vortex.on&&vortex.str>.45){const gA=(vortex.str-.45)/.55,gR=80*vortex.str,g=ctx.createRadialGradient(vortex.cx,vortex.cy,0,vortex.cx,vortex.cy,gR);g.addColorStop(0,`rgba(185,28,46,${gA*.95})`);g.addColorStop(.45,`rgba(185,28,46,${gA*.35})`);g.addColorStop(1,`rgba(185,28,46,0)`);ctx.beginPath();ctx.arc(vortex.cx,vortex.cy,gR,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();}
     requestAnimationFrame(draw);
   }
   draw();
