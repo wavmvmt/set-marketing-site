@@ -217,7 +217,7 @@ nav.s{padding:16px 64px;background:rgba(245,240,232,.96);backdrop-filter:blur(28
 .r-cl{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:300;margin-bottom:14px;line-height:.92}
 .r-cl em{font-style:italic;color:var(--red)}
 .r-desc{font-family:'Syne',sans-serif;font-size:15px;font-weight:400;color:#1a1714;line-height:1.8;margin-bottom:28px}
-.r-q{font-family:'Cormorant Garamond',serif;font-size:21px;font-style:italic;font-weight:300;color:#e6dfd4;line-height:1.6;margin-bottom:18px;padding-left:20px;border-left:2px solid var(--red)}
+.r-q{font-family:'Cormorant Garamond',serif;font-size:21px;font-style:italic;font-weight:300;color:#2a2520;line-height:1.6;margin-bottom:18px;padding-left:20px;border-left:2px solid var(--red)}
 .r-qa{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#1a1714;padding-left:20px}
 .metrics{display:flex;flex-direction:column}
 .metric{display:flex;align-items:center;gap:24px;padding:24px 0;border-bottom:1px solid var(--border)}
@@ -266,7 +266,7 @@ nav.s{padding:16px 64px;background:rgba(245,240,232,.96);backdrop-filter:blur(28
 .tc:hover{background:#e5ddd1}
 .tstars{display:flex;gap:3px;margin-bottom:22px}
 .star{color:var(--red);font-size:11px}
-.ttext{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;font-weight:300;color:#e6dfd4;line-height:1.65;margin-bottom:30px}
+.ttext{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;font-weight:300;color:#2a2520;line-height:1.65;margin-bottom:30px}
 .tau{display:flex;align-items:center;gap:14px}
 .tav{width:42px;height:42px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:18px;font-style:italic;color:var(--red);flex-shrink:0}
 .tan{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:#1a1714;letter-spacing:.04em}
@@ -471,7 +471,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 .section-glow{position:absolute;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(185,28,46,.045) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:0;opacity:0;transition:opacity .4s;will-change:transform}
 
 /* Section number decorative giant */
-.sec-num-bg{position:absolute;font-family:var(--fd);font-size:clamp(180px,24vw,340px);font-weight:300;color:rgba(244,241,236,.028);right:-0.04em;bottom:-0.18em;line-height:1;pointer-events:none;user-select:none;z-index:0;overflow:hidden}
+.sec-num-bg{position:absolute;font-family:var(--fd);font-size:clamp(180px,24vw,340px);font-weight:300;color:rgba(26,23,20,.04);right:-0.04em;bottom:-0.18em;line-height:1;pointer-events:none;user-select:none;z-index:0;overflow:hidden}
 .clients,.services,.results,.founder,.process,.testimonials{position:relative;overflow:hidden}
 
 @media(max-width:900px){
@@ -1130,21 +1130,7 @@ if (!IS_MOBILE) {
 document.querySelectorAll('.sv-card').forEach((el,i) => { el.style.transitionDelay=(0.06*i)+'s'; });
 document.querySelectorAll('.tc').forEach((el,i) => { el.style.transitionDelay=(0.08*i)+'s'; });
 
-// ── TEXT REVEAL ───────────────────────────────────────────────────────────────
-if (!REDUCED) {
-  ['.sv-intro','.sv-desc','.r-desc','.r-q','.ps-d','.cl-s','.cta-s','.fc p'].forEach(sel => {
-    document.querySelectorAll(sel).forEach(el => {
-      const words = el.textContent.trim().split(/\s+/);
-      el.innerHTML = words.map(w=>`<span class="trw" style="display:inline-block">${w}</span>`).join(' ');
-      const spans = el.querySelectorAll('.trw');
-      if (IS_MOBILE) {
-        gsap.fromTo(spans,{opacity:.15,y:4},{opacity:1,y:0,duration:.4,stagger:.01,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 90%'}});
-      } else {
-        gsap.fromTo(spans,{opacity:.06,filter:'blur(2px)'},{opacity:1,filter:'blur(0)',stagger:.035,ease:'none',scrollTrigger:{trigger:el,start:'top 84%',end:'bottom 52%',scrub:.7}});
-      }
-    });
-  });
-}
+// ── TEXT REVEAL — disabled (all text visible immediately) ─────────────────────
 
 // ── TICKER VELOCITY — desktop only ───────────────────────────────────────────
 if (!IS_MOBILE) {
