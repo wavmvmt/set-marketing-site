@@ -191,19 +191,19 @@ nav.s{padding:16px 64px;background:rgba(245,240,232,.96);backdrop-filter:blur(28
 .sv-card:hover .tag{border-color:rgba(185,28,46,.2);color:rgba(185,28,46,.7)}
 
 /* ─── RESULTS ────────────────────────────────── */
-.results{background:var(--off-black)}
-.rs-header{padding:120px 64px 56px}
+.results{background:var(--off-black);position:relative;z-index:10}
+.rs-header{padding:120px 64px 56px;background:var(--off-black)}
 .rs-t{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6.5vw,96px);font-weight:300;line-height:.92;margin-bottom:0}
 .rs-t em{font-style:italic;color:var(--red)}
 .rs-hint{font-family:var(--fm);font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:rgba(185,28,46,.6);margin-top:30px;display:flex;align-items:center;gap:14px}
 .rs-hint-line{display:block;width:0;height:1px;background:var(--red);animation:rs-line 2.4s ease-in-out infinite}
 @keyframes rs-line{0%{width:0;opacity:1}60%{width:44px;opacity:1}100%{width:44px;opacity:0}}
-.rs-pin{overflow:hidden}
+.rs-pin{overflow:hidden;background:var(--off-black)}
 .rs-track{display:flex}
 @media(min-width:901px){
   .rs-pin{height:100vh}
   .rs-track{height:100%;align-items:stretch}
-  .rc{flex-shrink:0;display:flex;flex-direction:column;justify-content:center;padding:80px 72px;min-width:78vw;max-width:950px;border-right:1px solid var(--border)}
+  .rc{flex-shrink:0;display:flex;flex-direction:column;justify-content:center;padding:80px 72px;min-width:78vw;max-width:950px;border-right:1px solid var(--border);background:var(--off-black)}
   .rc.feat{min-width:88vw;max-width:1350px;display:grid;grid-template-columns:1.15fr 1fr;gap:80px;align-items:center;background:var(--card);border-top:2px solid var(--red);border-right:1px solid var(--border)}
 }
 @media(max-width:900px){
