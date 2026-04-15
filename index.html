@@ -143,8 +143,8 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .sd{font-family:'Syne',sans-serif;font-size:13px;color:#1a1714;margin-top:8px;line-height:1.6}
 
 /* ─── SECTION LABELS ─────────────────────────── */
-.s-lbl{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:24px;display:flex;align-items:center;gap:14px}
-.s-lbl::before{content:'';display:block;width:22px;height:1px;background:var(--red);flex-shrink:0}
+.s-lbl{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:24px;display:flex;align-items:center;gap:14px}
+.s-lbl::before{display:none}
 
 /* ─── REVEAL (disabled — text visible immediately) ─── */
 .rv{opacity:1;transform:none}
@@ -187,7 +187,7 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .sv-nm em{font-style:italic;color:var(--red)}
 .sv-desc{font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.8;margin-bottom:28px}
 .tags{display:flex;flex-wrap:wrap;gap:7px}
-.tag{font-family:var(--fm);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--white);border:1px solid var(--border);padding:5px 10px;transition:border-color .3s,color .3s}
+.tag{font-family:var(--fm);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);border:1px solid var(--border);padding:5px 10px;transition:border-color .3s,color .3s}
 .sv-card:hover .tag{border-color:rgba(185,28,46,.2);color:rgba(185,28,46,.7)}
 
 /* ─── RESULTS ────────────────────────────────── */
@@ -205,7 +205,7 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
   .rc{padding:48px 24px}
   .rc.feat{display:flex;flex-direction:column;gap:36px}
 }
-.r-cat{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px}
+.r-cat{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px}
 .r-cl{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:300;margin-bottom:14px;line-height:.92}
 .r-cl em{font-style:italic;color:var(--red)}
 .r-desc{font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.8;margin-bottom:28px}
@@ -246,7 +246,7 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .ps:hover .ps-num{color:rgba(185,28,46,.65);transform:scale(1.04) translateX(4px)}
 .ps-nm{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1a1714;margin-bottom:14px}
 .ps-d{font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.8}
-.ps-tag{display:inline-block;margin-top:20px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);border:1px solid rgba(185,28,46,.3);padding:6px 12px;transition:background .3s,color .3s}
+.ps-tag{display:inline-block;margin-top:20px;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);border:1px solid rgba(185,28,46,.3);padding:6px 12px;transition:background .3s,color .3s}
 .ps:hover .ps-tag{background:var(--red);color:#fff}
 
 /* ─── TESTIMONIALS ───────────────────────────── */
@@ -429,7 +429,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 .star{color:var(--red)}
 
 /* TY·06 — Mono data labels */
-.mono-num{font-family:var(--fm);color:rgba(185,28,46,.9);font-size:.93em}
+.mono-num{font-family:var(--fm);color:var(--red);font-size:.93em;font-weight:700}
 
 /* C·02 — Scarcity bar */
 .scarcity-bar{margin:0 auto 40px;max-width:420px}
@@ -439,7 +439,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 .scarcity-fill{height:100%;background:var(--red);width:0;border-radius:2px;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
 
 /* C·04 — Section micro CTAs */
-.section-cta{font-family:var(--fm);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-top:28px;transition:color .25s}
+.section-cta{font-family:var(--fm);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-top:28px;transition:color .25s}
 .section-cta:hover{color:var(--red)}
 .section-cta::after{content:'→';font-size:13px}
 
@@ -593,11 +593,10 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
     <div class="hgrid"></div>
     <div class="hspotlight" id="spotlight"></div>
     <div class="h-topbar"></div>
-    <p class="h-eye">Revenue Architecture · Toronto &amp; Miami · Est. 2019</p>
     <h1 class="h-hl">
       We Don't<br>
       Run <em>Campaigns.</em><br>
-      We Install <span class="h-cycle"><span class="h-cycle-inner"><span class="h-cycle-word outline">Systems.</span><span class="h-cycle-word outline">Processes.</span><span class="h-cycle-word outline">Revenue.</span></span></span>
+      We Install <span class="outline">Systems.</span> <span class="outline">Processes.</span> <span class="outline">Revenue.</span>
     </h1>
     <div class="hbot">
       <p style="font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.75;max-width:520px;">SET Marketing engineers acquisition, conversion, and automation infrastructure for operators generating <span class="mono-num">$1M</span> to <span class="mono-num">$20M</span> who are ready to scale beyond founder-led growth. Powered by SET OS, our proprietary growth intelligence platform.</p>
@@ -1097,18 +1096,6 @@ if (heroRight) {
   });
   heroRight.addEventListener('mouseleave', () => spotlight.style.opacity='0');
 }
-
-// ── M·01 KINETIC HEADLINE CYCLE ───────────────────────────────────────────────
-if (!REDUCED) (function() {
-  const inner = document.querySelector('.h-cycle-inner');
-  if (!inner) return;
-  let idx = 0;
-  const words = inner.querySelectorAll('.h-cycle-word');
-  setInterval(() => {
-    idx = (idx + 1) % words.length;
-    inner.style.transform = `translateY(${-idx * 100}%)`;
-  }, 2800);
-})();
 
 // ── REVEAL ────────────────────────────────────────────────────────────────────
 // Reveal animations disabled — all .rv elements visible immediately
