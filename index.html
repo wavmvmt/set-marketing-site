@@ -86,13 +86,13 @@ body:has(.sv-card:hover,.tc:hover,.ps:hover) #cur-r{width:88px;height:88px;borde
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");background-size:180px 180px;pointer-events:none;z-index:700;opacity:.5;mix-blend-mode:multiply}
 
 /* ─── NAV ────────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:28px 64px;display:flex;align-items:center;justify-content:space-between;transition:padding .4s,background .4s,border-color .4s;border-bottom:1px solid transparent}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:28px 64px;display:flex;align-items:center;justify-content:space-between;transition:padding .4s,background .4s,border-color .4s;border-bottom:1px solid transparent;background:var(--black)}
 nav.s{padding:16px 64px;background:rgba(245,240,232,.96);backdrop-filter:blur(28px);border-color:var(--border)}
 .nl{display:flex;align-items:center;text-decoration:none}
-.logo-mark{display:flex;align-items:center;justify-content:center;width:36px;height:36px;margin-right:10px;flex-shrink:0}
-.logo-mark svg{width:36px;height:36px}
-.logo-set{font-family:var(--fb);font-weight:800;font-size:15px;letter-spacing:.26em;text-transform:uppercase;color:var(--white)}
-.logo-sub{font-family:var(--fm);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
+.logo-mark{display:flex;align-items:center;justify-content:center;width:48px;height:48px;margin-right:14px;flex-shrink:0}
+.logo-mark svg{width:48px;height:48px}
+.logo-set{font-family:var(--fb);font-weight:800;font-size:20px;letter-spacing:.26em;text-transform:uppercase;color:var(--white)}
+.logo-sub{font-family:var(--fm);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
 .nlinks{display:flex;align-items:center;gap:44px;list-style:none}
 .nlinks a{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--white);text-decoration:none;transition:color .3s}
 .nlinks a:hover{color:var(--red)}
