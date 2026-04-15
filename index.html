@@ -348,6 +348,13 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 /* C·03 — Scroll progress bar */
 #scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--red);z-index:9000;transition:width .05s linear;pointer-events:none}
 
+/* ─── BACK TO TOP ───────────────────────────── */
+#back-to-top{position:fixed;bottom:32px;left:32px;z-index:495;display:flex;align-items:center;gap:10px;background:var(--off-black);border:1px solid var(--border);padding:12px 20px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,background .3s;border-radius:2px}
+#back-to-top.show{opacity:1;pointer-events:all}
+#back-to-top:hover{background:var(--card)}
+#back-to-top .btt-arrow{font-size:16px;color:var(--red);line-height:1}
+#back-to-top .btt-txt{font-family:var(--fm);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--white)}
+
 /* C·09 — Sticky bottom CTA */
 #sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:490;background:var(--red);display:flex;align-items:center;justify-content:center;gap:16px;padding:14px 24px;transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);pointer-events:none}
 #sticky-cta.show{transform:translateY(0);pointer-events:all}
@@ -867,6 +874,11 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   </div>
 </footer>
 
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <span class="btt-arrow">↑</span>
+  <span class="btt-txt">Back to top</span>
+</button>
+
 <script>
 // Wait for deferred scripts to load
 window.addEventListener('load', function() {
@@ -909,6 +921,12 @@ function updateProgress() {
 }
 if (lenis) { lenis.on('scroll', updateProgress); }
 else { window.addEventListener('scroll', updateProgress, { passive:true }); }
+
+// ── BACK TO TOP BUTTON ───────────────────────────────────────────────────────
+const bttBtn = document.getElementById('back-to-top');
+function updateBTT() { bttBtn.classList.toggle('show', window.scrollY > 600); }
+if (lenis) { lenis.on('scroll', updateBTT); }
+else { window.addEventListener('scroll', updateBTT, { passive:true }); }
 
 // ── C·09 STICKY CTA ───────────────────────────────────────────────────────────
 const stickyCTA = document.getElementById('sticky-cta');
