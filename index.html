@@ -113,8 +113,8 @@ body:has(.sv-card:hover,.tc:hover,.ps:hover) #cur-r{width:88px;height:88px;borde
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");background-size:180px 180px;pointer-events:none;z-index:700;opacity:.5;mix-blend-mode:multiply}
 
 /* ─── NAV ────────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:28px 64px;display:flex;align-items:center;justify-content:space-between;transition:padding .4s,background .4s,border-color .4s;border-bottom:1px solid transparent;background:var(--black)}
-nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28px);border-color:var(--border)}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:14px 64px;display:flex;align-items:center;justify-content:space-between;transition:padding .4s,background .4s,border-color .4s;border-bottom:1px solid transparent;background:var(--black)}
+nav.s{padding:10px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28px);border-color:var(--border)}
 .nl{display:flex;align-items:center;text-decoration:none;background:none}
 .nl img{display:block;width:auto}
 .nlinks{display:flex;align-items:center;gap:44px;list-style:none}
@@ -725,7 +725,7 @@ footer{
 
 <nav id="nav">
   <a href="#" class="nl" aria-label="SET Marketing Home">
-    <img src="set-logo.png" alt="SET Marketing" style="display:block;height:160px;width:auto;max-width:520px">
+    <img src="set-logo.png" alt="SET Marketing" style="display:block;height:80px;width:auto;max-width:280px">
   </a>
   <ul class="nlinks">
     <li><a href="#services">Services</a></li>
