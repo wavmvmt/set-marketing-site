@@ -310,6 +310,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 /* ─── MOBILE ─────────────────────────────────── */
 @media(max-width:900px){
   nav{padding:18px 24px}
+  .industry-grid{grid-template-columns:repeat(2,1fr)!important}
   nav.s{padding:14px 24px}
   .nlinks{display:none}
   .ncta{padding:10px 20px;font-size:12px}
@@ -350,6 +351,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 }
 @media(max-width:480px){
   .ft-top{grid-template-columns:1fr}
+  .industry-grid{grid-template-columns:1fr!important}
 }
 
 /* ═══════════════════════════════════════════════
@@ -653,13 +655,15 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   <div class="s-lbl rv">Who This Is For</div>
   <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,80px);font-weight:300;line-height:.92;margin-bottom:16px" class="rv">Built for <em style="font-style:italic;color:var(--red)">Operators</em><br>Ready to Scale</h2>
   <p style="font-family:'Syne',sans-serif;font-size:17px;color:#1a1714;line-height:1.75;max-width:640px;margin-bottom:56px" class="rv">We work with founders, CEOs, and leadership teams generating $1M to $20M+ who need marketing leadership, not just marketing services. If you're scaling beyond founder-led growth, this is for you.</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+  <div class="industry-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
     <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">01</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">SaaS &amp; Tech Companies</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">B2B and B2C platforms scaling user acquisition, reducing churn, and building growth engines.</div></div>
     <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">02</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Industrial &amp; Construction</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Real estate developers, trades, equipment dealers, facilities companies, and manufacturers.</div></div>
     <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">03</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Ecommerce &amp; DTC Brands</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Luxury, CPG, food &amp; beverage, and lifestyle brands scaling paid acquisition and retention.</div></div>
     <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">04</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Professional Services</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Law firms, consulting, financial advisory, healthcare, and B2B service companies ready to systematize growth.</div></div>
     <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">05</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Hospitality &amp; Entertainment</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Hotels, venues, restaurants, events, and entertainment brands building premium audience pipelines.</div></div>
     <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">06</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Automotive &amp; Luxury</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Dealerships, exotic auto, luxury retail, and high-ticket brands that need premium positioning and lead systems.</div></div>
+    <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">07</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Finance &amp; Fintech</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Wealth management, lending, insurance, and financial platforms acquiring high-value clients at scale.</div></div>
+    <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">08</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Education &amp; Coaching</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">EdTech platforms, coaching programs, and professional development brands scaling enrolment and retention.</div></div>
   </div>
   <p style="font-family:var(--fm);font-size:13px;color:rgba(26,23,20,.5);margin-top:40px;letter-spacing:.15em" class="rv">No CMO, or marketing disconnected from revenue? That's exactly when to call.</p>
 </section>
