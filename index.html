@@ -360,28 +360,109 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 @media(max-width:900px){.cta-next{margin-top:40px;padding-top:32px}.cta-step{gap:24px;padding:24px 0}}
 
 /* ─── FOOTER ─────────────────────────────────── */
-footer{background:var(--off-black);border-top:3px solid var(--red);padding:80px 64px 48px}
-.ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:60px;margin-bottom:56px;align-items:start}
-.ft-brand img{display:block;height:52px;width:auto;margin-bottom:24px}
-.ft-brand-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:rgba(26,23,20,.6);line-height:1.75;max-width:300px;margin-bottom:24px}
-.ft-brand-links{display:flex;flex-direction:column;gap:8px}
-.ft-brand-links a{font-family:'DM Mono','Courier New',monospace;font-size:11px;letter-spacing:.14em;color:var(--red);text-decoration:none;transition:opacity .2s}
-.ft-brand-links a:hover{opacity:.7}
-.ft-col-title{font-family:'DM Mono','Courier New',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(26,23,20,.4);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border)}
-.ft-links{list-style:none;display:flex;flex-direction:column;gap:11px}
-.ft-links a{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:rgba(26,23,20,.7);text-decoration:none;transition:color .2s;display:block}
-.ft-links a:hover{color:var(--red)}
-.ft-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid var(--border)}
-.ft-copy{font-family:'DM Mono','Courier New',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(26,23,20,.4)}
-.ft-tagline{font-family:'DM Mono','Courier New',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(185,28,46,.7)}
+footer{
+  background:#0f0e0e;
+  border-top:3px solid #B91C2E;
+  padding:80px 64px 48px;
+}
+.ft-inner{
+  display:grid;
+  grid-template-columns:1.8fr 1fr 1fr 1fr;
+  gap:64px;
+  margin-bottom:60px;
+}
+/* Logo stamp — white box so black logo renders on dark bg */
+.ft-logo-stamp{
+  display:block;
+  background:#fff;
+  padding:12px 20px;
+  width:fit-content;
+  margin-bottom:28px;
+  line-height:0;
+}
+.ft-logo-stamp img{
+  display:block;
+  height:46px;
+  width:auto;
+}
+.ft-desc{
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  font-size:14px;
+  color:rgba(255,255,255,.5);
+  line-height:1.75;
+  max-width:280px;
+  margin-bottom:24px;
+}
+.ft-contact-links{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.ft-contact-links a{
+  font-family:'DM Mono','Courier New',monospace;
+  font-size:11px;
+  letter-spacing:.12em;
+  color:#B91C2E;
+  text-decoration:none;
+  transition:opacity .2s;
+}
+.ft-contact-links a:hover{opacity:.7}
+.ft-col-head{
+  font-family:'DM Mono','Courier New',monospace;
+  font-size:10px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+  margin-bottom:20px;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.ft-nav-links{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.ft-nav-links a{
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  font-size:14px;
+  color:rgba(255,255,255,.55);
+  text-decoration:none;
+  transition:color .2s;
+  display:block;
+}
+.ft-nav-links a:hover{color:#fff}
+.ft-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:28px;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.ft-copy{
+  font-family:'DM Mono','Courier New',monospace;
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.22);
+}
+.ft-tagline{
+  font-family:'DM Mono','Courier New',monospace;
+  font-size:10px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(185,28,46,.6);
+}
 @media(max-width:900px){
   footer{padding:56px 24px 40px}
-  .ft-grid{grid-template-columns:1fr 1fr;gap:36px}
-  .ft-bottom{flex-direction:column;gap:10px;text-align:center}
+  .ft-inner{grid-template-columns:1fr 1fr;gap:36px}
+  .ft-bar{flex-direction:column;gap:10px;text-align:center}
 }
-@media(max-width:480px){.ft-grid{grid-template-columns:1fr}}
+@media(max-width:480px){
+  .ft-inner{grid-template-columns:1fr}
+}
 
-/* ─── KEYFRAMES/* ─── KEYFRAMES ──────────────────────────────── */
+/* ─── KEYFRAMES/* ─── KEYFRAMES/* ─── KEYFRAMES ──────────────────────────────── */
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ─── MOBILE ─────────────────────────────────── */
@@ -1014,19 +1095,21 @@ footer{background:var(--off-black);border-top:3px solid var(--red);padding:80px 
 </section>
 
 <footer>
-  <div class="ft-grid">
-    <div class="ft-brand">
-      <img src="set-logo.png" alt="SET Marketing">
-      <p class="ft-brand-tag">Revenue architecture for operators generating $1M to $20M who are ready to scale beyond founder-led growth. Toronto and Miami.</p>
-      <div class="ft-brand-links">
+  <div class="ft-inner">
+    <div>
+      <a href="#" class="ft-logo-stamp">
+        <img src="set-logo.png" alt="SET Marketing">
+      </a>
+      <p class="ft-desc">Revenue architecture for operators generating $1M to $20M who are ready to scale beyond founder-led growth. Toronto and Miami.</p>
+      <div class="ft-contact-links">
         <a href="mailto:chris@marketingbyset.com">chris@marketingbyset.com</a>
         <a href="https://marketingbyset.com" target="_blank" rel="noopener">marketingbyset.com</a>
         <a href="https://setventures.co" target="_blank" rel="noopener">setventures.co</a>
       </div>
     </div>
     <div>
-      <div class="ft-col-title">Services</div>
-      <ul class="ft-links">
+      <div class="ft-col-head">Services</div>
+      <ul class="ft-nav-links">
         <li><a href="#services">Growth Strategy</a></li>
         <li><a href="#services">Paid Acquisition</a></li>
         <li><a href="#services">Funnel Optimization</a></li>
@@ -1036,8 +1119,8 @@ footer{background:var(--off-black);border-top:3px solid var(--red);padding:80px 
       </ul>
     </div>
     <div>
-      <div class="ft-col-title">Company</div>
-      <ul class="ft-links">
+      <div class="ft-col-head">Company</div>
+      <ul class="ft-nav-links">
         <li><a href="#founder">About Chris</a></li>
         <li><a href="#results">Case Studies</a></li>
         <li><a href="#clients">Clients</a></li>
@@ -1046,16 +1129,16 @@ footer{background:var(--off-black);border-top:3px solid var(--red);padding:80px 
       </ul>
     </div>
     <div>
-      <div class="ft-col-title">SET Ecosystem</div>
-      <ul class="ft-links">
+      <div class="ft-col-head">SET Ecosystem</div>
+      <ul class="ft-nav-links">
         <li><a href="https://setventures.co" target="_blank" rel="noopener">SET Ventures</a></li>
         <li><a href="https://thechrismarchese.com" target="_blank" rel="noopener">TheChrisMarchese.com</a></li>
-        <li><a href="#" target="_blank">SET Sales Academy</a></li>
-        <li><a href="#" target="_blank">Art by Marchese</a></li>
+        <li><a href="#">SET Sales Academy</a></li>
+        <li><a href="#">Art by Marchese</a></li>
       </ul>
     </div>
   </div>
-  <div class="ft-bottom">
+  <div class="ft-bar">
     <div class="ft-copy">&copy; 2026 SET Marketing &middot; SET Enterprises &middot; All Rights Reserved</div>
     <div class="ft-tagline">Setting The Pace &middot; Toronto &middot; Miami</div>
   </div>
