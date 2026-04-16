@@ -182,6 +182,25 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .rv.on{opacity:1;transform:none}
 .d1,.d2,.d3,.d4{transition-delay:0s}
 
+
+/* ─── PAIN QUALIFIER ───────────────────────── */
+.pain-check{padding:120px 64px;background:var(--black);border-top:1px solid var(--border)}
+.pain-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:100px;align-items:start}
+.pain-t{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,58px);font-weight:300;line-height:1.05;margin-bottom:0}
+.pain-t em{font-style:italic;color:var(--red)}
+.pain-item{display:flex;gap:20px;padding:28px 0;border-bottom:1px solid var(--border)}
+.pain-item:first-child{border-top:1px solid var(--border)}
+.pain-icon{font-size:18px;color:rgba(185,28,46,.4);flex-shrink:0;margin-top:2px;font-weight:700;width:20px}
+.pain-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px}
+.pain-sub{font-family:'Syne',sans-serif;font-size:15px;color:rgba(26,23,20,.65);line-height:1.7}
+.pain-resolution{display:flex;gap:20px;align-items:center;padding:28px 32px;background:var(--red);margin-top:4px}
+.pain-res-mark{font-size:20px;color:#fff;flex-shrink:0;font-weight:700}
+.pain-res-text{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:#fff;line-height:1.4}
+@media(max-width:900px){
+  .pain-check{padding:72px 24px}
+  .pain-inner{grid-template-columns:1fr;gap:48px}
+}
+
 /* ─── CLIENTS ────────────────────────────────── */
 .clients{padding:108px 64px 0;background:var(--off-black)}
 .cl-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;gap:40px}
@@ -220,6 +239,23 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .tags{display:flex;flex-wrap:wrap;gap:7px}
 .tag{font-family:var(--fm);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);border:1px solid var(--border);padding:5px 10px;transition:border-color .3s,color .3s}
 .sv-card:hover .tag{border-color:rgba(185,28,46,.2);color:rgba(185,28,46,.7)}
+
+
+/* ─── WHO THIS IS FOR SLIM ───────────────────── */
+.who-for-slim{padding:80px 64px;background:var(--off-black);border-top:1px solid var(--border)}
+.wfs-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
+.wfs-t{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.5vw,48px);font-weight:300;line-height:1.1;margin-bottom:16px}
+.wfs-t em{font-style:italic;color:var(--red)}
+.wfs-sub{font-family:'Syne',sans-serif;font-size:16px;color:rgba(26,23,20,.7);line-height:1.75;max-width:460px}
+.wfs-right{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.wfs-col{display:flex;flex-direction:column;gap:0}
+.wfs-item{font-family:'Syne',sans-serif;font-size:15px;font-weight:500;color:var(--white);padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.wfs-check{color:var(--red);font-weight:700;font-size:13px;flex-shrink:0}
+@media(max-width:900px){
+  .who-for-slim{padding:64px 24px}
+  .wfs-inner{grid-template-columns:1fr;gap:40px}
+  .wfs-right{grid-template-columns:1fr}
+}
 
 /* ─── RESULTS ────────────────────────────────── */
 .results{background:var(--off-black);position:relative;z-index:10}
@@ -308,6 +344,18 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .cta-t em{font-style:italic;color:var(--red)}
 .cta-s{font-family:'Syne',sans-serif;font-size:19px;font-weight:400;color:#1a1714;max-width:480px;margin:0 auto 52px;line-height:1.8}
 .cta-disc{font-family:var(--fm);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(26,23,20,.6);margin-top:28px}
+
+
+/* ─── CTA NEXT STEPS ─────────────────────────── */
+.cta-next{max-width:680px;margin:56px auto 0;text-align:left}
+.cta-next-label{font-family:var(--fm);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:rgba(26,23,20,.5);margin-bottom:24px;text-align:center}
+.cta-next-steps{display:flex;flex-direction:column;gap:0}
+.cta-step{display:flex;gap:24px;padding:24px 0;border-bottom:1px solid var(--border)}
+.cta-step:first-child{border-top:1px solid var(--border)}
+.cta-step-n{font-family:var(--fm);font-size:11px;letter-spacing:.2em;color:var(--red);flex-shrink:0;padding-top:3px;min-width:24px}
+.cta-step-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:5px}
+.cta-step-sub{font-family:'Syne',sans-serif;font-size:14px;color:rgba(26,23,20,.6);line-height:1.65}
+@media(max-width:900px){.cta-next{margin-top:40px}}
 
 /* ─── FOOTER ─────────────────────────────────── */
 footer{background:var(--black);border-top:1px solid var(--border);padding:84px 64px 48px}
@@ -621,7 +669,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
       </span>
     </h1>
     <div class="hbot">
-      <p style="font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.75;max-width:520px;">SET Marketing engineers acquisition, conversion, and automation infrastructure for operators generating <span class="mono-num">$1M</span> to <span class="mono-num">$20M</span> who are ready to scale beyond founder-led growth. Powered by SET OS, our proprietary growth intelligence platform.</p>
+      <p style="font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.75;max-width:520px;">You're generating revenue but marketing feels like guesswork. Agencies overpromise and underdeliver. Your best leads still come from you personally. SET installs the acquisition infrastructure that makes growth predictable, scalable, and founder-independent.</p>
       <div class="hact">
         <a href="#contact" class="btn-p">
           Book Revenue Strategy Call
@@ -641,6 +689,54 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   <div class="st rv d2"><div class="sn"><span class="slot" data-target="150" data-suffix="+">150+</span></div><div class="sl">Companies Scaled</div><div class="sd">$1M operators and beyond</div></div>
   <div class="st rv d3"><div class="sn"><span class="slot" data-target="12" data-suffix="+">12+</span></div><div class="sl">Industries Served</div><div class="sd">Real estate · tech · health</div></div>
 </div>
+
+<section class="pain-check" id="pain-check" aria-label="Is this you">
+  <div class="pain-inner">
+    <div class="pain-left rv">
+      <div class="s-lbl">Sound Familiar?</div>
+      <h2 class="pain-t">If you are generating revenue and <em>still feel stuck</em>, read this.</h2>
+      <a href="#contact" class="btn-p" style="margin-top:40px">
+        Get Your Revenue Diagnosis
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5H12.5M12.5 7.5L8.5 3.5M12.5 7.5L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="pain-right">
+      <div class="pain-item rv">
+        <div class="pain-icon">✗</div>
+        <div>
+          <div class="pain-title">Marketing spend with no clear attribution</div>
+          <div class="pain-sub">You're running ads, paying for content, hiring freelancers. You have no idea what's actually working or why.</div>
+        </div>
+      </div>
+      <div class="pain-item rv">
+        <div class="pain-icon">✗</div>
+        <div>
+          <div class="pain-title">Tried 2 or 3 agencies. None of them built anything lasting.</div>
+          <div class="pain-sub">They ran campaigns. Showed you dashboards. Left you with nothing replicable when the contract ended.</div>
+        </div>
+      </div>
+      <div class="pain-item rv">
+        <div class="pain-icon">✗</div>
+        <div>
+          <div class="pain-title">Revenue is still founder-dependent</div>
+          <div class="pain-sub">You close most of the deals. Referrals keep things alive. But there is no system generating qualified leads without you in the room.</div>
+        </div>
+      </div>
+      <div class="pain-item rv">
+        <div class="pain-icon">✗</div>
+        <div>
+          <div class="pain-title">No senior marketing leadership on your team</div>
+          <div class="pain-sub">A full-time CMO costs <span class="mono-num">$285K+</span> and takes months to hire. Contractors execute tasks. Nobody is building the strategy.</div>
+        </div>
+      </div>
+      <div class="pain-resolution rv">
+        <div class="pain-res-mark">✓</div>
+        <div class="pain-res-text">SET fixes the infrastructure. Not the campaigns.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <section class="clients" id="clients" aria-label="Client Roster">
   <div class="sec-num-bg">01</div>
@@ -704,22 +800,30 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   </div>
 </section>
 
-<section class="who-for" id="qualify" aria-label="Who This Is For" style="padding:100px 64px;background:var(--off-black);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="s-lbl rv">Who This Is For</div>
-  <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,80px);font-weight:300;line-height:.92;margin-bottom:16px" class="rv">Built for <em style="font-style:italic;color:var(--red)">Operators</em><br>Ready to Scale</h2>
-  <p style="font-family:'Syne',sans-serif;font-size:17px;color:#1a1714;line-height:1.75;max-width:640px;margin-bottom:56px" class="rv">We work with founders, CEOs, and leadership teams generating $1M to $20M+ who need marketing leadership, not just marketing services. If you're scaling beyond founder-led growth, this is for you.</p>
-  <div class="industry-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
-    <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">01</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">SaaS &amp; Tech Companies</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">B2B and B2C platforms scaling user acquisition, reducing churn, and building growth engines.</div></div>
-    <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">02</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Industrial &amp; Construction</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Real estate developers, trades, equipment dealers, facilities companies, and manufacturers.</div></div>
-    <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">03</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Ecommerce &amp; DTC Brands</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Luxury, CPG, food &amp; beverage, and lifestyle brands scaling paid acquisition and retention.</div></div>
-    <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">04</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Professional Services</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Law firms, consulting, financial advisory, healthcare, and B2B service companies ready to systematize growth.</div></div>
-    <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">05</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Hospitality &amp; Entertainment</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Hotels, venues, restaurants, events, and entertainment brands building premium audience pipelines.</div></div>
-    <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">06</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Automotive &amp; Luxury</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Dealerships, exotic auto, luxury retail, and high-ticket brands that need premium positioning and lead systems.</div></div>
-    <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">07</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Finance &amp; Fintech</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">Wealth management, lending, insurance, and financial platforms acquiring high-value clients at scale.</div></div>
-    <div style="background:var(--card);border:1px solid var(--border);padding:28px 24px" class="rv"><div style="font-family:var(--fd);font-size:28px;color:var(--red);margin-bottom:8px;font-style:italic">08</div><div style="font-family:var(--fb);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px">Education &amp; Coaching</div><div style="font-family:'Syne',sans-serif;font-size:14px;color:#1a1714;line-height:1.6">EdTech platforms, coaching programs, and professional development brands scaling enrolment and retention.</div></div>
+<section class="who-for-slim" id="qualify" aria-label="Who This Is For">
+  <div class="wfs-inner">
+    <div class="wfs-left rv">
+      <div class="s-lbl">Who This Is For</div>
+      <h2 class="wfs-t">Operators generating <em>$1M to $20M</em> ready to stop guessing.</h2>
+      <p class="wfs-sub">We work best with founders and CEOs who already have proof of concept and revenue, but marketing is the bottleneck holding back the next stage of growth.</p>
+    </div>
+    <div class="wfs-right">
+      <div class="wfs-col">
+        <div class="wfs-item rv"><span class="wfs-check">✓</span> SaaS and B2B Tech</div>
+        <div class="wfs-item rv"><span class="wfs-check">✓</span> Ecommerce and DTC Brands</div>
+        <div class="wfs-item rv"><span class="wfs-check">✓</span> Industrial and Construction</div>
+        <div class="wfs-item rv"><span class="wfs-check">✓</span> Professional Services</div>
+      </div>
+      <div class="wfs-col">
+        <div class="wfs-item rv"><span class="wfs-check">✓</span> Hospitality and Luxury</div>
+        <div class="wfs-item rv"><span class="wfs-check">✓</span> Finance and Fintech</div>
+        <div class="wfs-item rv"><span class="wfs-check">✓</span> Education and Coaching</div>
+        <div class="wfs-item rv"><span class="wfs-check">✓</span> Automotive and High-Ticket</div>
+      </div>
+    </div>
   </div>
-  <p style="font-family:var(--fm);font-size:13px;color:rgba(26,23,20,.5);margin-top:40px;letter-spacing:.15em" class="rv">No CMO, or marketing disconnected from revenue? That's exactly when to call.</p>
 </section>
+
 
 <section class="results" id="results" aria-label="Client Results">
   <div class="sec-num-bg">03</div>
@@ -899,6 +1003,33 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
     </button>
   </div>
   <p class="cta-disc rv">Confidential · No Commitment · 45-Minute Working Session</p>
+
+  <div class="cta-next rv">
+    <div class="cta-next-label">What happens after you apply</div>
+    <div class="cta-next-steps">
+      <div class="cta-step">
+        <div class="cta-step-n">01</div>
+        <div>
+          <div class="cta-step-title">We review your application</div>
+          <div class="cta-step-sub">Within 24 hours, Chris or the SET team reaches out to confirm fit and schedule your session.</div>
+        </div>
+      </div>
+      <div class="cta-step">
+        <div class="cta-step-n">02</div>
+        <div>
+          <div class="cta-step-title">45-minute working session</div>
+          <div class="cta-step-sub">Not a sales call. We look at your actual numbers, diagnose the revenue bottleneck, and map a clear plan.</div>
+        </div>
+      </div>
+      <div class="cta-step">
+        <div class="cta-step-n">03</div>
+        <div>
+          <div class="cta-step-title">You leave with a plan</div>
+          <div class="cta-step-sub">Whether we work together or not, you leave with a Revenue Architecture framework specific to your business.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
