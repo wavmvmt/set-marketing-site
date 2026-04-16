@@ -112,7 +112,8 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .h-topbar{position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);z-index:4}
 .h-eye{font-family:var(--fm);font-size:13px;letter-spacing:.35em;color:var(--red);text-transform:uppercase;margin-bottom:36px;display:flex;align-items:center;gap:16px;opacity:1;position:relative;z-index:5}
 .h-eye::before{content:'';display:block;width:36px;height:1px;background:var(--red);flex-shrink:0}
-.h-hl{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,5.5vw,108px);font-weight:300;line-height:.88;letter-spacing:-.02em;opacity:1;position:relative;z-index:5}
+.h-hl{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,5.5vw,108px);font-weight:300;line-height:1.05;letter-spacing:-.02em;opacity:1;position:relative;z-index:5}
+.h-hl .line1{display:block;margin-bottom:.18em}
 .h-hl em{font-style:italic;color:var(--red)}
 .h-hl .outline{-webkit-text-stroke:1.5px var(--white);color:transparent}
 .hbot{display:flex;flex-direction:column;gap:32px;margin-top:52px;opacity:1;position:relative;z-index:5}
@@ -579,9 +580,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 
 <section class="hero" aria-label="SET Marketing Hero">
   <div class="hero-vid">
-    <video autoplay loop muted playsinline preload="none" id="hero-vid" style="position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100%;min-height:100%;transform:translate(-50%,-50%);object-fit:cover;pointer-events:none">
-      <source src="set-hero.mp4" type="video/mp4">
-    </video>
+    <iframe src="https://player.vimeo.com/video/1174452087?background=1&autoplay=1&loop=1&muted=1&autopause=0&quality=1080p" allow="autoplay; fullscreen" title="SET Marketing Hero" style="position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none"></iframe>
   </div>
   <div class="hero-right">
     <canvas id="hero-canvas"></canvas>
@@ -590,7 +589,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
     <div class="hspotlight" id="spotlight"></div>
     <div class="h-topbar"></div>
     <h1 class="h-hl">
-      Escape The Race.<br>
+      <span class="line1">Escape The Race.</span>
       <em>SET</em> The Pace.
     </h1>
     <div class="hbot">
@@ -609,10 +608,10 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 <!-- ticker removed -->
 
 <div class="stats" id="stats">
-  <div class="st rv"><div class="sn">$500<em>M+</em></div><div class="sl">Revenue Generated</div><div class="sd">Across all client campaigns</div></div>
-  <div class="st rv d1"><div class="sn">$60<em>M+</em></div><div class="sl">Ad Spend Deployed</div><div class="sd">Meta, Google &amp; YouTube</div></div>
-  <div class="st rv d2"><div class="sn">150<em>+</em></div><div class="sl">Companies Scaled</div><div class="sd">$1M operators and beyond</div></div>
-  <div class="st rv d3"><div class="sn">12<em>+</em></div><div class="sl">Industries Served</div><div class="sd">Real estate · tech · health</div></div>
+  <div class="st rv"><div class="sn"><span class="slot" data-prefix="$" data-target="500" data-suffix="M+">$500M+</span></div><div class="sl">Revenue Generated</div><div class="sd">Across all client campaigns</div></div>
+  <div class="st rv d1"><div class="sn"><span class="slot" data-prefix="$" data-target="60" data-suffix="M+">$60M+</span></div><div class="sl">Ad Spend Deployed</div><div class="sd">Meta, Google &amp; YouTube</div></div>
+  <div class="st rv d2"><div class="sn"><span class="slot" data-target="150" data-suffix="+">150+</span></div><div class="sl">Companies Scaled</div><div class="sd">$1M operators and beyond</div></div>
+  <div class="st rv d3"><div class="sn"><span class="slot" data-target="12" data-suffix="+">12+</span></div><div class="sl">Industries Served</div><div class="sd">Real estate · tech · health</div></div>
 </div>
 
 <section class="clients" id="clients" aria-label="Client Roster">
@@ -1181,13 +1180,38 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── VIDEO LAZY LOAD ────────────────────────────────────────────────────────────
-// Hero video: start loading immediately (above the fold, user needs it)
-const heroVid = document.getElementById('hero-vid');
-if (heroVid) { heroVid.load(); heroVid.play().catch(()=>{}); }
-
-// Founder video: load only when near viewport
-const founderVid = document.getElementById('founder-vid');
+// ── SLOT COUNTERS ─────────────────────────────────────────────────────────────
+const slotObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = parseInt(el.dataset.target);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const steps = 40;
+    const interval = duration / steps;
+    let current = 0;
+    let step = 0;
+    // eased step values — slow start, fast middle, slow end
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+    const timer = setInterval(() => {
+      step++;
+      const progress = easeOutCubic(step / steps);
+      current = Math.round(progress * target);
+      // slot machine effect: show random numbers while rolling
+      if (step < steps) {
+        const rand = Math.floor(Math.random() * target);
+        el.innerHTML = `${prefix}${rand}<em style="color:var(--red);font-style:normal">${suffix}</em>`;
+      } else {
+        el.innerHTML = `${prefix}${target}<em style="color:var(--red);font-style:normal">${suffix}</em>`;
+        clearInterval(timer);
+      }
+    }, interval);
+    slotObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.slot').forEach(el => slotObs.observe(el));
 if (founderVid) {
   const vidObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
