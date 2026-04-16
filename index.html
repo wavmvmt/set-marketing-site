@@ -511,6 +511,20 @@ footer{
 .break-cross-icon{font-family:'DM Mono','Courier New',monospace;font-size:13px;color:rgba(185,28,46,.6);letter-spacing:.2em;white-space:nowrap;flex-shrink:0}
 @media(max-width:900px){.break-cross{padding:32px 24px}}
 
+/* ─── FOOTER NEWSLETTER ──────────────────────── */
+.ft-newsletter{margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08)}
+.ft-nl-label{font-family:'DM Mono','Courier New',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:12px}
+.ft-nl-row{display:flex;gap:8px}
+.ft-nl-input{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13px;padding:11px 14px;outline:none;transition:border-color .2s;min-width:0}
+.ft-nl-input::placeholder{color:rgba(255,255,255,.3)}
+.ft-nl-input:focus{border-color:rgba(185,28,46,.7)}
+.ft-nl-btn{background:#B91C2E;color:#fff;border:none;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:11px 16px;cursor:pointer;transition:background .2s;flex-shrink:0}
+.ft-nl-btn:hover{background:#D42240}
+.ft-nl-msg{font-family:'DM Mono','Courier New',monospace;font-size:11px;letter-spacing:.1em;margin-top:8px;display:none}
+.ft-nl-msg.show{display:block}
+.ft-nl-msg.ok{color:#4ade80}
+.ft-nl-msg.err{color:#f87171}
+
 /* ─── KEYFRAMES ──────────────────────────────── */
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
@@ -1166,6 +1180,14 @@ footer{
         <a href="https://marketingbyset.com" target="_blank" rel="noopener">marketingbyset.com</a>
         <a href="https://setventures.co" target="_blank" rel="noopener">setventures.co</a>
       </div>
+      <div class="ft-newsletter">
+        <div class="ft-nl-label">Stay in the loop</div>
+        <div class="ft-nl-row">
+          <input class="ft-nl-input" type="email" id="nl-email" placeholder="Your email address">
+          <button class="ft-nl-btn" onclick="nlSubscribe()">Subscribe</button>
+        </div>
+        <div class="ft-nl-msg" id="nl-msg"></div>
+      </div>
     </div>
     <div>
       <div class="ft-col-head">Services</div>
@@ -1491,6 +1513,35 @@ if (founderVid) {
   }, { rootMargin: '300px' });
   vidObs.observe(founderVid);
 }
+
+// ── NEWSLETTER ────────────────────────────────────────────────────────────────
+async function nlSubscribe() {
+  const input = document.getElementById('nl-email');
+  const msg = document.getElementById('nl-msg');
+  const email = (input.value || '').trim();
+  if (!email || !email.includes('@')) {
+    msg.textContent = 'Please enter a valid email.';
+    msg.className = 'ft-nl-msg show err';
+    return;
+  }
+  msg.textContent = 'Subscribing...';
+  msg.className = 'ft-nl-msg show';
+  try {
+    const res = await fetch('https://vutsqfyyfoppebqsbjpx.supabase.co/rest/v1/newsletter_subscribers', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': 'SUPABASE_ANON_KEY', 'Authorization': 'Bearer SUPABASE_ANON_KEY', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ email, source: 'marketingbyset.com' })
+    });
+    input.value = '';
+    msg.textContent = res.status === 409 ? 'Already subscribed!' : "You're in. Welcome.";
+    msg.className = 'ft-nl-msg show ok';
+  } catch {
+    window.location.href = 'mailto:chris@marketingbyset.com?subject=Newsletter&body=Please subscribe: ' + email;
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('nl-email')?.addEventListener('keydown', e => { if (e.key === 'Enter') nlSubscribe(); });
+});
 
 // S·07 removed — was causing flash on scroll
 
