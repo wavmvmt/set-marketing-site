@@ -360,20 +360,20 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 @media(max-width:900px){.cta-next{margin-top:40px;padding-top:32px}.cta-step{gap:24px;padding:24px 0}}
 
 /* ─── FOOTER ─────────────────────────────────── */
-footer{background:#111010;border-top:2px solid var(--red);padding:72px 64px 44px}
-.ft-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;align-items:start}
-.fb-logo-wrap{margin-bottom:20px}
-.fb-logo-wrap img{height:52px;width:auto;background:#fff;padding:8px 14px;display:inline-block}
-.fb-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:400;color:rgba(255,255,255,.55);line-height:1.75;max-width:280px;margin-bottom:24px}
-.fb-contact a{display:block;font-family:var(--fm);font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:9px;transition:color .25s}
+footer{background:#111010;border-top:3px solid var(--red);padding:72px 64px 44px}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px;align-items:start}
+.fb-logo-pill{display:inline-block;background:#ffffff;padding:10px 18px;margin-bottom:24px;line-height:0}
+.fb-logo-pill img{display:block;height:48px;width:auto}
+.fb-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:rgba(255,255,255,.5);line-height:1.75;max-width:290px;margin-bottom:24px}
+.fb-contact a{display:block;font-family:var(--fm);font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:10px;transition:color .2s}
 .fb-contact a:hover{color:#fff}
-.fc-title{font-family:var(--fm);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06)}
-.flinks{list-style:none;display:flex;flex-direction:column;gap:10px}
-.flinks a{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:400;color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s;display:block}
+.fc-title{font-family:var(--fm);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06)}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:12px}
+.flinks a{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s;display:block}
 .flinks a:hover{color:#fff}
-.fb-bot{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.06)}
-.fb-copy{font-family:var(--fm);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25)}
-.fb-tag2{font-family:var(--fm);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(185,28,46,.6)}
+.fb-bot{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.07)}
+.fb-copy{font-family:var(--fm);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.22)}
+.fb-tag2{font-family:var(--fm);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(185,28,46,.55)}
 
 /* ─── KEYFRAMES ──────────────────────────────── */
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -419,8 +419,9 @@ footer{background:#111010;border-top:2px solid var(--red);padding:72px 64px 44px
   .tc{padding:36px 28px}
   .cta{padding:64px 24px 80px}
   footer{padding:48px 24px 36px}
-  .ft-top{grid-template-columns:1fr 1fr;gap:28px}
-  .fb-logo-wrap img{height:40px;padding:6px 10px}
+  .ft-top{grid-template-columns:1fr 1fr;gap:24px}
+  .fb-logo-pill{margin-bottom:16px}
+  .fb-logo-pill img{height:36px}
   .fb-bot{flex-direction:column;gap:8px;text-align:center}
 }
 @media(max-width:480px){
@@ -1009,7 +1010,7 @@ footer{background:#111010;border-top:2px solid var(--red);padding:72px 64px 44px
 <footer>
   <div class="ft-top">
     <div>
-      <div class="fb-logo-wrap">
+      <div class="fb-logo-pill">
         <img src="set-logo.png" alt="SET Marketing">
       </div>
       <p class="fb-tag">Revenue architecture for operators generating $1M to $20M who are ready to scale beyond founder-led growth. Toronto and Miami.</p>
