@@ -462,7 +462,106 @@ footer{
   .ft-inner{grid-template-columns:1fr}
 }
 
-/* ─── KEYFRAMES/* ─── KEYFRAMES/* ─── KEYFRAMES ──────────────────────────────── */
+
+/* ─── SECTION BREAKS ─────────────────────────── */
+
+/* Break 1: Credential ticker — dark band, white scrolling text */
+.break-ticker{background:#111010;padding:0;overflow:hidden;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.break-ticker-track{display:flex;animation:breakTicker 22s linear infinite;white-space:nowrap;padding:18px 0}
+.break-ticker-track span{font-family:'DM Mono','Courier New',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 32px;flex-shrink:0}
+.break-ticker-track .bt-dot{color:#B91C2E;padding:0 8px;letter-spacing:0}
+@keyframes breakTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Break 2: Red full-bleed statement band */
+.break-red{background:#B91C2E;padding:40px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.break-red-stat{display:flex;flex-direction:column;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:40px}
+.break-red-stat:first-child{border-left:none;padding-left:0}
+.break-red-num{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(48px,5vw,72px);font-weight:300;color:#fff;line-height:1}
+.break-red-label{font-family:'DM Mono','Courier New',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-top:6px}
+@media(max-width:900px){.break-red{padding:32px 24px;gap:0;justify-content:space-around}.break-red-stat{padding-left:20px}}
+
+/* Break 3: Editorial dark — large ghost number + phrase */
+.break-editorial{background:#0f0e0e;padding:72px 64px;display:flex;align-items:center;gap:48px;overflow:hidden;position:relative}
+.break-ed-number{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(120px,16vw,220px);font-weight:300;color:rgba(185,28,46,.12);line-height:1;flex-shrink:0;user-select:none}
+.break-ed-content{position:relative;z-index:1}
+.break-ed-label{font-family:'DM Mono','Courier New',monospace;font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:#B91C2E;margin-bottom:12px}
+.break-ed-text{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,3.5vw,48px);font-weight:300;color:rgba(255,255,255,.85);line-height:1.2;font-style:italic}
+.break-ed-rule{position:absolute;right:64px;top:50%;transform:translateY(-50%);width:80px;height:1px;background:rgba(185,28,46,.4)}
+@media(max-width:900px){.break-editorial{padding:48px 24px}.break-ed-number{font-size:80px}.break-ed-rule{display:none}}
+
+/* Break 4: Light crosshair divider */
+.break-cross{padding:48px 64px;background:var(--off-black);display:flex;align-items:center;gap:24px}
+.break-cross-line{flex:1;height:1px;background:var(--border)}
+.break-cross-icon{font-family:'DM Mono','Courier New',monospace;font-size:13px;color:rgba(185,28,46,.6);letter-spacing:.2em;white-space:nowrap;flex-shrink:0}
+@media(max-width:900px){.break-cross{padding:32px 24px}}
+
+/* ─── KEYFRAMES
+/* ─── SECTION BREAKS ─────────────────────────── */
+
+/* Break 1: Credential ticker — dark band, white scrolling text */
+.break-ticker{background:#111010;padding:0;overflow:hidden;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.break-ticker-track{display:flex;animation:breakTicker 22s linear infinite;white-space:nowrap;padding:18px 0}
+.break-ticker-track span{font-family:'DM Mono','Courier New',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 32px;flex-shrink:0}
+.break-ticker-track .bt-dot{color:#B91C2E;padding:0 8px;letter-spacing:0}
+@keyframes breakTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Break 2: Red full-bleed statement band */
+.break-red{background:#B91C2E;padding:40px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.break-red-stat{display:flex;flex-direction:column;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:40px}
+.break-red-stat:first-child{border-left:none;padding-left:0}
+.break-red-num{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(48px,5vw,72px);font-weight:300;color:#fff;line-height:1}
+.break-red-label{font-family:'DM Mono','Courier New',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-top:6px}
+@media(max-width:900px){.break-red{padding:32px 24px;gap:0;justify-content:space-around}.break-red-stat{padding-left:20px}}
+
+/* Break 3: Editorial dark — large ghost number + phrase */
+.break-editorial{background:#0f0e0e;padding:72px 64px;display:flex;align-items:center;gap:48px;overflow:hidden;position:relative}
+.break-ed-number{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(120px,16vw,220px);font-weight:300;color:rgba(185,28,46,.12);line-height:1;flex-shrink:0;user-select:none}
+.break-ed-content{position:relative;z-index:1}
+.break-ed-label{font-family:'DM Mono','Courier New',monospace;font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:#B91C2E;margin-bottom:12px}
+.break-ed-text{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,3.5vw,48px);font-weight:300;color:rgba(255,255,255,.85);line-height:1.2;font-style:italic}
+.break-ed-rule{position:absolute;right:64px;top:50%;transform:translateY(-50%);width:80px;height:1px;background:rgba(185,28,46,.4)}
+@media(max-width:900px){.break-editorial{padding:48px 24px}.break-ed-number{font-size:80px}.break-ed-rule{display:none}}
+
+/* Break 4: Light crosshair divider */
+.break-cross{padding:48px 64px;background:var(--off-black);display:flex;align-items:center;gap:24px}
+.break-cross-line{flex:1;height:1px;background:var(--border)}
+.break-cross-icon{font-family:'DM Mono','Courier New',monospace;font-size:13px;color:rgba(185,28,46,.6);letter-spacing:.2em;white-space:nowrap;flex-shrink:0}
+@media(max-width:900px){.break-cross{padding:32px 24px}}
+
+/* ─── KEYFRAMES
+/* ─── SECTION BREAKS ─────────────────────────── */
+
+/* Break 1: Credential ticker — dark band, white scrolling text */
+.break-ticker{background:#111010;padding:0;overflow:hidden;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.break-ticker-track{display:flex;animation:breakTicker 22s linear infinite;white-space:nowrap;padding:18px 0}
+.break-ticker-track span{font-family:'DM Mono','Courier New',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 32px;flex-shrink:0}
+.break-ticker-track .bt-dot{color:#B91C2E;padding:0 8px;letter-spacing:0}
+@keyframes breakTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Break 2: Red full-bleed statement band */
+.break-red{background:#B91C2E;padding:40px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.break-red-stat{display:flex;flex-direction:column;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:40px}
+.break-red-stat:first-child{border-left:none;padding-left:0}
+.break-red-num{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(48px,5vw,72px);font-weight:300;color:#fff;line-height:1}
+.break-red-label{font-family:'DM Mono','Courier New',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-top:6px}
+@media(max-width:900px){.break-red{padding:32px 24px;gap:0;justify-content:space-around}.break-red-stat{padding-left:20px}}
+
+/* Break 3: Editorial dark — large ghost number + phrase */
+.break-editorial{background:#0f0e0e;padding:72px 64px;display:flex;align-items:center;gap:48px;overflow:hidden;position:relative}
+.break-ed-number{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(120px,16vw,220px);font-weight:300;color:rgba(185,28,46,.12);line-height:1;flex-shrink:0;user-select:none}
+.break-ed-content{position:relative;z-index:1}
+.break-ed-label{font-family:'DM Mono','Courier New',monospace;font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:#B91C2E;margin-bottom:12px}
+.break-ed-text{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,3.5vw,48px);font-weight:300;color:rgba(255,255,255,.85);line-height:1.2;font-style:italic}
+.break-ed-rule{position:absolute;right:64px;top:50%;transform:translateY(-50%);width:80px;height:1px;background:rgba(185,28,46,.4)}
+@media(max-width:900px){.break-editorial{padding:48px 24px}.break-ed-number{font-size:80px}.break-ed-rule{display:none}}
+
+/* Break 4: Light crosshair divider */
+.break-cross{padding:48px 64px;background:var(--off-black);display:flex;align-items:center;gap:24px}
+.break-cross-line{flex:1;height:1px;background:var(--border)}
+.break-cross-icon{font-family:'DM Mono','Courier New',monospace;font-size:13px;color:rgba(185,28,46,.6);letter-spacing:.2em;white-space:nowrap;flex-shrink:0}
+@media(max-width:900px){.break-cross{padding:32px 24px}}
+
+/* ─── KEYFRAMES ──────────────────────────────── */
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ─── MOBILE ─────────────────────────────────── */
@@ -751,6 +850,29 @@ footer{
   <div class="st rv d3"><div class="sn"><span class="slot" data-target="12" data-suffix="+">12+</span></div><div class="sl">Industries Served</div><div class="sd">Real estate · tech · health</div></div>
 </div>
 
+<!-- BREAK: Credential ticker -->
+<div class="break-ticker" aria-hidden="true">
+  <div class="break-ticker-track">
+    <span>Revenue Architecture</span><span class="bt-dot">✦</span>
+    <span>Paid Acquisition</span><span class="bt-dot">✦</span>
+    <span>Fractional CMO</span><span class="bt-dot">✦</span>
+    <span>$500M+ Generated</span><span class="bt-dot">✦</span>
+    <span>SET OS Platform</span><span class="bt-dot">✦</span>
+    <span>Toronto &amp; Miami</span><span class="bt-dot">✦</span>
+    <span>Systems Not Campaigns</span><span class="bt-dot">✦</span>
+    <span>150+ Operators Scaled</span><span class="bt-dot">✦</span>
+    <span>Revenue Architecture</span><span class="bt-dot">✦</span>
+    <span>Paid Acquisition</span><span class="bt-dot">✦</span>
+    <span>Fractional CMO</span><span class="bt-dot">✦</span>
+    <span>$500M+ Generated</span><span class="bt-dot">✦</span>
+    <span>SET OS Platform</span><span class="bt-dot">✦</span>
+    <span>Toronto &amp; Miami</span><span class="bt-dot">✦</span>
+    <span>Systems Not Campaigns</span><span class="bt-dot">✦</span>
+    <span>150+ Operators Scaled</span><span class="bt-dot">✦</span>
+  </div>
+</div>
+
+
 <section class="pain-check" id="pain-check" aria-label="Is this you">
   <div class="pain-inner">
     <div class="pain-left rv">
@@ -898,6 +1020,27 @@ footer{
 </section>
 
 
+<!-- BREAK: Red stats band -->
+<div class="break-red" aria-hidden="true">
+  <div class="break-red-stat">
+    <div class="break-red-num">$500M+</div>
+    <div class="break-red-label">Revenue Generated</div>
+  </div>
+  <div class="break-red-stat">
+    <div class="break-red-num">150+</div>
+    <div class="break-red-label">Operators Scaled</div>
+  </div>
+  <div class="break-red-stat">
+    <div class="break-red-num">$60M+</div>
+    <div class="break-red-label">Ad Spend Deployed</div>
+  </div>
+  <div class="break-red-stat">
+    <div class="break-red-num">12+</div>
+    <div class="break-red-label">Industries Served</div>
+  </div>
+</div>
+
+
 <section class="results" id="results" aria-label="Client Results">
   <div class="sec-num-bg">03</div>
   <div class="rs-header">
@@ -970,6 +1113,18 @@ footer{
   </div>
 </section>
 
+
+<!-- BREAK: Editorial dark -->
+<div class="break-editorial" aria-hidden="true">
+  <div class="break-ed-number">04</div>
+  <div class="break-ed-content">
+    <div class="break-ed-label">The Operator Behind SET</div>
+    <div class="break-ed-text">"The system does not change.<br>Only the operator changes."</div>
+  </div>
+  <div class="break-ed-rule"></div>
+</div>
+
+
 <section class="founder" id="founder" aria-label="About Chris Marchese">
   <div class="sec-num-bg">04</div>
   <div class="fv rv">
@@ -1015,6 +1170,15 @@ footer{
     </div>
   </div>
 </section>
+
+
+<!-- BREAK: Crosshair divider -->
+<div class="break-cross" aria-hidden="true">
+  <div class="break-cross-line"></div>
+  <div class="break-cross-icon">✦ &nbsp; CLIENT VOICES &nbsp; ✦</div>
+  <div class="break-cross-line"></div>
+</div>
+
 
 <section class="testimonials" id="testimonials" aria-label="Client Testimonials">
   <div class="sec-num-bg">06</div>
