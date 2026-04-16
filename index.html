@@ -96,14 +96,14 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .nlinks{display:flex;align-items:center;gap:44px;list-style:none}
 .nlinks a{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--white);text-decoration:none;transition:color .3s}
 .nlinks a:hover{color:var(--red)}
-.ncta{font-family:var(--fb);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#f4f1ec;background:var(--red);padding:13px 30px;text-decoration:none;font-weight:700;transition:background .3s;display:inline-block}
-.ncta:hover{background:var(--red2)}
+.ncta{font-family:var(--fb);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#f4f1ec;background:var(--red);padding:13px 28px;text-decoration:none;font-weight:700;transition:background .25s,box-shadow .25s,transform .2s;display:inline-block;box-shadow:0 3px 16px rgba(185,28,46,.22)}
+.ncta:hover{background:var(--red2);box-shadow:0 6px 24px rgba(185,28,46,.34);transform:translateY(-1px)}
 
 /* ─── HERO ───────────────────────────────────── */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
 .hero-vid{position:relative;overflow:hidden;background:var(--black)}
 .hero-vid iframe{position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100%;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none}
-.hero-vid::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,var(--black) 100%),linear-gradient(180deg,rgba(245,240,232,.4) 0%,transparent 30%);pointer-events:none;z-index:1}
+.hero-vid::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 55%,var(--black) 100%);pointer-events:none;z-index:1}
 .hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding:120px 64px 90px;position:relative;overflow:hidden;background:var(--black);width:100%}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .hbg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 0% 60%,rgba(185,28,46,.07) 0%,transparent 60%);z-index:1}
@@ -114,13 +114,19 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .h-eye::before{content:'';display:block;width:36px;height:1px;background:var(--red);flex-shrink:0}
 .h-hl{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,5.5vw,108px);font-weight:300;line-height:1.05;letter-spacing:-.02em;opacity:1;position:relative;z-index:5}
 .h-hl .line1{display:block;margin-bottom:.18em}
+.h-hl .line2{display:block}
+.hl-word{display:inline-block;opacity:0;transform:translateX(60px);filter:blur(4px)}
+.hl-set{display:inline-block;opacity:0;transform:scale(.7) translateX(40px);color:var(--red);font-style:italic}
 .h-hl em{font-style:italic;color:var(--red)}
 .h-hl .outline{-webkit-text-stroke:1.5px var(--white);color:transparent}
 .hbot{display:flex;flex-direction:column;gap:32px;margin-top:52px;opacity:1;position:relative;z-index:5}
-.btn-p{display:inline-flex;align-items:center;gap:14px;background:var(--red);color:#f4f1ec;padding:18px 42px;font-family:var(--fb);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:background .3s,gap .3s;will-change:transform}
-.btn-p:hover{background:var(--red2);gap:22px}
-.btn-g{display:inline-flex;align-items:center;gap:8px;color:var(--white);font-size:13px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:color .3s;will-change:transform}
-.btn-g:hover{color:var(--red)}
+.btn-p{display:inline-flex;align-items:center;gap:14px;background:var(--red);color:#f4f1ec;padding:19px 46px;font-family:var(--fb);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;transition:background .25s,gap .3s,box-shadow .25s,transform .2s;box-shadow:0 4px 24px rgba(185,28,46,.25),0 1px 3px rgba(185,28,46,.15);will-change:transform;border:none;cursor:pointer}
+.btn-p:hover{background:var(--red2);gap:22px;box-shadow:0 8px 36px rgba(185,28,46,.38),0 2px 8px rgba(185,28,46,.2);transform:translateY(-2px)}
+.btn-p:active{transform:translateY(0);box-shadow:0 3px 16px rgba(185,28,46,.2)}
+.btn-g{display:inline-flex;align-items:center;gap:8px;color:var(--white);font-size:13px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:color .3s,gap .3s;will-change:transform;position:relative;padding-bottom:3px}
+.btn-g::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--red);transition:width .35s ease}
+.btn-g:hover{color:var(--red);gap:14px}
+.btn-g:hover::after{width:100%}
 .hact{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 
 /* ─── TICKER ─────────────────────────────────── */
@@ -163,7 +169,7 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .mq-row{overflow:hidden;margin:6px 0}
 .mq-track{display:flex;gap:56px;align-items:baseline;white-space:nowrap;animation:mq 34s linear infinite;will-change:transform}
 .mq-track.rev{animation-direction:reverse;animation-duration:44s}
-.mq-name{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7vw,96px);font-weight:300;color:rgba(26,23,20,.3);flex-shrink:0;letter-spacing:-.02em;transition:color .5s;cursor:default;line-height:1}
+.mq-name{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7vw,96px);font-weight:300;color:rgba(26,23,20,.3);flex-shrink:0;letter-spacing:-.02em;transition:color .5s;cursor:pointer;line-height:1;text-decoration:none;display:inline-block}
 .mq-name:hover{color:rgba(26,23,20,.85)}
 .mq-name.acc{font-style:italic;color:rgba(185,28,46,.6)}
 .mq-name.acc:hover{color:var(--red)}
@@ -502,53 +508,8 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
 <!-- C·09 Sticky bottom CTA -->
 <div id="sticky-cta">
   <span>Q2 2026 · 3 of 4 spots filled</span>
-  <a href="#contact" onclick="openModal();return false;">Book Revenue Strategy Call</a>
+  <a href="#contact" href="#contact">Book Revenue Strategy Call</a>
   <button class="sc-close" onclick="document.getElementById('sticky-cta').classList.remove('show')">×</button>
-</div>
-
-<!-- C·01 Booking modal -->
-<div id="modal-overlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <div class="modal-form-wrap">
-      <div class="modal-eyebrow">Revenue Strategy Call · Q2 2026</div>
-      <h2 class="modal-title">Let's Build Your <em>System</em></h2>
-      <p class="modal-sub">We work with a select number of operators each quarter. Two quick questions first.</p>
-      <div class="modal-field">
-        <label class="modal-label">Your Name</label>
-        <input class="modal-input" type="text" id="m-name" placeholder="First &amp; Last Name">
-      </div>
-      <div class="modal-field">
-        <label class="modal-label">Best Phone / Email</label>
-        <input class="modal-input" type="text" id="m-contact" placeholder="Phone or email">
-      </div>
-      <div class="modal-field">
-        <label class="modal-label">Current Annual Revenue</label>
-        <div class="modal-pills">
-          <button class="modal-pill" onclick="selectPill(this,'rev')">$500K–$1M</button>
-          <button class="modal-pill" onclick="selectPill(this,'rev')">$1M–$5M</button>
-          <button class="modal-pill" onclick="selectPill(this,'rev')">$5M–$20M</button>
-          <button class="modal-pill" onclick="selectPill(this,'rev')">$20M+</button>
-        </div>
-      </div>
-      <div class="modal-field">
-        <label class="modal-label">Biggest Growth Obstacle</label>
-        <div class="modal-pills">
-          <button class="modal-pill" onclick="selectPill(this,'obs')">Lead generation</button>
-          <button class="modal-pill" onclick="selectPill(this,'obs')">Conversion rate</button>
-          <button class="modal-pill" onclick="selectPill(this,'obs')">Team / systems</button>
-          <button class="modal-pill" onclick="selectPill(this,'obs')">Scaling profitably</button>
-        </div>
-      </div>
-      <button class="modal-submit" id="modal-btn" onclick="submitModal()">Book My Strategy Call →</button>
-      <p class="modal-disc">Confidential · No commitment · 45-minute working session</p>
-    </div>
-    <div class="modal-success" id="modal-success">
-      <div class="modal-success-icon">✦</div>
-      <div class="modal-success-title">You're on the list.</div>
-      <p class="modal-success-sub">Chris or the SET team will reach out within 24 hours to confirm your session. Check your inbox.</p>
-    </div>
-  </div>
 </div>
 
 <!-- L·04 Mobile nav -->
@@ -557,7 +518,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   <a href="#results" onclick="closeMobileNav()"><em>Results</em></a>
   <a href="#founder" onclick="closeMobileNav()">About</a>
   <a href="#process" onclick="closeMobileNav()">Process</a>
-  <a href="#contact" onclick="closeMobileNav();openModal();return false;" class="mn-cta">Book Strategy Call</a>
+  <a href="#contact" onclick="closeMobileNav()" class="mn-cta">Book Strategy Call</a>
 </div>
 
 <div id="bg-gradient"></div>
@@ -576,7 +537,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
     <li><a href="#process">Process</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="ncta" onclick="openModal();return false;">Book Strategy Call</a>
+  <a href="#contact" class="ncta" href="#contact">Book Strategy Call</a>
   <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -592,17 +553,25 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
     <div class="hgrid"></div>
     <div class="hspotlight" id="spotlight"></div>
     <div class="h-topbar"></div>
-    <h1 class="h-hl">
-      <span class="line1">Escape The Race.</span>
-      <em>SET</em> The Pace.
+    <h1 class="h-hl" id="hero-hl">
+      <span class="line1">
+        <span class="hl-word hl-w1">Escape</span>
+        <span class="hl-word hl-w2">The</span>
+        <span class="hl-word hl-w3">Race.</span>
+      </span>
+      <span class="line2">
+        <em class="hl-set">SET</em>
+        <span class="hl-word hl-w4">The</span>
+        <span class="hl-word hl-w5">Pace.</span>
+      </span>
     </h1>
     <div class="hbot">
       <p style="font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.75;max-width:520px;">SET Marketing engineers acquisition, conversion, and automation infrastructure for operators generating <span class="mono-num">$1M</span> to <span class="mono-num">$20M</span> who are ready to scale beyond founder-led growth. Powered by SET OS, our proprietary growth intelligence platform.</p>
       <div class="hact">
-        <button class="btn-p" onclick="openModal()">
+        <a href="#contact" class="btn-p">
           Book Revenue Strategy Call
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5H12.5M12.5 7.5L8.5 3.5M12.5 7.5L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+        </a>
         <a href="#results" class="btn-g">View Client Results →</a>
       </div>
     </div>
@@ -631,30 +600,30 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   <div class="cl-marquee">
     <div class="mq-row">
       <div class="mq-track">
-        <span class="mq-name">BMW</span><span class="mq-dot">✦</span>
-        <span class="mq-name acc">Huawei</span><span class="mq-dot">✦</span>
-        <span class="mq-name">W Hotels</span><span class="mq-dot">✦</span>
-        <span class="mq-name acc">Rick Ross</span><span class="mq-dot">✦</span>
-        <span class="mq-name">Miami Dolphins</span><span class="mq-dot">✦</span>
-        <span class="mq-name">BMW</span><span class="mq-dot">✦</span>
-        <span class="mq-name acc">Huawei</span><span class="mq-dot">✦</span>
-        <span class="mq-name">W Hotels</span><span class="mq-dot">✦</span>
-        <span class="mq-name acc">Rick Ross</span><span class="mq-dot">✦</span>
-        <span class="mq-name">Miami Dolphins</span><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://www.bmw.com" target="_blank" rel="noopener">BMW</a><span class="mq-dot">✦</span>
+        <a class="mq-name acc" href="https://www.huawei.com" target="_blank" rel="noopener">Huawei</a><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://www.marriott.com/en-us/hotel-brands/w-hotels" target="_blank" rel="noopener">W Hotels</a><span class="mq-dot">✦</span>
+        <a class="mq-name acc" href="https://rickrossboss.com" target="_blank" rel="noopener">Rick Ross</a><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://www.miamidolphins.com" target="_blank" rel="noopener">Miami Dolphins</a><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://www.bmw.com" target="_blank" rel="noopener">BMW</a><span class="mq-dot">✦</span>
+        <a class="mq-name acc" href="https://www.huawei.com" target="_blank" rel="noopener">Huawei</a><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://www.marriott.com/en-us/hotel-brands/w-hotels" target="_blank" rel="noopener">W Hotels</a><span class="mq-dot">✦</span>
+        <a class="mq-name acc" href="https://rickrossboss.com" target="_blank" rel="noopener">Rick Ross</a><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://www.miamidolphins.com" target="_blank" rel="noopener">Miami Dolphins</a><span class="mq-dot">✦</span>
       </div>
     </div>
     <div class="mq-row">
       <div class="mq-track rev">
-        <span class="mq-name">Tissot</span><span class="mq-dot">✦</span>
-        <span class="mq-name acc">HomeLife</span><span class="mq-dot">✦</span>
-        <span class="mq-name">Bioflex</span><span class="mq-dot">✦</span>
-        <span class="mq-name acc">Marriott</span><span class="mq-dot">✦</span>
-        <span class="mq-name">Lamborghini</span><span class="mq-dot">✦</span>
-        <span class="mq-name">Tissot</span><span class="mq-dot">✦</span>
-        <span class="mq-name acc">HomeLife</span><span class="mq-dot">✦</span>
-        <span class="mq-name">Bioflex</span><span class="mq-dot">✦</span>
-        <span class="mq-name acc">Marriott</span><span class="mq-dot">✦</span>
-        <span class="mq-name">Lamborghini</span><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://www.tissotwatches.com" target="_blank" rel="noopener">Tissot</a><span class="mq-dot">✦</span>
+        <a class="mq-name acc" href="https://www.homelife.ca" target="_blank" rel="noopener">HomeLife</a><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://bioflexjewelry.com" target="_blank" rel="noopener">Bioflex</a><span class="mq-dot">✦</span>
+        <a class="mq-name acc" href="https://www.marriott.com" target="_blank" rel="noopener">Marriott</a><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://www.lamborghini.com" target="_blank" rel="noopener">Lamborghini</a><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://www.tissotwatches.com" target="_blank" rel="noopener">Tissot</a><span class="mq-dot">✦</span>
+        <a class="mq-name acc" href="https://www.homelife.ca" target="_blank" rel="noopener">HomeLife</a><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://bioflexjewelry.com" target="_blank" rel="noopener">Bioflex</a><span class="mq-dot">✦</span>
+        <a class="mq-name acc" href="https://www.marriott.com" target="_blank" rel="noopener">Marriott</a><span class="mq-dot">✦</span>
+        <a class="mq-name" href="https://www.lamborghini.com" target="_blank" rel="noopener">Lamborghini</a><span class="mq-dot">✦</span>
       </div>
     </div>
   </div>
@@ -711,7 +680,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
           <p class="r-desc">A scaling operator came to SET with a fragmented acquisition strategy and no unified growth infrastructure. We installed Revenue OS, rebuilt their funnel from the ground up, and aligned marketing directly with sales. Revenue doubled in <span class="mono-num">18</span> months, cost per acquisition dropped <span class="mono-num">27%</span>, and the sales cycle compressed by <span class="mono-num">40%</span>.</p>
           <div class="r-q">"SET installed Revenue OS and reduced our cost per acquisition by 27%. We doubled revenue in 18 months. The system works."</div>
           <div class="r-qa">George Pintilie, Founder</div>
-          <a href="#contact" class="section-cta" onclick="openModal();return false;">See if you qualify</a>
+          <a href="#contact" class="section-cta" href="#contact">See if you qualify</a>
         </div>
         <div class="metrics">
           <div class="metric"><div class="mv">2×</div><div class="ml">Revenue doubled in 18 months, scaling from $250M to $500M</div></div>
@@ -725,7 +694,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
         <p class="r-desc">Replaced scattered campaigns with structured acquisition systems and measurable KPIs, delivering qualified, consistent lead flow from day one of the engagement.</p>
         <div class="r-q">"If you are serious about scaling your business, bet on SET. They increased my leads by 33% in 90 days."</div>
         <div class="r-qa">Sean Huley, CEO</div>
-        <a href="#contact" class="section-cta" onclick="openModal();return false;">Get your lead system</a>
+        <a href="#contact" class="section-cta" href="#contact">Get your lead system</a>
       </div>
       <div class="rc">
         <div class="r-cat">Strategy · Positioning · Growth Architecture</div>
@@ -733,7 +702,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
         <p class="r-desc">Repositioned brand, sharpened messaging, and built a full go-to-market playbook that replaced guesswork with structure and gave leadership a clear system for growth.</p>
         <div class="r-q">"SET completely reframed how we approach growth. Instead of random campaigns, we now operate with structured acquisition systems."</div>
         <div class="r-qa">Mahmoud Elminawi, Founder</div>
-        <a href="#contact" class="section-cta" onclick="openModal();return false;">Start with strategy</a>
+        <a href="#contact" class="section-cta" href="#contact">Start with strategy</a>
       </div>
       <div class="rc feat">
         <div>
@@ -742,7 +711,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
           <p class="r-desc">Regalis Foods came to SET needing structure across every channel. We installed a full fractional CMO engagement — from site experience to email to paid media. Revenue grew <span class="mono-num">222%</span> in <span class="mono-num">9</span> months, organic search traffic jumped <span class="mono-num">333%</span>, and the email list grew <span class="mono-num">215%</span>.</p>
           <div class="r-q">"Once SET stepped in, everything changed. They brought structure, focus, and momentum. From the site experience to our email voice to paid media, it finally feels cohesive and true to who we are."</div>
           <div class="r-qa">Ian Purkayastha, Founder &amp; CEO, Regalis Foods</div>
-          <a href="#contact" class="section-cta" onclick="openModal();return false;">Get results like this</a>
+          <a href="#contact" class="section-cta" href="#contact">Get results like this</a>
         </div>
         <div class="metrics">
           <div class="metric"><div class="mv">+222%</div><div class="ml">Revenue growth in 9 months</div></div>
@@ -761,7 +730,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
           <div class="metric"><div class="mv">-33%</div><div class="ml">Customer acquisition cost</div></div>
           <div class="metric"><div class="mv">400+</div><div class="ml">Influencer creators activated</div></div>
         </div>
-        <a href="#contact" class="section-cta" onclick="openModal();return false;">Scale like Olipop</a>
+        <a href="#contact" class="section-cta" href="#contact">Scale like Olipop</a>
       </div>
     </div>
   </div>
@@ -792,7 +761,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
       <span class="cred" title="Sales training and methodology">SET Sales Academy</span>
       <span class="cred">Est. 2019</span>
     </div>
-    <a href="#contact" class="section-cta" onclick="openModal();return false;">Work with Chris</a>
+    <a href="#contact" class="section-cta" href="#contact">Work with Chris</a>
   </div>
 </section>
 
@@ -867,7 +836,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:84px 6
   <h2 class="cta-t rv">Ready to<br><em>Install</em><br>the System?</h2>
   <p class="cta-s rv">We work with a select number of operators each quarter. If you are generating <span class="mono-num">$1M</span> to <span class="mono-num">$20M</span> and serious about structured, predictable growth, this is where it starts.</p>
   <div class="rv">
-    <button class="btn-p" onclick="openModal()">
+    <a href="#contact" class="btn-p">
       Book Your Revenue Strategy Call
       <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5H12.5M12.5 7.5L8.5 3.5M12.5 7.5L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
@@ -957,8 +926,15 @@ gsap.timeline()
   .call(() => {
     loader.style.display = 'none';
     if (lenis) lenis.start();
-    // Hero text visible immediately — no fade-in animation
-    document.querySelectorAll('.h-eye,.h-hl,.hbot').forEach(el => el.style.opacity = '1');
+    // Hero headline — words race in from the right, SET zooms in
+    const tl = gsap.timeline({ delay: 0.1 });
+    tl.to('.hl-w1', { opacity:1, x:0, filter:'blur(0px)', duration:.55, ease:'power3.out' }, 0)
+      .to('.hl-w2', { opacity:1, x:0, filter:'blur(0px)', duration:.5,  ease:'power3.out' }, 0.08)
+      .to('.hl-w3', { opacity:1, x:0, filter:'blur(0px)', duration:.55, ease:'power3.out' }, 0.16)
+      .to('.hl-set', { opacity:1, scale:1, x:0,           duration:.65, ease:'back.out(1.6)' }, 0.38)
+      .to('.hl-w4', { opacity:1, x:0, filter:'blur(0px)', duration:.45, ease:'power3.out' }, 0.52)
+      .to('.hl-w5', { opacity:1, x:0, filter:'blur(0px)', duration:.45, ease:'power3.out' }, 0.6);
+    gsap.fromTo('.hbot', { opacity:0, y:16 }, { opacity:1, y:0, duration:.7, delay:.85, ease:'power3.out' });
   });
 
 // ── C·03 SCROLL PROGRESS BAR ──────────────────────────────────────────────────
@@ -989,34 +965,7 @@ function updateStickyCTA() {
 if (lenis) { lenis.on('scroll', updateStickyCTA); }
 else { window.addEventListener('scroll', updateStickyCTA, { passive:true }); }
 
-// ── C·01 BOOKING MODAL ────────────────────────────────────────────────────────
-function openModal() {
-  document.getElementById('modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  // Animate scarcity fill
-  setTimeout(() => {
-    const sf = document.getElementById('scarcity-fill');
-    if (sf) sf.style.width = '75%';
-  }, 400);
-}
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function selectPill(el, group) {
-  el.closest('.modal-pills').querySelectorAll('.modal-pill').forEach(p => p.classList.remove('sel'));
-  el.classList.add('sel');
-}
-function submitModal() {
-  const btn = document.getElementById('modal-btn');
-  btn.textContent = 'Sending...';
-  btn.classList.add('loading');
-  setTimeout(() => {
-    document.querySelector('.modal-form-wrap').style.display = 'none';
-    document.getElementById('modal-success').classList.add('show');
-  }, 1600);
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+// modal removed — CTA scrolls to #contact
 
 // ── L·04 MOBILE NAV ───────────────────────────────────────────────────────────
 function toggleMobileNav() {
