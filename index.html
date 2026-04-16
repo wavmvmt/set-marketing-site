@@ -338,10 +338,10 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .tac{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#1a1714;margin-top:3px}
 
 /* ─── CTA ────────────────────────────────────── */
-.cta{padding:160px 64px;background:var(--off-black);position:relative;overflow:hidden;text-align:center}
+.cta{padding:120px 64px 120px;background:var(--off-black);position:relative;overflow:hidden;text-align:center}
 .cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(185,28,46,.04) 0%,transparent 65%)}
 .cta-topline{position:absolute;top:0;left:0;right:0;height:2px;background:var(--red)}
-.cta-lbl{font-family:var(--fm);font-size:13px;letter-spacing:.42em;text-transform:uppercase;color:var(--red);margin-bottom:26px;display:block}
+.cta-lbl{font-family:var(--fm);font-size:13px;letter-spacing:.42em;text-transform:uppercase;color:var(--red);margin-bottom:36px;display:block;margin-top:16px}
 .cta-t{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,8.5vw,128px);font-weight:300;line-height:.88;margin-bottom:36px}
 .cta-t em{font-style:italic;color:var(--red)}
 .cta-s{font-family:'Plus Jakarta Sans',sans-serif;font-size:19px;font-weight:400;color:#1a1714;max-width:480px;margin:0 auto 52px;line-height:1.8}
@@ -417,7 +417,7 @@ footer{background:#1a1714;border-top:2px solid var(--red);padding:80px 64px 48px
   .testimonials{padding:72px 24px}
   .tst-grid{grid-template-columns:1fr}
   .tc{padding:36px 28px}
-  .cta{padding:80px 24px}
+  .cta{padding:80px 24px 80px}
   footer{padding:56px 24px 40px}
   .ft-top{grid-template-columns:1fr 1fr;gap:32px}
   .fb-logo-wrap img{height:48px}
@@ -969,9 +969,9 @@ footer{background:#1a1714;border-top:2px solid var(--red);padding:80px 64px 48px
     <div class="scarcity-track"><div class="scarcity-fill" id="scarcity-fill"></div></div>
   </div>
   <h2 class="cta-t rv">Ready to<br><em>Install</em><br>the System?</h2>
-  <p class="cta-s rv">We work with a select number of operators each quarter. If you are generating <span class="mono-num">$1M</span> to <span class="mono-num">$20M</span> and serious about structured, predictable growth, this is where it starts.</p>
+  <p class="cta-s rv" style="margin-bottom:48px">We work with a select number of operators each quarter. If you are generating <span class="mono-num">$1M</span> to <span class="mono-num">$20M</span> and serious about structured, predictable growth, this is where it starts.</p>
   <div class="rv">
-    <a href="#contact" class="btn-p">
+    <a href="#contact" class="btn-p no-mag">
       Book Your Revenue Strategy Call
       <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5H12.5M12.5 7.5L8.5 3.5M12.5 7.5L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
@@ -1259,7 +1259,7 @@ if (!IS_MOBILE && !REDUCED) {
 
 // ── MAGNETIC BUTTONS — desktop only ──────────────────────────────────────────
 if (!IS_MOBILE) {
-  document.querySelectorAll('.btn-p,.ncta,.btn-g').forEach(btn => {
+  document.querySelectorAll('.btn-p:not(.no-mag),.ncta,.btn-g').forEach(btn => {
     btn.addEventListener('mousemove', e => {
       const r = btn.getBoundingClientRect();
       gsap.to(btn, { x:(e.clientX-r.left-r.width/2)*.22, y:(e.clientY-r.top-r.height/2)*.22, duration:.35, ease:'power2.out' });
