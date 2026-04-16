@@ -360,22 +360,28 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 @media(max-width:900px){.cta-next{margin-top:40px;padding-top:32px}.cta-step{gap:24px;padding:24px 0}}
 
 /* ─── FOOTER ─────────────────────────────────── */
-footer{background:#111010;border-top:3px solid var(--red);padding:72px 64px 44px}
-.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px;align-items:start}
-.fb-logo-pill{display:inline-block;background:#ffffff;padding:10px 18px;margin-bottom:24px;line-height:0}
-.fb-logo-pill img{display:block;height:48px;width:auto}
-.fb-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:rgba(255,255,255,.5);line-height:1.75;max-width:290px;margin-bottom:24px}
-.fb-contact a{display:block;font-family:var(--fm);font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:10px;transition:color .2s}
-.fb-contact a:hover{color:#fff}
-.fc-title{font-family:var(--fm);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06)}
-.flinks{list-style:none;display:flex;flex-direction:column;gap:12px}
-.flinks a{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s;display:block}
-.flinks a:hover{color:#fff}
-.fb-bot{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.07)}
-.fb-copy{font-family:var(--fm);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.22)}
-.fb-tag2{font-family:var(--fm);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(185,28,46,.55)}
+footer{background:var(--off-black);border-top:3px solid var(--red);padding:80px 64px 48px}
+.ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:60px;margin-bottom:56px;align-items:start}
+.ft-brand img{display:block;height:52px;width:auto;margin-bottom:24px}
+.ft-brand-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:rgba(26,23,20,.6);line-height:1.75;max-width:300px;margin-bottom:24px}
+.ft-brand-links{display:flex;flex-direction:column;gap:8px}
+.ft-brand-links a{font-family:'DM Mono','Courier New',monospace;font-size:11px;letter-spacing:.14em;color:var(--red);text-decoration:none;transition:opacity .2s}
+.ft-brand-links a:hover{opacity:.7}
+.ft-col-title{font-family:'DM Mono','Courier New',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(26,23,20,.4);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ft-links a{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:rgba(26,23,20,.7);text-decoration:none;transition:color .2s;display:block}
+.ft-links a:hover{color:var(--red)}
+.ft-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid var(--border)}
+.ft-copy{font-family:'DM Mono','Courier New',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(26,23,20,.4)}
+.ft-tagline{font-family:'DM Mono','Courier New',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(185,28,46,.7)}
+@media(max-width:900px){
+  footer{padding:56px 24px 40px}
+  .ft-grid{grid-template-columns:1fr 1fr;gap:36px}
+  .ft-bottom{flex-direction:column;gap:10px;text-align:center}
+}
+@media(max-width:480px){.ft-grid{grid-template-columns:1fr}}
 
-/* ─── KEYFRAMES ──────────────────────────────── */
+/* ─── KEYFRAMES/* ─── KEYFRAMES ──────────────────────────────── */
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ─── MOBILE ─────────────────────────────────── */
@@ -1008,21 +1014,19 @@ footer{background:#111010;border-top:3px solid var(--red);padding:72px 64px 44px
 </section>
 
 <footer>
-  <div class="ft-top">
-    <div>
-      <div class="fb-logo-pill">
-        <img src="set-logo.png" alt="SET Marketing">
-      </div>
-      <p class="fb-tag">Revenue architecture for operators generating $1M to $20M who are ready to scale beyond founder-led growth. Toronto and Miami.</p>
-      <div class="fb-contact">
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <img src="set-logo.png" alt="SET Marketing">
+      <p class="ft-brand-tag">Revenue architecture for operators generating $1M to $20M who are ready to scale beyond founder-led growth. Toronto and Miami.</p>
+      <div class="ft-brand-links">
         <a href="mailto:chris@marketingbyset.com">chris@marketingbyset.com</a>
         <a href="https://marketingbyset.com" target="_blank" rel="noopener">marketingbyset.com</a>
         <a href="https://setventures.co" target="_blank" rel="noopener">setventures.co</a>
       </div>
     </div>
     <div>
-      <div class="fc-title">Services</div>
-      <ul class="flinks">
+      <div class="ft-col-title">Services</div>
+      <ul class="ft-links">
         <li><a href="#services">Growth Strategy</a></li>
         <li><a href="#services">Paid Acquisition</a></li>
         <li><a href="#services">Funnel Optimization</a></li>
@@ -1032,8 +1036,8 @@ footer{background:#111010;border-top:3px solid var(--red);padding:72px 64px 44px
       </ul>
     </div>
     <div>
-      <div class="fc-title">Company</div>
-      <ul class="flinks">
+      <div class="ft-col-title">Company</div>
+      <ul class="ft-links">
         <li><a href="#founder">About Chris</a></li>
         <li><a href="#results">Case Studies</a></li>
         <li><a href="#clients">Clients</a></li>
@@ -1042,8 +1046,8 @@ footer{background:#111010;border-top:3px solid var(--red);padding:72px 64px 44px
       </ul>
     </div>
     <div>
-      <div class="fc-title">SET Ecosystem</div>
-      <ul class="flinks">
+      <div class="ft-col-title">SET Ecosystem</div>
+      <ul class="ft-links">
         <li><a href="https://setventures.co" target="_blank" rel="noopener">SET Ventures</a></li>
         <li><a href="https://thechrismarchese.com" target="_blank" rel="noopener">TheChrisMarchese.com</a></li>
         <li><a href="#" target="_blank">SET Sales Academy</a></li>
@@ -1051,9 +1055,9 @@ footer{background:#111010;border-top:3px solid var(--red);padding:72px 64px 44px
       </ul>
     </div>
   </div>
-  <div class="fb-bot">
-    <div class="fb-copy">&copy; 2026 SET Marketing &middot; SET Enterprises &middot; All Rights Reserved</div>
-    <div class="fb-tag2">Setting The Pace &middot; Toronto &middot; Miami</div>
+  <div class="ft-bottom">
+    <div class="ft-copy">&copy; 2026 SET Marketing &middot; SET Enterprises &middot; All Rights Reserved</div>
+    <div class="ft-tagline">Setting The Pace &middot; Toronto &middot; Miami</div>
   </div>
 </footer>
 
