@@ -47,7 +47,7 @@
 <link rel="preconnect" href="https://i.vimeocdn.com">
 <link rel="preconnect" href="https://f.vimeocdn.com">
 <!-- Fonts: only weights actually used, font-display:swap -->
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Syne:wght@400;700;800&family=DM+Mono:wght@0,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@0,400&display=swap" rel="stylesheet">
 <!-- Scripts: defer so they don't block render -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
@@ -65,11 +65,11 @@
   --red:#B91C2E;
   --red2:#D42240;
   --fd:'Cormorant Garamond',Georgia,serif;
-  --fb:'Syne',system-ui,sans-serif;
+  --fb:'Plus Jakarta Sans',system-ui,sans-serif;
   --fm:'DM Mono','Courier New',monospace;
 }
 html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
-body{background:var(--black);color:var(--white);font-family:var(--fb);font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none}
+body{background:var(--black);color:var(--white);font-family:var(--fb);font-size:16px;line-height:1.65;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased}
 /* Reduce layout recalculation on sections */
 section,.stats,.ticker{contain:layout style}
 /* Only use will-change on actively animating elements */
@@ -170,8 +170,8 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .st:hover::before{width:100%}
 .sn{font-family:var(--fd);font-size:clamp(52px,5vw,84px);font-weight:300;color:var(--white);line-height:1;margin-bottom:10px}
 .sn em{color:var(--red);font-style:normal}
-.sl{font-family:'Syne',sans-serif;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:#1a1714}
-.sd{font-family:'Syne',sans-serif;font-size:13px;color:#1a1714;margin-top:8px;line-height:1.6}
+.sl{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:#1a1714}
+.sd{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:#1a1714;margin-top:8px;line-height:1.6}
 
 /* ─── SECTION LABELS ─────────────────────────── */
 .s-lbl{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:24px;display:flex;align-items:center;gap:14px}
@@ -191,11 +191,11 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .pain-item{display:flex;gap:20px;padding:28px 0;border-bottom:1px solid var(--border)}
 .pain-item:first-child{border-top:1px solid var(--border)}
 .pain-icon{font-size:18px;color:rgba(185,28,46,.4);flex-shrink:0;margin-top:2px;font-weight:700;width:20px}
-.pain-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px}
-.pain-sub{font-family:'Syne',sans-serif;font-size:15px;color:rgba(26,23,20,.65);line-height:1.7}
+.pain-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px}
+.pain-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;color:rgba(26,23,20,.65);line-height:1.7}
 .pain-resolution{display:flex;gap:20px;align-items:center;padding:28px 32px;background:var(--red);margin-top:4px}
 .pain-res-mark{font-size:20px;color:#fff;flex-shrink:0;font-weight:700}
-.pain-res-text{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:#fff;line-height:1.4}
+.pain-res-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#fff;line-height:1.4}
 @media(max-width:900px){
   .pain-check{padding:72px 24px}
   .pain-inner{grid-template-columns:1fr;gap:48px}
@@ -206,7 +206,7 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .cl-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;gap:40px}
 .cl-t{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,72px);font-weight:300;line-height:.92}
 .cl-t em{font-style:italic;color:var(--red)}
-.cl-s{max-width:280px;font-family:'Syne',sans-serif;font-size:17px;color:var(--white);line-height:1.75;text-align:right}
+.cl-s{max-width:280px;font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;color:var(--white);line-height:1.75;text-align:right}
 /* Marquee */
 .cl-marquee{padding:32px 0 80px;overflow:hidden}
 .mq-row{overflow:hidden;margin:6px 0}
@@ -224,7 +224,7 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .sv-hd{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:72px;align-items:end}
 .sv-t{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6.5vw,96px);font-weight:300;line-height:.92}
 .sv-t em{font-style:italic;color:var(--red)}
-.sv-intro{font-family:'Syne',sans-serif;font-size:18px;font-weight:400;color:#1a1714;line-height:1.85;padding-top:24px;border-top:1px solid var(--border)}
+.sv-intro{font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:400;color:#1a1714;line-height:1.85;padding-top:24px;border-top:1px solid var(--border)}
 .sv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
 .sv-card{background:var(--black);padding:56px 46px;position:relative;overflow:hidden;transition:background .4s,transform .35s}
 .sv-card:hover{background:#e0d8cc;transform:translateY(-5px)}
@@ -235,7 +235,7 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .sv-n{font-family:'DM Mono',monospace;font-size:13px;color:var(--red);letter-spacing:.3em;margin-bottom:28px}
 .sv-nm{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;line-height:1.15;margin-bottom:18px;color:#1a1714}
 .sv-nm em{font-style:italic;color:var(--red)}
-.sv-desc{font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.8;margin-bottom:28px}
+.sv-desc{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.8;margin-bottom:28px}
 .tags{display:flex;flex-wrap:wrap;gap:7px}
 .tag{font-family:var(--fm);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);border:1px solid var(--border);padding:5px 10px;transition:border-color .3s,color .3s}
 .sv-card:hover .tag{border-color:rgba(185,28,46,.2);color:rgba(185,28,46,.7)}
@@ -246,10 +246,10 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .wfs-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
 .wfs-t{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.5vw,48px);font-weight:300;line-height:1.1;margin-bottom:16px}
 .wfs-t em{font-style:italic;color:var(--red)}
-.wfs-sub{font-family:'Syne',sans-serif;font-size:16px;color:rgba(26,23,20,.7);line-height:1.75;max-width:460px}
+.wfs-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;color:rgba(26,23,20,.7);line-height:1.75;max-width:460px}
 .wfs-right{display:grid;grid-template-columns:1fr 1fr;gap:0}
 .wfs-col{display:flex;flex-direction:column;gap:0}
-.wfs-item{font-family:'Syne',sans-serif;font-size:15px;font-weight:500;color:var(--white);padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.wfs-item{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:500;color:var(--white);padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
 .wfs-check{color:var(--red);font-weight:700;font-size:13px;flex-shrink:0}
 @media(max-width:900px){
   .who-for-slim{padding:64px 24px}
@@ -275,14 +275,14 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .r-cat{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px}
 .r-cl{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:300;margin-bottom:14px;line-height:.92}
 .r-cl em{font-style:italic;color:var(--red)}
-.r-desc{font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.8;margin-bottom:28px}
+.r-desc{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.8;margin-bottom:28px}
 .r-q{font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;font-weight:300;color:#2a2520;line-height:1.6;margin-bottom:18px;padding-left:20px;border-left:2px solid var(--red)}
 .r-qa{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.25em;text-transform:uppercase;color:#1a1714;padding-left:20px}
 .metrics{display:flex;flex-direction:column}
 .metric{display:flex;align-items:center;gap:24px;padding:24px 0;border-bottom:1px solid var(--border)}
 .metric:last-child{border-bottom:none}
 .mv{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;color:var(--red);line-height:1;min-width:140px}
-.ml{font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.6}
+.ml{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.6}
 
 /* ─── FOUNDER ────────────────────────────────── */
 .founder{padding:140px 64px;background:var(--black);display:grid;grid-template-columns:1fr 1.1fr;gap:96px;align-items:center}
@@ -292,7 +292,7 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .f-badge{position:absolute;top:32px;right:-24px;background:var(--red);color:#f4f1ec;padding:10px 18px;font-family:var(--fm);font-size:12px;letter-spacing:.2em;text-transform:uppercase;z-index:2}
 .ft{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5vw,78px);font-weight:300;line-height:.92;margin-bottom:36px}
 .ft em{font-style:italic;color:var(--red)}
-.fc p{font-family:'Syne',sans-serif;font-size:18px;font-weight:400;color:#1a1714;line-height:1.75;margin-bottom:20px}
+.fc p{font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:400;color:#1a1714;line-height:1.75;margin-bottom:20px}
 .fsig{font-family:'Cormorant Garamond',serif;font-size:44px;font-style:italic;font-weight:300;color:var(--red);margin-top:40px;margin-bottom:4px}
 .frole{font-family:var(--fm);font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:#1a1714}
 .f-creds{display:flex;gap:28px;margin-top:36px;padding-top:36px;border-top:1px solid var(--border);flex-wrap:wrap}
@@ -316,8 +316,8 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .ps:hover::after{transform:scaleX(1)}
 .ps-num{font-family:'Cormorant Garamond',serif;font-size:96px;font-weight:300;color:rgba(185,28,46,.4);line-height:1;margin-bottom:20px;font-style:italic;transition:color .4s,transform .4s}
 .ps:hover .ps-num{color:rgba(185,28,46,.65);transform:scale(1.04) translateX(4px)}
-.ps-nm{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1a1714;margin-bottom:14px}
-.ps-d{font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.8}
+.ps-nm{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1a1714;margin-bottom:14px}
+.ps-d{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.8}
 .ps-tag{display:inline-block;margin-top:20px;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);border:1px solid rgba(185,28,46,.3);padding:6px 12px;transition:background .3s,color .3s}
 .ps:hover .ps-tag{background:var(--red);color:#fff}
 
@@ -326,15 +326,15 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .tst-t{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6.5vw,96px);font-weight:300;line-height:.92;margin-bottom:72px}
 .tst-t em{font-style:italic;color:var(--red)}
 .tst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-.tc{background:var(--black);padding:52px 44px;transition:background .3s}
+.tc{background:var(--black);padding:52px 44px;transition:background .3s;display:flex;flex-direction:column}
 .tc:hover{background:#e5ddd1}
 .tstars{display:flex;gap:3px;margin-bottom:22px}
 .star{color:var(--red);font-size:14px}
-.ttext{font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;font-weight:300;color:#2a2520;line-height:1.65;margin-bottom:30px}
-.tau{display:flex;align-items:center;gap:14px}
-.tav{width:48px;height:48px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:18px;font-style:italic;color:var(--red);flex-shrink:0;overflow:hidden}
+.ttext{font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;font-weight:300;color:#2a2520;line-height:1.7;margin-bottom:0;flex:1;padding-bottom:28px}
+.tau{display:flex;align-items:center;gap:14px;margin-top:auto;padding-top:24px;border-top:1px solid var(--border)}
+.tav{width:52px;height:52px;border-radius:50%;background:var(--card);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:18px;font-style:italic;color:var(--red);flex-shrink:0;overflow:hidden}
 .tav img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-.tan{font-family:'Syne',sans-serif;font-size:16px;font-weight:600;color:#1a1714;letter-spacing:.04em}
+.tan{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:600;color:#1a1714;letter-spacing:.04em}
 .tac{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#1a1714;margin-top:3px}
 
 /* ─── CTA ────────────────────────────────────── */
@@ -344,7 +344,7 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .cta-lbl{font-family:var(--fm);font-size:13px;letter-spacing:.42em;text-transform:uppercase;color:var(--red);margin-bottom:26px;display:block}
 .cta-t{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,8.5vw,128px);font-weight:300;line-height:.88;margin-bottom:36px}
 .cta-t em{font-style:italic;color:var(--red)}
-.cta-s{font-family:'Syne',sans-serif;font-size:19px;font-weight:400;color:#1a1714;max-width:480px;margin:0 auto 52px;line-height:1.8}
+.cta-s{font-family:'Plus Jakarta Sans',sans-serif;font-size:19px;font-weight:400;color:#1a1714;max-width:480px;margin:0 auto 52px;line-height:1.8}
 .cta-disc{font-family:var(--fm);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(26,23,20,.6);margin-top:28px}
 
 
@@ -355,8 +355,8 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .cta-step{display:flex;gap:24px;padding:24px 0;border-bottom:1px solid var(--border)}
 .cta-step:first-child{border-top:1px solid var(--border)}
 .cta-step-n{font-family:var(--fm);font-size:11px;letter-spacing:.2em;color:var(--red);flex-shrink:0;padding-top:3px;min-width:24px}
-.cta-step-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:5px}
-.cta-step-sub{font-family:'Syne',sans-serif;font-size:14px;color:rgba(26,23,20,.6);line-height:1.65}
+.cta-step-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:5px}
+.cta-step-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:rgba(26,23,20,.6);line-height:1.65}
 @media(max-width:900px){.cta-next{margin-top:40px}}
 
 /* ─── FOOTER ─────────────────────────────────── */
@@ -364,12 +364,12 @@ footer{background:#1a1714;border-top:2px solid var(--red);padding:80px 64px 48px
 .ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;margin-bottom:64px;align-items:start}
 .fb-logo-wrap{margin-bottom:24px}
 .fb-logo-wrap img{height:64px;width:auto;filter:invert(1) brightness(2)}
-.fb-tag{font-family:'Syne',sans-serif;font-size:15px;font-weight:400;color:rgba(255,255,255,.6);line-height:1.75;max-width:300px;margin-bottom:28px}
+.fb-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:400;color:rgba(255,255,255,.6);line-height:1.75;max-width:300px;margin-bottom:28px}
 .fb-contact a{display:block;font-family:var(--fm);font-size:12px;letter-spacing:.18em;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:10px;transition:color .25s}
 .fb-contact a:hover{color:#fff}
 .fc-title{font-family:var(--fm);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:20px}
 .flinks{list-style:none;display:flex;flex-direction:column;gap:12px}
-.flinks a{font-family:'Syne',sans-serif;font-size:14px;font-weight:400;color:rgba(255,255,255,.65);text-decoration:none;transition:color .25s;display:block}
+.flinks a{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:400;color:rgba(255,255,255,.65);text-decoration:none;transition:color .25s;display:block}
 .flinks a:hover{color:#fff}
 .fb-bot{display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid rgba(255,255,255,.08)}
 .fb-copy{font-family:var(--fm);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3)}
@@ -642,7 +642,7 @@ footer{background:#1a1714;border-top:2px solid var(--red);padding:80px 64px 48px
       </span>
     </h1>
     <div class="hbot">
-      <p style="font-family:'Syne',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.75;max-width:520px;">You're generating revenue but marketing feels like guesswork. Agencies overpromise and underdeliver. Your best leads still come from you personally. SET installs the acquisition infrastructure that makes growth predictable, scalable, and founder-independent.</p>
+      <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:400;color:#1a1714;line-height:1.75;max-width:520px;">You're generating revenue but marketing feels like guesswork. Agencies overpromise and underdeliver. Your best leads still come from you personally. SET installs the acquisition infrastructure that makes growth predictable, scalable, and founder-independent.</p>
       <div class="hact">
         <a href="#contact" class="btn-p">
           Book Revenue Strategy Call
@@ -924,32 +924,32 @@ footer{background:#1a1714;border-top:2px solid var(--red);padding:80px 64px 48px
     <div class="tc rv">
       <div class="tstars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
       <p class="ttext">"SET completely reframed how we approach growth. Instead of random campaigns, we now operate with structured acquisition systems and measurable KPIs. The clarity alone made it worth it."</p>
-      <div class="tau"><div class="tav">M</div><div><div class="tan">Mahmoud Elminawi</div><div class="tac">Founder, Elminawi Group</div></div></div>
+      <div class="tau"><div class="tav"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=104&h=104&fit=crop&crop=face&auto=format&q=80" alt="Mahmoud Elminawi" loading="lazy"></div><div><div class="tan">Mahmoud Elminawi</div><div class="tac">Founder, Elminawi Group</div></div></div>
     </div>
-    <div class="tc rv d1">
+    <div class="tc rv">
       <div class="tstars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
       <p class="ttext">"What impressed me most was the strategic depth. If you are serious about scaling your business, bet on SET. They increased my leads by <span class="mono-num">33%</span> in <span class="mono-num">90</span> days, with systems, not guesswork."</p>
-      <div class="tau"><div class="tav">S</div><div><div class="tan">Sean Huley</div><div class="tac">CEO, Huley Enterprises</div></div></div>
+      <div class="tau"><div class="tav"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=104&h=104&fit=crop&crop=face&auto=format&q=80" alt="Sean Huley" loading="lazy"></div><div><div class="tan">Sean Huley</div><div class="tac">CEO, Huley Enterprises</div></div></div>
     </div>
-    <div class="tc rv d2">
+    <div class="tc rv">
       <div class="tstars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
       <p class="ttext">"SET installed Revenue OS and reduced our cost per acquisition by <span class="mono-num">27%</span>. We doubled revenue in <span class="mono-num">18</span> months. The system works because they built it to last."</p>
-      <div class="tau"><div class="tav">G</div><div><div class="tan">George Pintilie</div><div class="tac">Founder, Pintilie Group</div></div></div>
+      <div class="tau"><div class="tav"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=104&h=104&fit=crop&crop=face&auto=format&q=80" alt="George Pintilie" loading="lazy"></div><div><div class="tan">George Pintilie</div><div class="tac">Founder, Pintilie Group</div></div></div>
     </div>
     <div class="tc rv">
       <div class="tstars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
       <p class="ttext">"Once SET stepped in, everything changed. They brought structure, focus, and momentum. From the site experience to our email voice to paid media, it finally feels cohesive and true to who we are."</p>
-      <div class="tau"><div class="tav">I</div><div><div class="tan">Ian Purkayastha</div><div class="tac">Founder &amp; CEO, Regalis Foods</div></div></div>
+      <div class="tau"><div class="tav"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=104&h=104&fit=crop&crop=face&auto=format&q=80" alt="Ian Purkayastha" loading="lazy"></div><div><div class="tan">Ian Purkayastha</div><div class="tac">Founder &amp; CEO, Regalis Foods</div></div></div>
     </div>
-    <div class="tc rv d1">
+    <div class="tc rv">
       <div class="tstars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
       <p class="ttext">"Before SET, our marketing spend felt untethered. No attribution, no predictability. They rebuilt our acquisition funnel in 90 days and our pipeline grew <span class="mono-num">185%</span>. I finally know exactly where every dollar is going."</p>
-      <div class="tau"><div class="tav"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=96&h=96&fit=crop&crop=face&auto=format" alt="Rachel Torres" loading="lazy"></div><div><div class="tan">Rachel Torres</div><div class="tac">COO, Meridian Health Partners</div></div></div>
+      <div class="tau"><div class="tav"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=104&h=104&fit=crop&crop=face&auto=format&q=80" alt="Rachel Torres" loading="lazy"></div><div><div class="tan">Rachel Torres</div><div class="tac">COO, Meridian Health Partners</div></div></div>
     </div>
-    <div class="tc rv d2">
+    <div class="tc rv">
       <div class="tstars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
       <p class="ttext">"We tried three agencies before SET. Nothing translated to revenue. SET diagnosed the root problem in week one and had qualified leads coming in by week three. The system they built runs without us in every decision."</p>
-      <div class="tau"><div class="tav"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&h=96&fit=crop&crop=face&auto=format" alt="David Kim" loading="lazy"></div><div><div class="tan">David Kim</div><div class="tac">CEO, Summit Logistics Group</div></div></div>
+      <div class="tau"><div class="tav"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=104&h=104&fit=crop&crop=face&auto=format&q=80" alt="David Kim" loading="lazy"></div><div><div class="tan">David Kim</div><div class="tac">CEO, Summit Logistics Group</div></div></div>
     </div>
   </div>
 </section>
