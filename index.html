@@ -345,18 +345,18 @@ nav.s{padding:16px 64px;background:rgba(250,248,245,.96);backdrop-filter:blur(28
 .cta-t{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,8.5vw,128px);font-weight:300;line-height:.88;margin-bottom:36px}
 .cta-t em{font-style:italic;color:var(--red)}
 .cta-s{font-family:'Plus Jakarta Sans',sans-serif;font-size:19px;font-weight:400;color:#1a1714;max-width:480px;margin:0 auto 52px;line-height:1.8}
-.cta-disc{font-family:var(--fm);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(26,23,20,.6);margin-top:0}
+.cta-disc{font-family:var(--fm);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(26,23,20,.55);margin-top:0}
 
 
 /* ─── CTA NEXT STEPS ─────────────────────────── */
 .cta-next{max-width:680px;margin:48px auto 0;text-align:left;padding-top:40px;border-top:1px solid var(--border)}
-.cta-next-label{font-family:var(--fm);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:rgba(26,23,20,.5);margin-bottom:32px;text-align:center}
+.cta-next-label{font-family:var(--fm);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:rgba(26,23,20,.55);margin-bottom:32px;text-align:center}
 .cta-next-steps{display:flex;flex-direction:column;gap:0}
-.cta-step{display:flex;gap:32px;padding:32px 0;border-bottom:1px solid var(--border)}
-.cta-step:first-child{border-top:1px solid var(--border)}
-.cta-step-n{font-family:var(--fm);font-size:12px;letter-spacing:.2em;color:var(--red);flex-shrink:0;padding-top:3px;min-width:28px}
-.cta-step-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:8px}
-.cta-step-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;color:rgba(26,23,20,.6);line-height:1.7}
+.cta-step{display:flex;gap:32px;padding:32px 0;border-bottom:1px solid rgba(26,23,20,.12)}
+.cta-step:first-child{border-top:1px solid rgba(26,23,20,.12)}
+.cta-step-n{font-family:var(--fm);font-size:12px;letter-spacing:.2em;color:var(--red);flex-shrink:0;padding-top:4px;min-width:32px;font-weight:700}
+.cta-step-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#1a1714;margin-bottom:8px}
+.cta-step-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;color:rgba(26,23,20,.65);line-height:1.75}
 @media(max-width:900px){.cta-next{margin-top:40px;padding-top:32px}.cta-step{gap:24px;padding:24px 0}}
 
 /* ─── FOOTER ─────────────────────────────────── */
@@ -976,7 +976,7 @@ footer{background:#1a1714;border-top:2px solid var(--red);padding:80px 64px 48px
       <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5H12.5M12.5 7.5L8.5 3.5M12.5 7.5L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
   </div>
-  <p class="cta-disc rv">Confidential · No Commitment · 4545-Minute Working Session#8209;Minute Working Session</p>
+  <p class="cta-disc rv">Confidential · No Commitment · <span style="white-space:nowrap">45&#8209;Minute Working Session</span></p>
 
   <div class="cta-next rv">
     <div class="cta-next-label">What happens after you apply</div>
@@ -991,7 +991,7 @@ footer{background:#1a1714;border-top:2px solid var(--red);padding:80px 64px 48px
       <div class="cta-step">
         <div class="cta-step-n">02</div>
         <div>
-          <div class="cta-step-title">4545-minute working session#8209;minute working session</div>
+          <div class="cta-step-title"><span style="white-space:nowrap">45&#8209;Minute Working Session</span></div>
           <div class="cta-step-sub">Not a sales call. We look at your actual numbers, diagnose the revenue bottleneck, and map a clear plan.</div>
         </div>
       </div>
